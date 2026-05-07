@@ -5,6 +5,7 @@ class AplikacjaSymulatora
 {
 public:
     AplikacjaSymulatora();
+    void uruchom();
 };
 
 #endif // APLIKACJASYMULATORA_H
