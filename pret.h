@@ -4,12 +4,13 @@
 
 class Pret
 {
-    Punkt* pPocz;
-    Punkt* pKonc;
-    double dlugosc;
+    Punkt* pPocz {nullptr};
+    Punkt* pKonc {nullptr};
+    double dlugosc {0};
 public:
     Pret();
     Pret(Punkt* _pPocz, Punkt* _pKonc);
+    double getL() {return dlugosc;};
 };
 
 #endif // PRET_H
