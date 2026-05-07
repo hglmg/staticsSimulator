@@ -11,6 +11,8 @@ public:
     Pret();
     Pret(Punkt* _pPocz, Punkt* _pKonc);
     double getL() {return dlugosc;};
+    Punkt* getPunktP() {return pPocz;};
+    Punkt* getPunktK() {return pKonc;};
 };
 
 #endif // PRET_H

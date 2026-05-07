@@ -3,7 +3,8 @@
 
 class Punkt
 {
-    double x, y;
+    double x {0}, y {0};
+
 public:
     Punkt();
     Punkt(double _x, double _y);
