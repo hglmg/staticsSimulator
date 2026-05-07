@@ -3,8 +3,10 @@
 
 class Punkt
 {
+    double x, y;
 public:
     Punkt();
+    Punkt(double _x, double _y);
 };
 
 #endif // PUNKT_H
