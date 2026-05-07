@@ -5,7 +5,12 @@ project(staticsSimulator LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(staticsSimulator main.cpp)
+add_executable(staticsSimulator main.cpp
+    punkt.h punkt.cpp
+    pret.h pret.cpp
+    podpora.h podpora.cpp
+    obciazenie.h obciazenie.cpp
+    silnikobliczeniowy.h silnikobliczeniowy.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS staticsSimulator
