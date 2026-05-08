@@ -11,3 +11,8 @@ Punkt::Punkt(double _x, double _y)
     y = _y;
 }
 
+bool Punkt::jestPodpora()
+{
+    if (podporaPkt == nullptr) return false;
+    else return true;
+}

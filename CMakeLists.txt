@@ -13,6 +13,9 @@ add_executable(staticsSimulator main.cpp
     silnikobliczeniowy.h silnikobliczeniowy.cpp
     aplikacjasymulatora.h aplikacjasymulatora.cpp
     kontenersiatki.h kontenersiatki.cpp
+    obcpunkt.cpp
+    obciazenie.h
+    obcpunkt.h
 
 )
 

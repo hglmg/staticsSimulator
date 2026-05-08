@@ -4,6 +4,7 @@
 class Podpora
 {
     bool xBlok {false}, yBlok {false};
+
 public:
     Podpora();
     bool blokujeX() {return xBlok;};
