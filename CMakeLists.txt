@@ -11,7 +11,10 @@ add_executable(staticsSimulator main.cpp
     podpora.h podpora.cpp
     obciazenie.h obciazenie.cpp
     silnikobliczeniowy.h silnikobliczeniowy.cpp
-    aplikacjasymulatora.h aplikacjasymulatora.cpp)
+    aplikacjasymulatora.h aplikacjasymulatora.cpp
+    kontenersiatki.h kontenersiatki.cpp
+
+)
 
 include(GNUInstallDirs)
 install(TARGETS staticsSimulator

@@ -1,8 +1,10 @@
 #ifndef OBCIAZENIE_H
 #define OBCIAZENIE_H
 
+
 class Obciazenie
 {
+protected:
     double wartosc {0}, wartoscX {0}, wartoscY {0};
 public:
     Obciazenie();
