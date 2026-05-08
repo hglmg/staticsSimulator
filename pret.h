@@ -7,7 +7,7 @@ class Pret
     Punkt* pPocz {nullptr};
     Punkt* pKonc {nullptr};
     double dlugosc {0};
-    std::string nazwa {""};
+    std::string nazwa {"l"};
 public:
     Pret();
     Pret(Punkt* _pPocz, Punkt* _pKonc);

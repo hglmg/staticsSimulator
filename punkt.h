@@ -6,7 +6,7 @@
 class Punkt
 {
     double x {0}, y {0};
-    std::string nazwa {""};
+    std::string nazwa {"p"};
     Podpora* podporaPkt {nullptr};//wskaznik na podpore ktora mialaby byc w danym punkcie, moze trzeba to odworcic?
 
 public:

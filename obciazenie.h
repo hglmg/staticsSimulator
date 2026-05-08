@@ -7,7 +7,7 @@ class Obciazenie
 {
 protected:
     double wartosc {0}, wartoscX {0}, wartoscY {0};
-    std::string nazwa {""};
+    std::string nazwa {"f"};
 public:
     Obciazenie();
     Obciazenie(double _wartoscX, double _wartoscY);
