@@ -5,11 +5,10 @@
 
 class AplikacjaSymulatora
 {
-    int status {0}; //0 byłoby dla nieuruchomionej, 1 dla działającej, 2 i kolejne dla różnych błędów, można gdzieś zrobić case dekodujący błędy, mozna tez zastapic to enumem
-    KontenerSiatki kontener;
-    SilnikObliczeniowy silnikFiz;
-
 public:
+    int status {0}; //0 byłoby dla nieuruchomionej, 1 dla działającej, 2 i kolejne dla różnych błędów, można gdzieś zrobić case dekodujący błędy, mozna tez zastapic to enumem
+    KontenerSiatki kontener;// nie jestem pewien co do wstawiania kontenera i silnika jako publicznych zmiennych, ale idk szczerze jak dać potem opcję dodawania opcji i w ogóle
+    SilnikObliczeniowy silnikFiz;
     AplikacjaSymulatora();
     void uruchom();
     int getStatus() {return status;};

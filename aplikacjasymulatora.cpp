@@ -1,3 +1,6 @@
 #include "aplikacjasymulatora.h"
 
-AplikacjaSymulatora::AplikacjaSymulatora() {}
+AplikacjaSymulatora::AplikacjaSymulatora()
+{
+	silnikFiz.dodajKontener(&kontener);//wiem że pewnie da się to przypisać nie dość że w headerze, to jeszcze bez ekstra metody ale nie wiem jak, jak wiesz to spróbuj
+}

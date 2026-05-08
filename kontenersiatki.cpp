@@ -38,3 +38,23 @@ void KontenerSiatki::dodajObciazenie(Obciazenie* noweObc, double _wartoscX, doub
     noweObc->modyfikujNazwe(_nazwa);
 
 }
+
+std::deque<double> KontenerSiatki::getObcX()
+{
+    std::deque<double> obcX;
+    for (Obciazenie* wybrane : obciazenia)
+    {
+        obcX.push_back(wybrane->getWarX());
+    }
+    return obcX;
+}
+
+std::deque<double> KontenerSiatki::getObcY()
+{
+    std::deque<double> obcY;
+    for (Obciazenie* wybrane : obciazenia)
+    {
+        obcY.push_back(wybrane->getWarY());
+    }
+    return obcY;
+}

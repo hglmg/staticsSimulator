@@ -9,7 +9,7 @@ class KontenerSiatki
 {
     std::deque<Punkt*> punkty;
     std::deque<Pret*> prety;
-    std::deque<Obciazenie*> obciazenia;
+    std::deque<Obciazenie*> obciazenia;//mozna tez zamienic to na map, ale nie wiem czy to cos tutaj by dalo
 
 public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos uproscic
     KontenerSiatki();
@@ -17,6 +17,9 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void dodajPunkt(Punkt* nowyPunkt, double _x, double _y, std::string _nazwa, bool& nameChangeForced);
     void dodajPret(Pret* nowyPret, Punkt* _pPocz, Punkt* _pKonc, std::string _nazwa, bool& nameChangeForced);
     void dodajObciazenie(Obciazenie* noweObc, double _wartoscX, double _wartoscY, std::string _nazwa, bool& nameChangeForced);
+    std::deque<double> getObcX();//imo calkiem optymalne rozwiazanie
+    std::deque<double> getObcY();
+    std::deque<double> getObcY();
 
 };
 
