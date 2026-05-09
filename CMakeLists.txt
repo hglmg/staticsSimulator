@@ -9,14 +9,14 @@ add_executable(staticsSimulator main.cpp
     punkt.h punkt.cpp
     pret.h pret.cpp
     podpora.h podpora.cpp
-    obciazenie.h obciazenie.cpp
+    obciazeniepunktowe.h obciazeniepunktowe.cpp
+    obciazeniekonstrukcyjne.h obciazeniekonstrukcyjne.cpp
     silnikobliczeniowy.h silnikobliczeniowy.cpp
     aplikacjasymulatora.h aplikacjasymulatora.cpp
     kontenersiatki.h kontenersiatki.cpp
-    obcpunkt.cpp obcpunkt.h
-    obliczenie.h
+    obliczenie.h obliczenie.cpp
 )
-
+ 
 include(GNUInstallDirs)
 install(TARGETS staticsSimulator
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

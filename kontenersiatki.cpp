@@ -11,7 +11,7 @@ void KontenerSiatki::dodajPunkt(Punkt* nowyPunkt, double _x, double _y, std::str
     {
         if (kontrolny->getNazwa() == _nazwa) nameChangeForced = false;//sprawdza czy jest już taka nazwa
     }
-    if (nameChangeForced) _nazwa.push_back('-');//troche old Minecraft style, dodaje srednik na koniec nazwy
+    if (nameChangeForced) _nazwa.push_back('-');//troche old Minecraft style, dodaje srednik na koniec nazwy jesli ta jest juz uzywana, dla tego kodu pewnie lepiej by wyszlo gdyby zamiast deque bylo map
     nowyPunkt->modyfikujNazwe(_nazwa);//na koniec zmienia nazwe. Rozdzielenie tego od konstruktora moze nie byc optymalne, ale idk na razie
 
 }
@@ -27,10 +27,10 @@ void KontenerSiatki::dodajPret(Pret* nowyPret, Punkt* _pPocz, Punkt* _pKonc, std
 
 }
 
-void KontenerSiatki::dodajObciazenie(Obciazenie* noweObc, double _wartoscX, double _wartoscY, std::string _nazwa, bool& nameChangeForced)
+void KontenerSiatki::dodajObciazenieP(ObciazeniePunktowe* noweObc, double _wartoscX, double _wartoscY, std::string _nazwa, bool& nameChangeForced)
 {
-    noweObc = new Obciazenie(_wartoscX, _wartoscY);
-    for (Obciazenie* kontrolne : obciazenia)
+    noweObc = new ObciazeniePunktowe(_wartoscX, _wartoscY);
+    for (ObciazeniePunktowe* kontrolne : obcPunktowe)
     {
         if (kontrolne->getNazwa() == _nazwa) nameChangeForced = false;
     }
@@ -39,20 +39,20 @@ void KontenerSiatki::dodajObciazenie(Obciazenie* noweObc, double _wartoscX, doub
 
 }
 
-std::deque<double> KontenerSiatki::getObcX()
+std::deque<double> KontenerSiatki::getObcPX()
 {
     std::deque<double> obcX;
-    for (Obciazenie* wybrane : obciazenia)
+    for (ObciazeniePunktowe* wybrane : obcPunktowe)
     {
         obcX.push_back(wybrane->getWarX());
     }
     return obcX;
 }
 
-std::deque<double> KontenerSiatki::getObcY()
+std::deque<double> KontenerSiatki::getObcPY()
 {
     std::deque<double> obcY;
-    for (Obciazenie* wybrane : obciazenia)
+    for (ObciazeniePunktowe* wybrane : obcPunktowe)
     {
         obcY.push_back(wybrane->getWarY());
     }
