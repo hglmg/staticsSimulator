@@ -3,7 +3,7 @@
 KontenerSiatki::KontenerSiatki() {}
 
 
-void KontenerSiatki::dodajPunkt(Punkt* nowyPunkt, double _x, double _y, std::string _nazwa, bool& nameChangeForced)//ostatni bool jest dla jakiegos alertu dla logu aplikacji czy coś
+void KontenerSiatki::dodajPunkt(Punkt* nowyPunkt, double _x, double _y, std::string _nazwa, bool& nameChangeForced)//ostatni bool jest dla jakiegos alertu dla logu aplikacji czy coś, choćby "INFO: konflikt nazwy, zapisano jako <zmieniona nazwa>
 {
     nowyPunkt = new Punkt(_x, _y);
     punkty.push_back(nowyPunkt);
@@ -15,7 +15,7 @@ void KontenerSiatki::dodajPunkt(Punkt* nowyPunkt, double _x, double _y, std::str
     nowyPunkt->modyfikujNazwe(_nazwa);//na koniec zmienia nazwe. Rozdzielenie tego od konstruktora moze nie byc optymalne, ale idk na razie
 
 }
-void KontenerSiatki::dodajPret(Pret* nowyPret, Punkt* _pPocz, Punkt* _pKonc, std::string _nazwa, bool& nameChangeForced)//ostatni bool jest dla jakiegos alertu dla logu aplikacji czy coś
+void KontenerSiatki::dodajPret(Pret* nowyPret, Punkt* _pPocz, Punkt* _pKonc, std::string _nazwa, bool& nameChangeForced)
 {
     nowyPret = new Pret(_pPocz, _pKonc);
     for (Pret* kontrolny : prety)

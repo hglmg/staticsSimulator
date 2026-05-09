@@ -17,7 +17,7 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void dodajPunkt(Punkt* nowyPunkt, double _x, double _y, std::string _nazwa, bool& nameChangeForced);
     void dodajPret(Pret* nowyPret, Punkt* _pPocz, Punkt* _pKonc, std::string _nazwa, bool& nameChangeForced);
     void dodajObciazenie(Obciazenie* noweObc, double _wartoscX, double _wartoscY, std::string _nazwa, bool& nameChangeForced);
-    std::deque<double> getObcX();//imo calkiem optymalne rozwiazanie
+    std::deque<double> getObcX();//imo calkiem optymalne rozwiazanie, ale może jest jakiś lepszy sposób
     std::deque<double> getObcY();
     std::deque<double> getObcY();
 
