@@ -14,7 +14,7 @@ add_executable(staticsSimulator main.cpp
     aplikacjasymulatora.h aplikacjasymulatora.cpp
     kontenersiatki.h kontenersiatki.cpp
     obcpunkt.cpp obcpunkt.h
-    obliczenie.cpp obliczenie.h
+    obliczenie.h
 )
 
 include(GNUInstallDirs)
