@@ -7,8 +7,8 @@ SilnikObliczeniowy::SilnikObliczeniowy()
 
 void SilnikObliczeniowy::obliczReakcje(double &silaRX, double &silaRY) //na razie bez momentu sily reakcji, poniewaz momenty sil wymagalyby wspolrzednych, a tego jeszcze nie ma
 {
-	std::deque<double> obX = kontener->getObcX();
-	std::deque<double> obY = kontener->getObcY();
+    std::vector<double> obX = kontener->getObcX();
+    std::vector<double> obY = kontener->getObcY();
 	double sumaX, sumaY;
 
 	if (obX.empty()) silaRX = 0;

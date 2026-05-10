@@ -15,8 +15,9 @@ add_executable(staticsSimulator main.cpp
     aplikacjasymulatora.h aplikacjasymulatora.cpp
     kontenersiatki.h kontenersiatki.cpp
     obliczenie.h obliczenie.cpp
-    obcpunktowe.h obcpunktowe.cpp
-    obckonstrukcyjne.h obckonstrukcyjne.cpp
+
+
+    Konstruktor.h Konstruktor.cpp
 )
  
 include(GNUInstallDirs)

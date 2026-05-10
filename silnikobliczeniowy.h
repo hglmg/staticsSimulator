@@ -1,6 +1,7 @@
 #ifndef SILNIKOBLICZENIOWY_H
 #define SILNIKOBLICZENIOWY_H
 #include "kontenersiatki.h"
+#include <list>
 
 class SilnikObliczeniowy
 {
