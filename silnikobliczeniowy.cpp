@@ -9,7 +9,7 @@ void SilnikObliczeniowy::obliczReakcje(double &silaRX, double &silaRY) //na razi
 {
     std::vector<double> obX = kontener->getObcX();
     std::vector<double> obY = kontener->getObcY();
-	double sumaX, sumaY;
+	double sumaX = 0, sumaY = 0;
 
 	if (obX.empty()) silaRX = 0;
 	else

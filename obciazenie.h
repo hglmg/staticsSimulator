@@ -2,11 +2,11 @@
 #define OBCIAZENIE_H
 #include <string>
 #include "punkt.h"
-#include "Pret.h"
+#include "pret.h"
 
 
 
-class Obciazenie // zróbmy że klasy pochodne są w tym samym pliku co bazowa - bedzie mniej plików do ogarniania, a program będzie lepiej upożadkowany
+class Obciazenie // zróbmy że klasy pochodne są w tym samym pliku co bazowa - bedzie mniej plików do ogarniania, a program będzie lepiej uporzadkowany >>>>dobra, mozemy tak zrobic
 {
 protected:
     double wartosc {0}, wartoscX {0}, wartoscY {0};
@@ -30,7 +30,7 @@ public:
 
 class ObcKonstrukcyjne : public Obciazenie
 {
-protected:
+//protected:
     Pret* pretPrzylozenia{ nullptr };
     Punkt* pktPozorny{ nullptr };
     double wartoscPoz {0}, wartoscPozX {0}, wartoscPozY {0};
@@ -43,8 +43,8 @@ public:
 
 class ObcPunktowe : public Obciazenie
 {
-protected:
-    Punkt* pktPrzylozenia{ nullptr }; // dlaczego nie pirivate?
+//protected:
+    Punkt* pktPrzylozenia{ nullptr }; // dlaczego nie pirivate? >>>> szczerze to dalem tak bo mialem pare pomyslow ktore wymagalyby dziedziczenia
 public:
     ObcPunktowe() = default;
     ObcPunktowe(double _wartoscX, double _wartoscY,Punkt* pkt);

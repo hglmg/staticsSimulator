@@ -20,10 +20,9 @@ void Konstruktor::konfiguruj()
         if(wybor == 1)
         {
             std::cout << "Podaj polozenie podpory(typ przytwierdzenie stale bo na razie nie ma innej): ";
-            double x;
-            double y;
+            double x, y;
             std::cin >> x >> y;
-            Podpora* podpora = new PrzytwierdzenieStale(x,y);
+            Podpora* podpora = new UtwierdzenieStale(x,y);
             schemat.dodajPodpore(podpora);
         }
         if(wybor == 2)
@@ -74,12 +73,12 @@ void Konstruktor::konfiguruj()
            std::cout << i << ": " << pret->getNazwa() << " " << pret->getL() << std::endl;
             i++;
         }
-        int prent;
-        std::cin >> prent;
+        int pret;//kolego, pisze sie pręt nie prent XD
+        std::cin >> pret;
         std::cout << "Podaj odleglosc od punktu poczatkowgo na precie: ";
         double l;
         std::cin >> l;
-        schemat.zwrocPrety()[prent-1]->dodajPunkt(l);
+        schemat.zwrocPrety()[pret-1]->dodajPunkt(l);
         }
         if (wybor == 5)
             break;

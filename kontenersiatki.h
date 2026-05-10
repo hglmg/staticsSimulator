@@ -21,6 +21,7 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void dodajObciazenie(Obciazenie* noweObc);
     void dodajPodpore(Podpora* pod); // po chuju troche bo podajesz wskaźnik a poptem tworzysz nowy??? nie wiem, robie po swojemu
     void kasujPunkty(){punkty.clear();};
+    void kasujIPodpore() { podpory.erase(podpory.begin()); };//do uzycia potem przy oswabadzaniu z wiezow
     std::vector<double> getObcX();//imo calkiem optymalne rozwiazanie, ale może jest jakiś lepszy sposób
     std::vector<double> getObcY();//10-05-2026 pojawia sie teraz problem, bo watosci obciazen konstrukcyjnych to wartosci N/m, a momentow sily - N*m
     //odnośnie błędu można po prostu zrobić 3 różne kontenery na różne obiążenie

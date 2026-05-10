@@ -18,7 +18,7 @@ add_executable(staticsSimulator main.cpp
 
 
     Konstruktor.h Konstruktor.cpp
-)
+  )
  
 include(GNUInstallDirs)
 install(TARGETS staticsSimulator

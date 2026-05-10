@@ -2,16 +2,63 @@
 
 Podpora::Podpora(double x, double y)
 {
-    Punkt* pkt = new Punkt(x,y,"P");
-    pozycja = pkt;
+    pozycja = new Punkt(x, y, "P");
 }
 
 
 
-PrzytwierdzenieStale::PrzytwierdzenieStale(double x, double y)  : Podpora(x,y)
+UtwierdzenieStale::UtwierdzenieStale(double _x, double _y)  : Podpora(_x, _y)
 {
     xBlok = true;
     yBlok = true;
-    momentSily = true;
+    rotBlok = true;
 
+}
+
+PrzegubWalcowy::PrzegubWalcowy(double _x, double _y) : Podpora(_x, _y)
+{
+    xBlok = true;
+    yBlok = true;
+    rotBlok = false;
+
+}
+
+UtwierdzeniePrzesuwne::UtwierdzeniePrzesuwne(double _x, double _y, char freeAxis) : Podpora(_x, _y)
+{
+    rotBlok = true;
+    switch (freeAxis)
+    {
+    default:
+        yBlok = true;
+        xBlok = false;
+        break;
+    case 'X':
+        xBlok = false;
+        yBlok = true;
+        break;
+    case 'Y':
+        xBlok = true;
+        yBlok = false;
+        break;
+    }
+}
+
+PodporaRuchoma::PodporaRuchoma(double _x, double _y, char freeAxis) : Podpora(_x, _y)
+{
+    rotBlok = false;
+    switch (freeAxis)
+    {
+    default:
+        yBlok = true;
+        xBlok = false;
+        break;
+    case 'X':
+        xBlok = false;
+        yBlok = true;
+        break;
+    case 'Y':
+        xBlok = true;
+        yBlok = false;
+        break;
+    }
 }

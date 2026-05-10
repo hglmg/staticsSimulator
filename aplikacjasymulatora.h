@@ -14,6 +14,8 @@ public:
     AplikacjaSymulatora();
     void uruchom();
     int getStatus() {return status;};
+    SilnikObliczeniowy getSilnik() { return silnikFiz; };//mowisz masz, metody z dostepem
+    Konstruktor getKonstruktor() { return konstruktor; };
 };
 
 #endif // APLIKACJASYMULATORA_H
