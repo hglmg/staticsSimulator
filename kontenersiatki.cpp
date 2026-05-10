@@ -27,10 +27,10 @@ void KontenerSiatki::dodajPret(Pret* nowyPret, Punkt* _pPocz, Punkt* _pKonc, std
 
 }
 
-void KontenerSiatki::dodajObciazenieP(ObciazeniePunktowe* noweObc, double _wartoscX, double _wartoscY, std::string _nazwa, bool& nameChangeForced)
+void KontenerSiatki::dodajObciazenie(Obciazenie* noweObc, double _wartoscX, double _wartoscY, std::string _nazwa, bool& nameChangeForced)
 {
-    noweObc = new ObciazeniePunktowe(_wartoscX, _wartoscY);
-    for (ObciazeniePunktowe* kontrolne : obcPunktowe)
+    noweObc = new Obciazenie(_wartoscX, _wartoscY);
+    for (Obciazenie* kontrolne : obciazenia)
     {
         if (kontrolne->getNazwa() == _nazwa) nameChangeForced = false;
     }
@@ -39,20 +39,20 @@ void KontenerSiatki::dodajObciazenieP(ObciazeniePunktowe* noweObc, double _warto
 
 }
 
-std::deque<double> KontenerSiatki::getObcPX()
+std::deque<double> KontenerSiatki::getObcX()
 {
     std::deque<double> obcX;
-    for (ObciazeniePunktowe* wybrane : obcPunktowe)
+    for (Obciazenie* wybrane : obciazenia)
     {
         obcX.push_back(wybrane->getWarX());
     }
     return obcX;
 }
 
-std::deque<double> KontenerSiatki::getObcPY()
+std::deque<double> KontenerSiatki::getObcY()
 {
     std::deque<double> obcY;
-    for (ObciazeniePunktowe* wybrane : obcPunktowe)
+    for (Obciazenie* wybrane : obciazenia)
     {
         obcY.push_back(wybrane->getWarY());
     }
