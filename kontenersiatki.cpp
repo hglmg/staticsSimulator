@@ -45,26 +45,26 @@ void KontenerSiatki::dodajObciazenie(Obciazenie* noweObc)
 
 }
 
-std::vector<double> KontenerSiatki::getObcX() // szczeże, zwracanie oddzielnie X i Y nie ma sensu - lepiej zwrócić całośc w postaci punktów i tylko wybrać X lub Y
-//polecił bym wypierdolić te funkcjce
-{
-    std::vector<double> obcX;
-    for (Obciazenie* wybrane : obciazenia)
-    {
-        obcX.push_back(wybrane->getWarX());
-    }
-    return obcX;
-}
+//std::vector<double> KontenerSiatki::getObcX() // szczeże, zwracanie oddzielnie X i Y nie ma sensu - lepiej zwrócić całośc w postaci punktów i tylko wybrać X lub Y
+////polecił bym wypierdolić te funkcjce
+//{
+//    std::vector<double> obcX;
+//    for (Obciazenie* wybrane : obciazenia)
+//    {
+//        obcX.push_back(wybrane->getWarX());
+//    }
+//    return obcX;
+//}
 
-std::vector<double> KontenerSiatki::getObcY()
-{
-    std::vector<double> obcY;
-    for (Obciazenie* wybrane : obciazenia)
-    {
-        obcY.push_back(wybrane->getWarY());
-    }
-    return obcY;
-}
+//std::vector<double> KontenerSiatki::getObcY()
+//{
+//    std::vector<double> obcY;
+//    for (Obciazenie* wybrane : obciazenia)
+//    {
+//        obcY.push_back(wybrane->getWarY());
+//    }
+//    return obcY;
+//}
 void KontenerSiatki::dodajPodpore(Podpora* pod)
 {
     podpory.push_back(pod);

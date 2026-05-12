@@ -17,12 +17,44 @@ void Konstruktor::konfiguruj()
         std::cout << "5.Break" << std::endl;
         int wybor;
         std::cin >> wybor;
-        if(wybor == 1)
+        if(wybor == 1)//ja bym zamienil te ify na switch case ale twoj wybor
         {
-            std::cout << "Podaj polozenie podpory(typ przytwierdzenie stale bo na razie nie ma innej): ";
+            std::cout << "Podaj polozenie podpory: ";
             double x, y;
+            int select;
             std::cin >> x >> y;
-            Podpora* podpora = new UtwierdzenieStale(x,y);
+            std::cout << "Wybierz tryb podpory:\n";
+            std::cout << "1.\tUtwierdzenie stale\n";
+            std::cout << "2.\tPrzegub walcowy\n";
+            std::cout << "3.\tUtwierdzenie przesuwne (blokada obrotu)\n";
+            std::cout << "4.\tPodpora ruchoma (swobodny obrot)\n";
+            std::cout << ">";
+            std::cin >> select;
+            Podpora* podpora;
+            char freeAxis;
+            switch (select)
+            {
+            default:
+                podpora = new UtwierdzenieStale(x, y);
+                break;
+            case 1:
+                podpora = new UtwierdzenieStale(x, y);
+                break;
+            case 2:
+                podpora = new PrzegubWalcowy(x, y);
+                break;
+            case 3:
+                std::cout << "Wybierz os swobodna elementu [X, Y]>";
+                std::cin >> freeAxis;
+                podpora = new UtwierdzeniePrzesuwne(x, y, freeAxis);
+                break;
+            case 4:
+                std::cout << "Wybierz os swobodna elementu [X, Y]>";
+                std::cin >> freeAxis;
+                podpora = new PodporaRuchoma(x, y, freeAxis);
+                break;
+            }
+            
             schemat.dodajPodpore(podpora);
         }
         if(wybor == 2)
@@ -82,6 +114,7 @@ void Konstruktor::konfiguruj()
         }
         if (wybor == 5)
             break;
+        else std::cerr << "Nieprawidlowa instrukcja\n";//dziwnie dziala bo sie wpisuje po kazdym while, ale w sumie to i tak zaraz to wywalamy wiec bajo jajo
 
         schemat.kasujPunkty();
         for(const auto &podpory : schemat.zwrocPodpory())

@@ -7,18 +7,20 @@ class Podpora
 {
 protected:
     bool xBlok{ false }, yBlok{ false }, rotBlok{ false };
-    ObcPunktowe *reakcjaX{ nullptr }, *reakcjaY{ nullptr }, *reakcjaMXY{ nullptr };//na potem do oswobodzenia z wiezow
+    Sila* reakcja{ nullptr };//nie wiem jeszcze czy dac to jako wskaznikowe czy zwykle
 
     Punkt* pozycja;
 
 
 
 public:
-    Podpora(double x, double y); // wyjebałem konstruktory domyśle bo tylko zaśmieciają i nic nie dają
+    Podpora(double _x, double _y); // wyjebałem konstruktory domyśle bo tylko zaśmieciają i nic nie dają
     //virtual bool blokujeX() = 0;
     //virtual bool blokujeY() = 0; // podpora to klasa abstarkcyjna: dostępne będą tylko jej typy pochodne
     void wstawPodpore();
-    Punkt* zwrocPunkt(){return pozycja;};
+    Punkt* zwrocPunkt() { return pozycja; };
+    Sila* zwrocReakcje() { return reakcja; };
+    void dodajReakcje(Sila* _reakcja) { reakcja = _reakcja; };
 };
 
 class UtwierdzenieStale : public Podpora
@@ -36,7 +38,7 @@ public:
 class UtwierdzeniePrzesuwne : public Podpora
 {
 public:
-    UtwierdzeniePrzesuwne(double _x, double _y, char freeAxis);//moze uzyc czegos innego do definiowania swobodnej osi, ale chyba char bedzie najlepszy
+    UtwierdzeniePrzesuwne(double _x, double _y, char freeAxis);//moze uzyc czegos innego do definiowania swobodnej osi, ale chyba char bedzie najlepszy (potem mozna zrobic jakis drop-down w GUI)
 };
 class PodporaRuchoma : public Podpora//moze tez pelnic funkcje lozyska czolowego
 {

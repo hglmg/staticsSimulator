@@ -1,7 +1,7 @@
 #ifndef SILNIKOBLICZENIOWY_H
 #define SILNIKOBLICZENIOWY_H
 #include "kontenersiatki.h"
-#include <list>
+#include <vector>
 
 class SilnikObliczeniowy
 {
@@ -17,7 +17,7 @@ public:
     void zmienKrokObliczen(double _krokObliczen) { krokObliczen = _krokObliczen; };
     void dodajKontener(KontenerSiatki* _kontener) { kontener = _kontener; };
     void inicjalizuj();//byloby odpowiedzialne za wczytanie liczb i wartosci do obliczen moze? (na razie nieużywane)
-    void obliczReakcje(double &silaRX, double &silaRY);//puste, na razie jeszcze nie wiem co i jak to dac
+    void obliczReakcje(double& silaRX, double& silaRY);
 };
 
 #endif // SILNIKOBLICZENIOWY_H

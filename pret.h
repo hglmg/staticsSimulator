@@ -8,7 +8,7 @@ class Pret
     Punkt* pPocz {nullptr};
     Punkt* pKonc {nullptr};
     double dlugosc {0};
-    std::string nazwa {"l"}; // nie wiem po co nadawać nazwy prętom i punktom
+    std::string nazwa {"l"}; // nie wiem po co nadawać nazwy prętom i punktom >>>> chodzi o to zeby byly odroznialne dla uzytkownika w gui, ale jak wolisz
     std::vector <Punkt*> punkty; // pierwszy punkt to początek, drugi koniec, reszcza to punkty charakterystyczne
 public:
 

@@ -1,8 +1,8 @@
 #include "podpora.h"
 
-Podpora::Podpora(double x, double y)
+Podpora::Podpora(double _x, double _y)
 {
-    pozycja = new Punkt(x, y, "P");
+    pozycja = new Punkt(_x, _y, "P");
 }
 
 

@@ -5,30 +5,14 @@ SilnikObliczeniowy::SilnikObliczeniowy()
 
 }
 
-void SilnikObliczeniowy::obliczReakcje(double &silaRX, double &silaRY) //na razie bez momentu sily reakcji, poniewaz momenty sil wymagalyby wspolrzednych, a tego jeszcze nie ma
+void SilnikObliczeniowy::obliczReakcje(double &silaRX, double &silaRY)
 {
-    std::vector<double> obX = kontener->getObcX();
-    std::vector<double> obY = kontener->getObcY();
 	double sumaX = 0, sumaY = 0;
-
-	if (obX.empty()) silaRX = 0;
-	else
+	for (Obciazenie* kontrolne : kontener->zwrocObciazenia())
 	{
-		for (double fX : obX)
-		{
-			sumaX += fX;
-		}
-		silaRX = -sumaX;
+		sumaX += kontrolne->getSila().getWarX();
+		sumaY += kontrolne->getSila().getWarY();
 	}
-	
-	if (obY.empty()) silaRY = 0;
-	else
-	{
-		for (double fY : obY)
-		{
-			sumaY += fY;
-		}
-		silaRY = -sumaY;
-	}
-
+	silaRX = -sumaX;
+	silaRY = -sumaY;
 }

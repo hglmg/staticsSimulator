@@ -8,7 +8,7 @@
 
 class KontenerSiatki
 {
-    std::vector<Punkt*> punkty; //zamaist deque wpuierdole vector - jest fajniejszy, może troche mniej optymalny
+    std::vector<Punkt*> punkty;
     std::vector<Pret*> prety;
     std::vector<Obciazenie*> obciazenia;//mozna tez zamienic to na map, ale nie wiem czy to cos tutaj by dalo
     std::vector<Podpora*> podpory;
@@ -19,15 +19,17 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void dodajPunkt(Punkt*);
     void dodajPret(Pret* nowyPret);
     void dodajObciazenie(Obciazenie* noweObc);
-    void dodajPodpore(Podpora* pod); // po chuju troche bo podajesz wskaźnik a poptem tworzysz nowy??? nie wiem, robie po swojemu
+    void dodajPodpore(Podpora* pod);
     void kasujPunkty(){punkty.clear();};
-    void kasujIPodpore() { podpory.erase(podpory.begin()); };//do uzycia potem przy oswabadzaniu z wiezow
-    std::vector<double> getObcX();//imo calkiem optymalne rozwiazanie, ale może jest jakiś lepszy sposób
-    std::vector<double> getObcY();//10-05-2026 pojawia sie teraz problem, bo watosci obciazen konstrukcyjnych to wartosci N/m, a momentow sily - N*m
+    void kasujPodporePocz() { podpory.erase(podpory.begin()); };
+    void kasujPodporeKonc() { podpory.pop_back(); };
+    //std::vector<double> getObcX();
+    //std::vector<double> getObcY();
     //odnośnie błędu można po prostu zrobić 3 różne kontenery na różne obiążenie
     std::vector <Punkt*> zwrocPunkty() {return punkty;};
     std::vector <Pret*> zwrocPrety() {return prety;};
     std::vector <Podpora*> zwrocPodpory() {return podpory;};
+    std::vector <Obciazenie*> zwrocObciazenia() { return obciazenia; };
 
 
 

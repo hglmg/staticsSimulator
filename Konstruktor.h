@@ -11,6 +11,7 @@ class Konstruktor
     KontenerSiatki schemat;
 public:
     Konstruktor() = default;
+    KontenerSiatki Kontener() { return schemat; };
     void konfiguruj();
 };
 
