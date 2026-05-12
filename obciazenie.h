@@ -1,14 +1,17 @@
 #ifndef OBCIAZENIE_H
 #define OBCIAZENIE_H
 #include <string>
+#include <Eigen> // biblioteka do macierzy i obliczen algebry liniowej
 #include "punkt.h"
 #include "pret.h"
 #include "sila.h"
 
 
 
+
 class Obciazenie // zróbmy że klasy pochodne są w tym samym pliku co bazowa - bedzie mniej plików do ogarniania, a program będzie lepiej uporzadkowany >>>>dobra, mozemy tak zrobic
 {
+
 protected:
     //double wartosc {0}, wartoscX {0}, wartoscY {0};
     Sila silaObc{ Sila(0, 0) };
@@ -25,17 +28,19 @@ public:
     Sila getSila() { return silaObc; };
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
+    Eigen::VectorXd utworzWektorObciorzen();
+
 
 };
 
 class ObcKonstrukcyjne : public Obciazenie
 {
 //protected:
-    Pret* pretPrzylozenia{ nullptr };
-    Punkt* pktPozorny{ nullptr };
-    Sila silaPoz{ Sila(0, 0) };
+    Pret* pretPrzylozenia{ nullptr }; // to raczej nie ma znaczenia
+    //Punkt* pktPozorny{ nullptr };
+    //Sila silaPoz{ Sila(0, 0) };
 public:
-    ObcKonstrukcyjne() = default;
+    //ObcKonstrukcyjne() = default;
     ObcKonstrukcyjne(double _wartoscX, double _wartoscY,Punkt* pkt);
     void dodajPunktPrz(Pret* _pretPrzylozenia) { pretPrzylozenia = _pretPrzylozenia; };
     Pret* getPret() { return pretPrzylozenia; };
@@ -48,6 +53,16 @@ class ObcPunktowe : public Obciazenie
 public:
     ObcPunktowe() = default;
     ObcPunktowe(double _wartoscX, double _wartoscY, Punkt* _pkt);
+    void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
+    Punkt* getPunkt() { return pktPrzylozenia; };
+};
+
+class MomentSkupiony : public Obciazenie
+{
+    Punkt* pktPrzylozenia{ nullptr };
+public:
+
+    MomentSkupiony(double _wartoscX, double _wartoscY, Punkt* _pkt);
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
     Punkt* getPunkt() { return pktPrzylozenia; };
 };

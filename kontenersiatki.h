@@ -20,9 +20,11 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void dodajPret(Pret* nowyPret);
     void dodajObciazenie(Obciazenie* noweObc);
     void dodajPodpore(Podpora* pod);
-    void kasujPunkty(){punkty.clear();};
+    void kasujPunkty();
     void kasujPodporePocz() { podpory.erase(podpory.begin()); };
-    void kasujPodporeKonc() { podpory.pop_back(); };
+    void kasujPodporeKonc() { podpory.pop_back(); }; // nie lepiej kaować indeksem? po prosu erase od index
+
+
     //std::vector<double> getObcX();
     //std::vector<double> getObcY();
     //odnośnie błędu można po prostu zrobić 3 różne kontenery na różne obiążenie
@@ -30,6 +32,7 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     std::vector <Pret*> zwrocPrety() {return prety;};
     std::vector <Podpora*> zwrocPodpory() {return podpory;};
     std::vector <Obciazenie*> zwrocObciazenia() { return obciazenia; };
+    int policzStopnieSwobody();
 
 
 

@@ -13,7 +13,9 @@ Obciazenie::Obciazenie(double _wartoscX, double _wartoscY, Punkt* _pkt)
 
 
 
-ObcKonstrukcyjne::ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Punkt* pkt)
+ObcKonstrukcyjne::ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Punkt* pkt) // to na razie zostawiam
+//pobawimy sie dziediczeniem jak skończe silnik
+//na razie zrobię dla klasy bazowej
 {
     //wartoscX = _wartoscX;
     //wartoscY = _wartoscY;
