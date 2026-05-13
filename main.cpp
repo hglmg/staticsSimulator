@@ -1,12 +1,11 @@
-#include <iostream>
-#include "aplikacjasymulatora.h"
+#include "mainwindow.h"
 
-using namespace std;
+#include <QApplication>
 
-int main()
+int main(int argc, char *argv[])
 {
-    cout << "Hello World!" << endl;
-    AplikacjaSymulatora apkaSim;
-    apkaSim.uruchom();
-    return 0;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return QCoreApplication::exec();
 }
