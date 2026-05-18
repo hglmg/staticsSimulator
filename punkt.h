@@ -2,6 +2,7 @@
 #define PUNKT_H
 #include <string>
 #include <Eigen>
+#include <iostream>
 
 class Punkt
 {
@@ -21,8 +22,8 @@ class Punkt
     double reakcja_y{0};
     double reakcja_obr{0};
 
-    double siła_x{0};
-    double siła_y{0};
+    double sila_x{0};
+    double sila_y{0};
     double moment_obr{0}; // dodać settery dla sił przyłożonych w punckie,
     //to punkt musi wiedzieć jaka siła na niego działa
 
@@ -43,8 +44,12 @@ public:
     int zwrocStopienSwobody_y(){return stopienSwobody_y; };
     int zwrocStopienSwobody_obr(){return stopienSwobody_obr; };
 
-    double zwrocSila_x(){return siła_x;};
-    double zwrocSila_y(){return siła_y;};
+    void dodajSile_x(double x){sila_x = x;};
+    void dodajSile_y(double y){sila_y = y;};
+    void dodajMoment_obr(double obr){moment_obr = obr;};
+
+    double zwrocSila_x(){return sila_x;};
+    double zwrocSila_y(){return sila_y;};
     double zwrocMoment_obr(){return moment_obr;};
 
     void ustawPrzemieszczenie_x(double x){przemieszczenie_x = x;};
@@ -55,6 +60,21 @@ public:
     void ustawReakcje_y(double war){reakcja_y = war;};
     void ustawReakcje_obr(double war){reakcja_obr = war;};
 
+
+
+
+    //debug
+
+    void wypisz()
+    {
+        std::cout << "przemieszszcenie x: " << przemieszczenie_x << "\n";
+        std::cout << "przemieszszcenie y: " << przemieszczenie_y << "\n";
+        std::cout << "przemieszszcenie obr: " << przemieszczenie_obr << "\n";
+
+        std::cout << "reakcja x: " << reakcja_x << "\n";
+        std::cout << "reakcja y: " << reakcja_y << "\n";
+        std::cout << "reakcja obr: " << reakcja_obr << "\n";
+    }
 
 };
 

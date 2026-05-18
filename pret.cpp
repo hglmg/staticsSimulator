@@ -11,8 +11,8 @@ Pret::Pret(Punkt* _pPocz, Punkt* _pKonc)
     punkty.push_back(pPocz);
     punkty.push_back(pKonc);
 
-    cos = (pKonc->getX() - pPocz->getX())/L;
-    sin = (pKonc->getY() - pPocz->getY())/L;
+    cosinus = (pKonc->getX() - pPocz->getX())/L;
+    sinus = (pKonc->getY() - pPocz->getY())/L;
     utworzMacierze();
 
 
@@ -78,17 +78,19 @@ void Pret::utworzMacierze()
     sztywnoscLokalna(5,4) = -(6*E*I)/L2;
     sztywnoscLokalna(5,5) = (4*E*I)/L;
 
+
+
     //tworzenie macierzy transformacji (do zamiany lokalnego układu współrzędnych na układ globalny)
 
-    transformacja(0,0) = cos;
-    transformacja(0,1) = sin;
+    transformacja(0,0) = cosinus;
+    transformacja(0,1) = sinus;
     transformacja(0,2) = 0;
     transformacja(0,3) = 0;
     transformacja(0,4) = 0;
     transformacja(0,5) = 0;
 
-    transformacja(1,0) = -sin;
-    transformacja(1,1) = cos;
+    transformacja(1,0) = -sinus;
+    transformacja(1,1) = cosinus;
     transformacja(1,2) = 0;
     transformacja(1,3) = 0;
     transformacja(1,4) = 0;
@@ -104,15 +106,15 @@ void Pret::utworzMacierze()
     transformacja(3,0) = 0;
     transformacja(3,1) = 0;
     transformacja(3,2) = 0;
-    transformacja(3,3) = cos;
-    transformacja(3,4) = sin;
+    transformacja(3,3) = cosinus;
+    transformacja(3,4) = sinus;
     transformacja(3,5) = 0;
 
     transformacja(4,0) = 0;
     transformacja(4,1) = 0;
     transformacja(4,2) = 0;
-    transformacja(4,3) = -sin;
-    transformacja(4,4) = cos;
+    transformacja(4,3) = -sinus;
+    transformacja(4,4) = cosinus;
     transformacja(4,5) = 0;
 
     transformacja(5,0) = 0;
@@ -122,8 +124,12 @@ void Pret::utworzMacierze()
     transformacja(5,4) = 0;
     transformacja(5,5) = 1;
 
+
+
     sztywnoscGlobalna = transformacja.transpose() * sztywnoscLokalna * transformacja; // przeliczenie macierzy
     //z lokalnego układu pręta na układ globalny
+
+
 
 
 

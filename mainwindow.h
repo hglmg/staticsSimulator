@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "aplikacjasymulatora.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -12,6 +13,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    AplikacjaSymulatora aplikacja;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

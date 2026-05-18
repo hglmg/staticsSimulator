@@ -19,8 +19,8 @@ class Pret
     double A{0.001};
     double I{1e-6}; // przykładowe wartości na stałe do testów, potem doda się ich wyliczanie na podstawie przekroju belki
 
-    double sin{0};
-    double cos{0}; // będzie potrzebne w silniku do transformacji
+    double sinus{0};
+    double cosinus{0}; // będzie potrzebne w silniku do transformacji
 
     Eigen::Matrix<double,6,6> sztywnoscLokalna;
     Eigen::Matrix<double,6,6> transformacja;
@@ -32,8 +32,8 @@ public:
     Pret(Punkt* _pPocz, Punkt* _pKonc);
 
     double getL() {return L;};
-    double getSin() {return sin;};
-    double getCos() {return cos;};
+    //double getSin() {return ;};
+    //double getCos() {return cos;};
 
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};

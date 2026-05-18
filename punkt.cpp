@@ -20,6 +20,9 @@ void Punkt::nazwijStopienSwodoby_obr(int numer)
     stopienSwobody_obr = numer;
 }
 
+
+
+
 // void Punkt::modyfikujPozycje(double _x, double _y)
 // {
 //     x = _x;

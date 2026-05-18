@@ -34,6 +34,26 @@ public:
     void rozwiaz();
     void konfiguruj(KontenerSiatki *_schemat);
 
+    void wypisz()
+    {
+        int i = 1;
+        if (schemat == nullptr)
+            {
+            std::cerr << "brak konfiguracji silnika! (wypisz)" << std::endl;
+            return;
+            }
+        for(const auto& punkt : schemat->zwrocPunkty())
+        {
+            punkt->modyfikujNazwe(std::to_string(i));
+            std::cout << "punkt " << punkt->getNazwa() << ": " << std::endl;;
+            punkt->wypisz();
+            i++;
+        }
+    }
+
+
+
+
 };
 
 #endif // SILNIKOBLICZENIOWY_H

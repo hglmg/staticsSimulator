@@ -22,8 +22,11 @@ void SilnikObliczeniowy:: zbudujMacierzGlobalna()
     numerujStopnieSwobody();
     const int N = 6;
     int n = schemat->policzStopnieSwobody(); //pobranie całkowitej liczby stopni swobody układu
+
+
     //dla belki 2D 3*stopnie swobody
     macierzGlobalna = Eigen::MatrixXd::Zero(n,n); // tworzenioe globalnej macierzy dla całego układu wypełnionej zerami
+
     for(const auto& p : schemat->zwrocPrety())
     {
         int stSwobody[N] = // wektor indeksów stopni swobody dla danego pręta
@@ -42,11 +45,13 @@ void SilnikObliczeniowy:: zbudujMacierzGlobalna()
         //trzebna by ją zwracać a auto dobierze samo
         //mogłem bez zmiennej pomocniczej ale jest czytelniej
 
+
         for (unsigned int i = 0; i < N; i++)
         {
-            for(unsigned int j = 0; j < N; i++)
+            for(unsigned int j = 0; j < N; j++)
             {
                 macierzGlobalna(stSwobody[i],stSwobody[j]) +=  macierzGlobalnaPreta(i,j);
+
                 //globalnym indeksom stopnia swobody dużej tablicy przypisuje te, z danego pręta
                 //+=, bo wiele elementów może wpływac na ten sampunkt i modyfikowac macierz
                 // ten sam punkt może należeć do kilku prętów i będzie modyfikowany kilkukrotnie
@@ -71,6 +76,7 @@ void SilnikObliczeniowy::zbudujWektorObciarzen()
         wektorObciarzen(p->zwrocStopienSwobody_y()) = p->zwrocSila_y();
         wektorObciarzen(p->zwrocStopienSwobody_obr()) = p->zwrocMoment_obr(); // wrzucamy wszystkie siły do jednego wektora
     }
+
 
     wektorObciarzen_podpory = wektorObciarzen;
 }
@@ -167,13 +173,16 @@ void SilnikObliczeniowy::wyznaczReakcjePodporowe()
         war = wektorReakcji(i);
         p->ustawReakcje_x(war);
 
+
         i = p->zwrocStopienSwobody_y();
         war = wektorReakcji(i);
         p->ustawReakcje_y(war);
 
+
         i = p->zwrocStopienSwobody_obr();
         war = wektorReakcji(i);
         p->ustawReakcje_obr(war);
+
     }
 
 }
@@ -184,13 +193,17 @@ void SilnikObliczeniowy::rozwiaz()
 
     if (schemat == nullptr)
     {
-        std::cerr << "Brak konfiguracji silnika!" << std::endl;
+        std::cerr << "Brak konfiguracji silnika! (rozwiaz)" << std::endl;
         return;
     }
 
+
     zbudujMacierzGlobalna();
+
     zbudujWektorObciarzen();
+
     narzucWarunkiBrzegowe();
+
 
     wektorPrzemieszczen = macierzGlobalna_podpory.colPivHouseholderQr().solve(wektorObciarzen_podpory); // rozwiązanie równania macierzowego
     //macierzGlobalna * /przesunięcia/ = wektorObciazen
