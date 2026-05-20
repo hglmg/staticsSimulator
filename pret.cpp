@@ -1,4 +1,5 @@
 #include "pret.h"
+#include "obciazenie.h"
 
 
 
@@ -26,6 +27,24 @@ void Pret::dodajPunkt(double odleglosc) // tworzymy punkt w konkretnej odległo�
     A[1] = ((pKonc->getY() - pPocz->getY())/L); // wektor jednostkowy
     Punkt* nowy = new Punkt((pPocz->getX() + odleglosc*A[0]),(pPocz->getY() + odleglosc*A[1]),"P");
     punkty.push_back(nowy);
+}
+
+void Pret::dodajObciarzenie(ObcKonstrukcyjne* _obc)
+{
+    obc.push_back(_obc);
+}
+
+std::vector <int> Pret::zwrocStopnieSwobody()
+{
+    stSwobody.push_back(pPocz->zwrocStopienSwobody_x());
+    stSwobody.push_back(pPocz->zwrocStopienSwobody_y());
+    stSwobody.push_back(pPocz->zwrocStopienSwobody_obr());
+
+    stSwobody.push_back(pKonc->zwrocStopienSwobody_x());
+    stSwobody.push_back(pKonc->zwrocStopienSwobody_y());
+    stSwobody.push_back(pKonc->zwrocStopienSwobody_obr());
+
+    return stSwobody;
 }
 
 void Pret::utworzMacierze()
@@ -128,6 +147,58 @@ void Pret::utworzMacierze()
 
     sztywnoscGlobalna = transformacja.transpose() * sztywnoscLokalna * transformacja; // przeliczenie macierzy
     //z lokalnego układu pręta na układ globalny
+
+    //tworzenie wektora obciążeń
+
+    wektorObciazenLokalnych.setZero();
+
+    for (auto* obciazenie : obc) // obciążenia tworzone w lokalnej osi pręta, w UI trzema wymusić podanie loklanych
+    //współrzędnych pręta
+    {
+        double qx = obciazenie->wartoscSily_x();
+        double qy = obciazenie->wartoscSily_y();
+
+        wektorObciazenLokalnych[0] += (qx * L) / 2.0;
+        wektorObciazenLokalnych[1] += -(qy * L) /2.0;
+        wektorObciazenLokalnych[2] += -(qy * L * L) / 12.0;
+        wektorObciazenLokalnych[3] += (qx * L) / 2.0;
+        wektorObciazenLokalnych[4] += -(qy * L) / 2.0;
+        wektorObciazenLokalnych[5] += (qy * L * L) / 12.0;
+
+        //i transformacja do układu globalnego
+
+        obciazeniaGlobalne = transformacja.transpose() * wektorObciazenLokalnych;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

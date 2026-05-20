@@ -23,7 +23,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(staticsSimulator
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        aplikacjasymulatora.cpp aplikacjasymulatora.h Konstruktor.cpp Konstruktor.h kontenersiatki.cpp kontenersiatki.h main.cpp mainwindow.cpp mainwindow.h mainwindow.ui obciazenie.cpp obciazenie.h obliczenie.cpp obliczenie.h podpora.cpp podpora.h pret.cpp pret.h punkt.cpp punkt.h README.md sila.cpp sila.h silnikobliczeniowy.cpp silnikobliczeniowy.h
+        aplikacjasymulatora.cpp aplikacjasymulatora.h Konstruktor.cpp Konstruktor.h kontenersiatki.cpp kontenersiatki.h main.cpp mainwindow.cpp mainwindow.h mainwindow.ui obciazenie.cpp obciazenie.h   podpora.cpp podpora.h pret.cpp pret.h punkt.cpp punkt.h README.md   silnikobliczeniowy.cpp silnikobliczeniowy.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET staticsSimulator APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

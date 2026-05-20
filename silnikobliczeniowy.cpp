@@ -68,17 +68,28 @@ void SilnikObliczeniowy:: zbudujMacierzGlobalna()
 void SilnikObliczeniowy::zbudujWektorObciarzen()
 {
     int n = schemat->policzStopnieSwobody();
-    wektorObciarzen = Eigen::VectorXd::Zero(n); //wektor zer
+    wektorObciazen = Eigen::VectorXd::Zero(n); //wektor zer
 
     for(const auto &p : schemat->zwrocPunkty())
     {
-        wektorObciarzen(p->zwrocStopienSwobody_x()) = p->zwrocSila_x();
-        wektorObciarzen(p->zwrocStopienSwobody_y()) = p->zwrocSila_y();
-        wektorObciarzen(p->zwrocStopienSwobody_obr()) = p->zwrocMoment_obr(); // wrzucamy wszystkie siły do jednego wektora
+        wektorObciazen(p->zwrocStopienSwobody_x()) += p->zwrocSila_x();
+        wektorObciazen(p->zwrocStopienSwobody_y()) += p->zwrocSila_y();
+        wektorObciazen(p->zwrocStopienSwobody_obr()) += p->zwrocMoment_obr(); // wrzucamy wszystkie siły do jednego wektora
+    }
+
+    for(const auto& pret : schemat->zwrocPrety())
+    {
+        auto silaPret = pret->zwrocObciorzeniaGlobalne();
+        auto stSwobody = pret->zwrocStopnieSwobody();
+
+        for(unsigned int i = 0; i < 6;i++)
+        {
+            wektorObciazen(stSwobody[i]) = silaPret(i); // dodanie do dobliczeń efektów działań obciążeń konstrukcyjnych
+        }
     }
 
 
-    wektorObciarzen_podpory = wektorObciarzen;
+    wektorObciazen_podpory = wektorObciazen;
 }
 
 void SilnikObliczeniowy::narzucWarunkiBrzegowe() // ma modyfikować kopie macierzy globalnych
@@ -100,7 +111,7 @@ void SilnikObliczeniowy::narzucWarunkiBrzegowe() // ma modyfikować kopie macier
             macierzGlobalna_podpory.col(i).setZero(); // zerujemy rząd i kolumne, odpowiadającą uwiazaniu na podporze
 
             macierzGlobalna_podpory(i,i) = 1;
-            wektorObciarzen_podpory(i) = 0; // te warunki wymuszają brak ruchu w punkcie podpory
+            wektorObciazen_podpory(i) = 0; // te warunki wymuszają brak ruchu w punkcie podpory
 
             // https://pl.wikipedia.org/wiki/Metoda_element%C3%B3w_sko%C5%84czonych
 
@@ -121,7 +132,7 @@ void SilnikObliczeniowy::narzucWarunkiBrzegowe() // ma modyfikować kopie macier
             macierzGlobalna_podpory.col(i).setZero();
 
             macierzGlobalna_podpory(i,i) = 1;
-            wektorObciarzen_podpory(i) = 0;
+            wektorObciazen_podpory(i) = 0;
         }
 
         if(podpora->zwrocBlok_obr())
@@ -131,7 +142,7 @@ void SilnikObliczeniowy::narzucWarunkiBrzegowe() // ma modyfikować kopie macier
             macierzGlobalna_podpory.col(i).setZero();
 
             macierzGlobalna_podpory(i,i) = 1;
-            wektorObciarzen_podpory(i) = 0;
+            wektorObciazen_podpory(i) = 0;
         }
 
     }
@@ -162,7 +173,7 @@ void SilnikObliczeniowy::wyznaczPrzemieszczenia()
 
 void SilnikObliczeniowy::wyznaczReakcjePodporowe()
 {
-    wektorReakcji = macierzGlobalna * wektorPrzemieszczen - wektorObciarzen;
+    wektorReakcji = macierzGlobalna * wektorPrzemieszczen - wektorObciazen;
     //wyznacza globalny wektor reakcji w punktach
     //kożysta z zależności R = Ku - F
     int i;
@@ -205,7 +216,7 @@ void SilnikObliczeniowy::rozwiaz()
     narzucWarunkiBrzegowe();
 
 
-    wektorPrzemieszczen = macierzGlobalna_podpory.colPivHouseholderQr().solve(wektorObciarzen_podpory); // rozwiązanie równania macierzowego
+    wektorPrzemieszczen = macierzGlobalna_podpory.colPivHouseholderQr().solve(wektorObciazen_podpory); // rozwiązanie równania macierzowego
     //macierzGlobalna * /przesunięcia/ = wektorObciazen
     //wektor przemieszczen zawiera przemieszczenia w danym punckie
     //colPivHouseholderQr() to funkcja do rozwiązywania równań macierzowych

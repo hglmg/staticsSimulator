@@ -4,57 +4,55 @@
 #include <Eigen> // biblioteka do macierzy i obliczen algebry liniowej
 #include "punkt.h"
 #include "pret.h"
-#include "sila.h"
 
 
 
 
-class Obciazenie // zróbmy że klasy pochodne są w tym samym pliku co bazowa - bedzie mniej plików do ogarniania, a program będzie lepiej uporzadkowany >>>>dobra, mozemy tak zrobic
+class Obciazenie
+
 {
-
 protected:
-    //double wartosc {0}, wartoscX {0}, wartoscY {0};
-    Sila silaObc{ Sila(0, 0) };
-    Punkt* punktPrzylozenia{nullptr};
     std::string nazwa {"F"};
+    double wartoscX{0};
+    double wartoscY{0};
+    double wartosc{0}; // dałem to bezpośrednio w klasie, bez użycia klasy siła (tak jest przejżyściej)
     
 public:
-    Obciazenie() = default;
-    //Obciazenie(double _wartoscX, double _wartoscY, Punkt* _pkt);
-    //double getWar() {return wartosc;};
-    //double getWarX() {return wartoscX;};
-    //double getWarY() {return wartoscY;};
-    Obciazenie(double _wartoscX, double _wartoscY, Punkt* _pkt);
-    Sila getSila() { return silaObc; };
+
+
+    Obciazenie(double _wartoscX, double _wartoscY);
+    double wartoscSily() { return wartosc; };
+    double wartoscSily_x() { return wartoscX; };
+    double wartoscSily_y() { return wartoscY; };
+
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
-    Eigen::VectorXd utworzWektorObciorzen();
+    virtual ~Obciazenie() = default; // klasa wirualna
+};
 
 
+
+class ObcPunktowe : public Obciazenie
+{
+
+    Punkt* pktPrzylozenia{ nullptr };
+public:
+
+    ObcPunktowe(double _wartoscX, double _wartoscY,Punkt* pkt);
+    void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
+    Punkt* getPunkt() { return pktPrzylozenia; };
 };
 
 class ObcKonstrukcyjne : public Obciazenie
 {
-//protected:
-    Pret* pretPrzylozenia{ nullptr }; // to raczej nie ma znaczenia
-    //Punkt* pktPozorny{ nullptr };
-    //Sila silaPoz{ Sila(0, 0) };
+
+    Pret* pretPrzylozenia{ nullptr };
+
 public:
-    //ObcKonstrukcyjne() = default;
-    ObcKonstrukcyjne(double _wartoscX, double _wartoscY,Punkt* pkt);
+
+    ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Pret* _pret);
     void dodajPunktPrz(Pret* _pretPrzylozenia) { pretPrzylozenia = _pretPrzylozenia; };
     Pret* getPret() { return pretPrzylozenia; };
-};
-
-class ObcPunktowe : public Obciazenie
-{
-//protected:
-    Punkt* pktPrzylozenia{ nullptr }; // dlaczego nie pirivate? >>>> szczerze to dalem tak bo mialem pare pomyslow ktore wymagalyby dziedziczenia
-public:
-    ObcPunktowe() = default;
-    ObcPunktowe(double _wartoscX, double _wartoscY, Punkt* _pkt);
-    void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
-    Punkt* getPunkt() { return pktPrzylozenia; };
 };
 
 class MomentSkupiony : public Obciazenie
@@ -66,6 +64,14 @@ public:
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
     Punkt* getPunkt() { return pktPrzylozenia; };
 };
+
+
+
+
+
+
+
+
 
 
 #endif // OBCIAZENIE_H

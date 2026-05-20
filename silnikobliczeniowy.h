@@ -11,12 +11,12 @@ class SilnikObliczeniowy // wywaliłem to co zrobiłeś bo się nie przyda
     KontenerSiatki* schemat{nullptr};
 
     Eigen::MatrixXd macierzGlobalna; // nie, Matrix Xd to nie żart, tylko struktura danych // globalna macierz sztywności
-    Eigen::VectorXd wektorObciarzen; //globalny wektor obiążen przyłożonych w punktach
+    Eigen::VectorXd wektorObciazen; //globalny wektor obiążen przyłożonych w punktach
     Eigen::VectorXd wektorPrzemieszczen; //przemieszczenia punktów (zależne od sztywności oraz obciążeń)
     Eigen::VectorXd wektorReakcji; // wartości sił reakcji w każdym z punktów
 
     Eigen::MatrixXd macierzGlobalna_podpory;
-    Eigen::VectorXd wektorObciarzen_podpory; // to posłuży do wyznaczenia przemieszczen
+    Eigen::VectorXd wektorObciazen_podpory; // to posłuży do wyznaczenia przemieszczen
     //początkowa kopie macierzGlobalna i wektorObciarzen, potem modyfikujemy
 
     void numerujStopnieSwobody();    //potrzebne do tworzenia globalnej macierzy

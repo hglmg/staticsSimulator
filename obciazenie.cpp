@@ -2,41 +2,53 @@
 #include <cmath>
 
 
-Obciazenie::Obciazenie(double _wartoscX, double _wartoscY, Punkt* _pkt)
+Obciazenie::Obciazenie(double _wartoscX, double _wartoscY)
 {
-    double wartosc = sqrt(pow(_wartoscX, 2) + pow(_wartoscY, 2)); // może warto by dodać kontruktor z punktu, wartości i kąta
-    //wzgl OX? - do przemyślenia, narazie robię tak
-    //brakuje punktu początkowego - dopiszę
-    punktPrzylozenia = _pkt;
-    silaObc = Sila(_wartoscX, _wartoscY);
+    wartosc = sqrt(pow(_wartoscX, 2) + pow(_wartoscY, 2));
+    wartoscX = _wartoscX;
+    wartoscY = _wartoscY;
+}
+
+ ObcPunktowe::ObcPunktowe(double _wartoscX, double _wartoscY, Punkt* pkt) : Obciazenie(_wartoscX,_wartoscY )
+{
+     pktPrzylozenia = pkt;
 }
 
 
 
-ObcKonstrukcyjne::ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Punkt* pkt) // to na razie zostawiam
-//pobawimy sie dziediczeniem jak skończe silnik
-//na razie zrobię dla klasy bazowej
+ObcKonstrukcyjne::ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Pret* pret) : Obciazenie(_wartoscX,_wartoscY )
 {
-    //wartoscX = _wartoscX;
-    //wartoscY = _wartoscY;
-    //wartosc = sqrt(pow(_wartoscX, 2) + pow(_wartoscY, 2));
-    //double _pktPozorny[2];
-    //_pktPozorny[0] = (pretPrzylozenia->zwrocPunkty().at(0)->getX() + pretPrzylozenia->zwrocPunkty().at(1)->getX()) / 2;
-    //_pktPozorny[1] = (pretPrzylozenia->zwrocPunkty().at(0)->getY() + pretPrzylozenia->zwrocPunkty().at(1)->getY()) / 2;
-    //narazie komment, ale chyba to wyjebię, mam lepszy pomysł
-    //pktPozorny = new Punkt(_pktPozorny[0], _pktPozorny[1]);
-    //wartoscPoz = pretPrzylozenia->getL() * wartosc;//wartosci pozorne to wartosci sily skupionej ktora jest analogiczna do sily kontrukcyjnej,
-    //wartoscPozX = pretPrzylozenia->getL() * wartoscX;//moze mozna to zrobic dajac wskaznik na sile skupiona
-    //wartoscPozY = pretPrzylozenia->getL() * wartoscY;
-    // 
-    // 
-    //silaPoz = Sila(wartoscPozX = pretPrzylozenia->getL() * wartoscX, wartoscPozY = pretPrzylozenia->getL() * wartoscY); dostosowane do nowej architektury
-
+    pretPrzylozenia = pret;
 }
 
-ObcPunktowe::ObcPunktowe(double _wartoscX, double _wartoscY, Punkt* _pkt)
+MomentSkupiony::MomentSkupiony(double _wartoscX, double _wartoscY, Punkt* pkt) : Obciazenie(_wartoscX,_wartoscY )
 {
-    silaObc = Sila(_wartoscX, _wartoscY);
-    punktPrzylozenia = _pkt;
-
+    pktPrzylozenia = pkt;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
