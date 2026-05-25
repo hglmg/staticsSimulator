@@ -84,7 +84,7 @@ void SilnikObliczeniowy::zbudujWektorObciarzen()
 
         for(unsigned int i = 0; i < 6;i++)
         {
-            wektorObciazen(stSwobody[i]) = silaPret(i); // dodanie do dobliczeń efektów działań obciążeń konstrukcyjnych
+            wektorObciazen(stSwobody[i]) += silaPret(i); // dodanie do dobliczeń efektów działań obciążeń konstrukcyjnych
         }
     }
 

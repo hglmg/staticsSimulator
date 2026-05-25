@@ -4,10 +4,14 @@
 #include <Eigen>
 #include <cmath>
 #include "punkt.h"
+#define PI 3.141592653589793238462643383279502884197169
+
+
 class ObcKonstrukcyjne;
 
 class Pret
 {
+protected:
     Punkt* pPocz {nullptr};
     Punkt* pKonc {nullptr};
 
@@ -33,17 +37,20 @@ class Pret
     Eigen::Matrix<double,6,1> wektorObciazenLokalnych;
     Eigen::Matrix<double,6,1> obciazeniaGlobalne;
 
-    void utworzMacierze();
+    void ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc);
+
+
+
 public:
 
     Pret(Punkt* _pPocz, Punkt* _pKonc);
+    void utworzMacierze();
 
     double getL() {return L;};
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
-    void dodajPunkt(double odleglosc); // trzeba bedzie to zmienić - dodanie punktu w połowie musi dzielić pręt na dwa nowe
-    //trzeba będzie uwzględnić w kontruktorze inną logikę dodawania punktu, ale to jest do zrobienia
-    //dopuki tego się nie zrobi, to silnik ignoruje siły z punktów nie będących początkami i końami pręta
+    Pret* dodajPunkt(double odleglosc);
+
     void dodajObciarzenie(ObcKonstrukcyjne* _obc);
 
     std::vector <Punkt*> zwrocPunkty(){return punkty;};
@@ -53,11 +60,32 @@ public:
     Eigen::MatrixXd zwrocSztywnoscGlobalna(){return sztywnoscGlobalna;};
     Eigen::MatrixXd zwrocObciorzeniaGlobalne(){return obciazeniaGlobalne;};
 
+
+    void wczytajParametry(double _E, double _d); // do prętów kołowych
+
     //dla obiążeń konstrukcyjnych: będzie działac analogicznie jak
     //w przypadku macierzy sztywności globalnej
     //jak odpowiednio zaimlementujemy, to silnik łyknie bez rónicy
     //ale to w przyszłym tygodniu - najpierw niech zacznie liczyć
 };
+
+class PretProstokotny : public Pret
+{
+    void wczytajParametry(double _E, double _b, double _h); //_h - lokalna wyskokość, _b lokalna szerokość
+public:
+    PretProstokotny(Punkt* _pPocz, Punkt* _pKonc,double _E, double _b, double _h);
+
+};
+
+class PretKolowy : public Pret
+{
+
+    void wczytajParametry(double _E, double _d);
+
+public:
+    PretKolowy(Punkt* _pPocz, Punkt*,double _E, double _d);
+};
+
 
 
 #endif // PRET_H

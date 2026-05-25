@@ -10,18 +10,24 @@ void Konstruktor::konfiguruj()
 
     schemat.dodajPunkt(podpora->zwrocPunkt());
 
-    Punkt* pom = new Punkt(0,10,"P");
+    Punkt* pom = new Punkt(0,1,"P");
 
-    Pret* pret = new Pret(schemat.zwrocPunkty()[0],pom);
+    Pret* pret = new PretProstokotny(schemat.zwrocPunkty()[0],pom,210e9, 0.01,0.05);
 
     schemat.dodajPret(pret);
 
     schemat.dodajPunkt(pom);
 
-    Obciazenie* obc = new ObcPunktowe(10,0,schemat.zwrocPunkty()[1]);
+    ObcKonstrukcyjne* obc = new ObcKonstrukcyjne(0,1000,schemat.zwrocPrety()[0]); // podaje w lokalnym układzie pręta
+
+    pret->dodajObciarzenie(obc);
 
     schemat.dodajObciazenie(obc);
-    schemat.zwrocPunkty()[1]->dodajSile_x(10);
+
+    pret->utworzMacierze(); // odnośnie zaokrągleń: stworzymy metodę w mainwindow która zaokrągla wyniki przed wypisaniem
+    //wrzuceniem ich na ekran do 0.0 dla małych wartości, ale przechowujemy całość,
+    //dokładność zaokrąglania będzie zależeć od najwiękrzej przyłożone siły na schemacie oraz rodzaju tego co sie wypisze czy coś
+
 
 
 
