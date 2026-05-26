@@ -18,11 +18,14 @@ void Konstruktor::konfiguruj()
 
     schemat.dodajPunkt(pom);
 
-    ObcKonstrukcyjne* obc = new ObcKonstrukcyjne(0,1000,schemat.zwrocPrety()[0]); // podaje w lokalnym układzie pręta
+    ObcPunktowe* obc = new ObcPunktowe(0,1000,pom);
 
-    pret->dodajObciarzenie(obc);
+    MomentSkupiony* mom = new MomentSkupiony(1000,pom);
+
+
 
     schemat.dodajObciazenie(obc);
+    schemat.dodajObciazenie(mom);
 
     pret->utworzMacierze(); // odnośnie zaokrągleń: stworzymy metodę w mainwindow która zaokrągla wyniki przed wypisaniem
     //wrzuceniem ich na ekran do 0.0 dla małych wartości, ale przechowujemy całość,

@@ -67,10 +67,8 @@ public:
 
     void wypisz()
     {
-        // std::cout << "przemieszszcenie x: " << przemieszczenie_x << "\n";
-        // std::cout << "przemieszszcenie y: " << przemieszczenie_y << "\n";
-        std::cout << "x: " << x << "\n";
-        std::cout << "y: " << y << "\n";
+        std::cout << "przemieszszcenie x: " << przemieszczenie_x << "\n";
+        std::cout << "przemieszszcenie y: " << przemieszczenie_y << "\n";
         std::cout << "przemieszszcenie obr: " << przemieszczenie_obr << "\n";
 
         std::cout << "reakcja x: " << reakcja_x << "\n";

@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->punktyTable->setRowCount(255);
     aplikacja.uruchom();
-    //aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
-    //aplikacja.getSilnik()->rozwiaz();
-    //aplikacja.getSilnik()->wypisz();
+    aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
+    aplikacja.getSilnik()->rozwiaz();
+    aplikacja.getSilnik()->wypisz();
 }
 
 MainWindow::~MainWindow()

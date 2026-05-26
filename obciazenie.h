@@ -15,15 +15,17 @@ protected:
     std::string nazwa {"F"};
     double wartoscX{0};
     double wartoscY{0};
+    double wartoscOBR{0};
     double wartosc{0}; // dałem to bezpośrednio w klasie, bez użycia klasy siła (tak jest przejżyściej)
     
 public:
 
-
+    Obciazenie() = default; // dodałem bo moment nie ma wartości x i y
     Obciazenie(double _wartoscX, double _wartoscY);
     double wartoscSily() { return wartosc; };
     double wartoscSily_x() { return wartoscX; };
     double wartoscSily_y() { return wartoscY; };
+    double wartoscSuly_OBR() { return wartoscOBR; };
 
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
@@ -58,9 +60,10 @@ public:
 class MomentSkupiony : public Obciazenie
 {
     Punkt* pktPrzylozenia{ nullptr };
+
 public:
 
-    MomentSkupiony(double _wartoscX, double _wartoscY, Punkt* _pkt);
+    MomentSkupiony(double _wartosc, Punkt* _pkt);
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
     Punkt* getPunkt() { return pktPrzylozenia; };
 };
