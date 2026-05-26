@@ -12,7 +12,7 @@ class Punkt
     // to sie chyba nie przyda, lepiej żeby podpora przechowywała info o punkcie, potencjalnie DO ######## ale niech zostanie na razie
     int stopienSwobody_x{-1};
     int stopienSwobody_y{-1};
-    int stopienSwobody_obr{-1};
+    int stopienSwobody_obr{-1};//jak wywaliles uzytek dla obciazen to troche dupa zeby to teraz usuwać
 
     double przemieszczenie_x{0};
     double przemieszczenie_y{0};
@@ -30,9 +30,9 @@ class Punkt
 
 
 public:
-    Punkt(double _x, double _y,std::string nazwa);
-    double getX() {return x;};
-    double getY() {return y;};
+    Punkt(double _x, double _y,std::string nazwa);//ten konstruktor jest zj****y, nie ma jak tworzyć punktów teraz
+    double getX() {return przemieszczenie_x;};
+    double getY() {return przemieszczenie_y;};
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
     void modyfikujPozycje(double _x, double _y);
@@ -44,16 +44,16 @@ public:
     int zwrocStopienSwobody_y(){return stopienSwobody_y; };
     int zwrocStopienSwobody_obr(){return stopienSwobody_obr; };
 
-    void dodajSile_x(double x){sila_x = x;};
-    void dodajSile_y(double y){sila_y = y;};
+    void dodajSile_x(double _x){sila_x = _x;};
+    void dodajSile_y(double _y){sila_y = _y;};
     void dodajMoment_obr(double obr){moment_obr = obr;};
 
     double zwrocSila_x(){return sila_x;};
     double zwrocSila_y(){return sila_y;};
     double zwrocMoment_obr(){return moment_obr;};
 
-    void ustawPrzemieszczenie_x(double x){przemieszczenie_x = x;};
-    void ustawPrzemieszczenie_y(double y){przemieszczenie_y = y;};
+    void ustawPrzemieszczenie_x(double _x){przemieszczenie_x = _x;};
+    void ustawPrzemieszczenie_y(double _y){przemieszczenie_y = _y;};
     void ustawPrzemieszczenie_obr(double obr){przemieszczenie_obr = obr;};
 
     void ustawReakcje_x(double war) {reakcja_x = war;};

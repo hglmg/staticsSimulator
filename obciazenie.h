@@ -5,7 +5,7 @@
 #include "punkt.h"
 #include "pret.h"
 
-
+/*  KLASA PRZESTARZAŁA  */
 
 
 class Obciazenie

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
 #include "aplikacjasymulatora.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,7 +18,13 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void odswiezTabele(QTableWidget* odswiezanaTabela, char dataType);
     ~MainWindow() override;
+
+private slots:
+    void on_punktAddBtn_clicked();
+
+    void on_punktRemoveBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

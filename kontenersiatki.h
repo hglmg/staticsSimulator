@@ -23,6 +23,8 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void kasujPunkty();
     void kasujPodporePocz() { podpory.erase(podpory.begin()); };
     void kasujPodporeKonc() { podpory.pop_back(); }; // nie lepiej kaować indeksem? po prosu erase od index
+    void kasujObcKonc() { obciazenia.pop_back(); };
+    void kasujPunktKonc() {punkty.pop_back();};
 
 
     //std::vector<double> getObcX();
