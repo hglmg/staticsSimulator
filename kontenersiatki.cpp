@@ -3,7 +3,7 @@
 KontenerSiatki::KontenerSiatki() {}
 
 
-void KontenerSiatki::dodajPunkt(Punkt* nowyPunkt)//ostatni bool jest dla jakiegos alertu dla logu aplikacji czy coś, choćby "INFO: konflikt nazwy, zapisano jako <zmieniona nazwa>
+void KontenerSiatki::dodajPunkt(Punkt* nowyPunkt)
 {
    punkty.push_back(nowyPunkt);
 }

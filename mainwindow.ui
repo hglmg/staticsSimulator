@@ -254,7 +254,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="punktXCoordSpinBox"/>
+            <widget class="QDoubleSpinBox" name="punktXCoordSpinBox">
+             <property name="decimals">
+              <number>5</number>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_2">
@@ -264,7 +268,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="punktYCoordSpinBox"/>
+            <widget class="QDoubleSpinBox" name="punktYCoordSpinBox">
+             <property name="decimals">
+              <number>5</number>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -678,6 +686,14 @@
           </layout>
          </widget>
          <widget class="QWidget" name="momentTab">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>220</width>
+            <height>494</height>
+           </rect>
+          </property>
           <attribute name="label">
            <string>Momenty</string>
           </attribute>

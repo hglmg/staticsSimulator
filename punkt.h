@@ -30,9 +30,9 @@ class Punkt
 
 
 public:
-    Punkt(double _x, double _y,std::string nazwa);//ten konstruktor jest zj****y, nie ma jak tworzyć punktów teraz
-    double getX() {return przemieszczenie_x;};
-    double getY() {return przemieszczenie_y;};
+    Punkt(double _x, double _y,std::string _nazwa);//ten konstruktor jest zj****y, nie ma jak tworzyć punktów teraz
+    double getX() {return x;};
+    double getY() {return y;};
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
     void modyfikujPozycje(double _x, double _y);
@@ -67,8 +67,10 @@ public:
 
     void wypisz()
     {
-        std::cout << "przemieszszcenie x: " << przemieszczenie_x << "\n";
-        std::cout << "przemieszszcenie y: " << przemieszczenie_y << "\n";
+        // std::cout << "przemieszszcenie x: " << przemieszczenie_x << "\n";
+        // std::cout << "przemieszszcenie y: " << przemieszczenie_y << "\n";
+        std::cout << "x: " << x << "\n";
+        std::cout << "y: " << y << "\n";
         std::cout << "przemieszszcenie obr: " << przemieszczenie_obr << "\n";
 
         std::cout << "reakcja x: " << reakcja_x << "\n";

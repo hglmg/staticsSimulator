@@ -1,10 +1,10 @@
 #include "punkt.h"
 
-Punkt::Punkt(double _x, double _y, std::string nazwa)
+Punkt::Punkt(double _x, double _y, std::string _nazwa)
 {
     x = _x;
     y = _y;
-    this->modyfikujNazwe(nazwa);
+    this->modyfikujNazwe(_nazwa);
 }
 
 void Punkt::nazwijStopienSwodoby_x(int numer)
