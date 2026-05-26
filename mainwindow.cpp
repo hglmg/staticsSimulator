@@ -26,7 +26,7 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
     case 'p':
         for (Punkt* wybrany : aplikacja.getSchemat()->zwrocPunkty())
         {
-            odswiezanaTabela->insertRow(i);
+            //odswiezanaTabela->insertRow(i);
             odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( wybrany->getNazwa() ) ));
             odswiezanaTabela->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(std::to_string(wybrany->getX()))));
             odswiezanaTabela->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(std::to_string(wybrany->getY()))));
