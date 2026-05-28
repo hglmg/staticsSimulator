@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
     aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
     aplikacja.getSilnik()->rozwiaz();
     aplikacja.getSilnik()->wypisz();
+    odswiezTabele(ui->punktyTable, 'p');
+    odswiezTabele(ui->pretyTable, 'l');
+    odswiezTabele(ui->podporyTable, 's');
+
 }
 
 MainWindow::~MainWindow()
@@ -32,6 +36,30 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
             odswiezanaTabela->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(std::to_string(wybrany->getY()))));
             wybrany->wypisz();
             ++i;
+        }
+        break;
+    case 'l':
+        for (Pret* wybrany : aplikacja.getSchemat()->zwrocPrety())
+        {
+            //odswiezanaTabela->insertRow(i);
+            odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( wybrany->getNazwa() ) ));
+            odswiezanaTabela->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(wybrany->getPPocz()->getNazwa())));
+            odswiezanaTabela->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(wybrany->getPKonc()->getNazwa())));
+            ++i;
+        }
+        break;
+    case 's':
+        for (Podpora* wybrana : aplikacja.getSchemat()->zwrocPodpory())
+        {
+            std::string blokOsi = "";
+            std::string blokObr;
+            odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( wybrana->zwrocPunkt()->getNazwa() ) ));
+            if (wybrana->zwrocBlok_x()) blokOsi += "X ";
+            if (wybrana->zwrocBlok_y()) blokOsi += "Y";
+            odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString( blokOsi ) ));
+            if (wybrana->zwrocBlok_obr()) blokObr = '+';
+            else blokObr = '-';
+            odswiezanaTabela->setItem(i, 2, new QTableWidgetItem( QString::fromStdString( blokObr ) ));
         }
         break;
     default:

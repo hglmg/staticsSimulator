@@ -290,7 +290,7 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
-            <widget class="QTableWidget" name="tableWidget_2">
+            <widget class="QTableWidget" name="pretyTable">
              <property name="columnCount">
               <number>3</number>
              </property>
@@ -862,17 +862,17 @@
              </attribute>
              <column>
               <property name="text">
-               <string>Nazwa</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Typ</string>
+               <string>Pkt. Przył.</string>
               </property>
              </column>
              <column>
               <property name="text">
                <string>Bl. Oś</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Bl. Obr.</string>
               </property>
              </column>
             </widget>

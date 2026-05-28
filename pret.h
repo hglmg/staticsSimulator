@@ -45,7 +45,8 @@ public:
 
     Pret(Punkt* _pPocz, Punkt* _pKonc);
     void utworzMacierze();
-
+    Punkt* getPPocz() {return pPocz;};
+    Punkt* getPKonc() {return pKonc;};
     double getL() {return L;};
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
