@@ -12,7 +12,7 @@ void Konstruktor::konfiguruj()
 
     Punkt* pom = new Punkt(0,1,"P");
 
-    Pret* pret = new PretProstokotny(schemat.zwrocPunkty()[0],pom,210e9, 0.01,0.05);
+    Pret* pret = new PretProstokotny(schemat.zwrocPunkty()[0],pom,210e9, 0.01,0.05,"l");
 
     schemat.dodajPret(pret);
 
@@ -171,9 +171,28 @@ void Konstruktor::konfiguruj()
 
     //     }
     // }
-
-
-
-
-
 }
+
+void Konstruktor::dodajPret(Punkt* pocz, Punkt* konc, double E, double d, std::string nazwa)
+{
+    Pret* pret = new PretKolowy(pocz, konc, E, d,"l");
+    schemat.dodajPret(pret);
+}
+
+void Konstruktor::dodajPret(Punkt* pocz, Punkt* konc, double E, double b, double h, std::string nazwa)
+{
+    Pret* pret = new PretProstokotny(pocz, konc, E, b, h, nazwa);
+    schemat.dodajPret(pret);
+}
+
+
+
+
+
+
+
+
+
+
+
+

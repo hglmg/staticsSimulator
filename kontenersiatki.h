@@ -27,9 +27,7 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void kasujPunktKonc() {punkty.pop_back();};
 
 
-    //std::vector<double> getObcX();
-    //std::vector<double> getObcY();
-    //odnośnie błędu można po prostu zrobić 3 różne kontenery na różne obiążenie
+
     std::vector <Punkt*> zwrocPunkty() {return punkty;};
     std::vector <Pret*> zwrocPrety() {return prety;};
     std::vector <Podpora*> zwrocPodpory() {return podpory;};

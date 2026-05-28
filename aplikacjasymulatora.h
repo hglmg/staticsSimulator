@@ -17,6 +17,8 @@ public:
     int getStatus() {return status;};
     SilnikObliczeniowy* getSilnik() { return &silnikFiz; };//mowisz masz, metody z dostepem
     KontenerSiatki* getSchemat() { return konstruktor.Kontener(); };
+    Konstruktor* getKonstruktor() {return &konstruktor;};
+
 };
 
 #endif // APLIKACJASYMULATORA_H

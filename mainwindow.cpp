@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     odswiezTabele(ui->pretyTable, 'l');
     odswiezTabele(ui->podporyTable, 's');
 
+
+
 }
 
 MainWindow::~MainWindow()
@@ -71,15 +73,40 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
 void MainWindow::on_punktAddBtn_clicked()
 {
     Punkt* nowy = new Punkt(ui->punktXCoordSpinBox->value(), ui->punktYCoordSpinBox->value(), ui->punktNameEdit->text().toStdString());
-    aplikacja.getSchemat()->dodajPunkt(nowy);
+    aplikacja.getSchemat()->dodajPunkt(nowy); // jest źle, bo mainwondow nie powinno szponcić w logice
     odswiezTabele(ui->punktyTable, 'p');\
         // std::cout<<nowy->getX()<<"\t"<<nowy->getY()<<"\t";
 }
-
+//i postaraj się nie robić takich piętrusów jak w 73 - zrób kilka zmiennych pomicbuiczych, kod jest przejżystrzy
 
 void MainWindow::on_punktRemoveBtn_clicked()
 {
     aplikacja.getSchemat()->kasujPunktKonc();
     odswiezTabele(ui->punktyTable, 'p');
 }
+
+void MainWindow::on_pretAddBtn_clicked()
+{
+    std::string nazwa = (ui->pretNameLineEdit->text().toStdString());
+    int indexPocz = (ui->pretStartPointComboBox->currentIndex());
+    int indexKonc= (ui->pretEndPointComboBox->currentIndex());
+    Punkt* pocz = aplikacja.getSchemat()->zwrocPunkty()[indexPocz];
+    Punkt* konc = aplikacja.getSchemat()->zwrocPunkty()[indexKonc];
+    double E = (ui->ELineEdit->text().toDouble());
+    double d = (ui->dLineEdit->text().toDouble());
+    aplikacja.getKonstruktor()->dodajPret(pocz, konc, E, d, nazwa);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

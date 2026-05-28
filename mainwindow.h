@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include "aplikacjasymulatora.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -26,7 +27,28 @@ private slots:
 
     void on_punktRemoveBtn_clicked();
 
+    void on_pretAddBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif // MAINWINDOW_H

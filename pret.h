@@ -43,7 +43,7 @@ protected:
 
 public:
 
-    Pret(Punkt* _pPocz, Punkt* _pKonc);
+    Pret(Punkt* _pPocz, Punkt* _pKonc, std::string nazwa);
     void utworzMacierze();
     Punkt* getPPocz() {return pPocz;};
     Punkt* getPKonc() {return pKonc;};
@@ -74,7 +74,7 @@ class PretProstokotny : public Pret
 {
     void wczytajParametry(double _E, double _b, double _h); //_h - lokalna wyskokość, _b lokalna szerokość
 public:
-    PretProstokotny(Punkt* _pPocz, Punkt* _pKonc,double _E, double _b, double _h);
+    PretProstokotny(Punkt* _pPocz, Punkt* _pKonc,double _E, double _b, double _h, std::string nazwa);
 
 };
 
@@ -84,7 +84,7 @@ class PretKolowy : public Pret
     void wczytajParametry(double _E, double _d);
 
 public:
-    PretKolowy(Punkt* _pPocz, Punkt*,double _E, double _d);
+    PretKolowy(Punkt* _pPocz, Punkt*,double _E, double _d, std::string nazwa);
 };
 
 

@@ -13,6 +13,12 @@ public:
     Konstruktor() = default;
     KontenerSiatki* Kontener() { return &schemat; };
     void konfiguruj();
+    void dodajPunkt();
+    void dodajPret(Punkt* pocz, Punkt* konc, double E, double d, std::string nazwa);
+    void dodajPret(Punkt* pocz, Punkt* konc, double E, double b, double h, std::string nazwa);
 };
+
+
+
 
 #endif // KONSTRUKTOR_H

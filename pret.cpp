@@ -4,12 +4,14 @@
 
 
 
-Pret::Pret(Punkt* _pPocz, Punkt* _pKonc)
+Pret::Pret(Punkt* _pPocz, Punkt* _pKonc,std::string _nazwa)
 {
     pPocz = _pPocz;
     pKonc = _pKonc;
 
     ustawDlugosc(_pPocz, _pKonc);
+
+    nazwa = _nazwa;
 
 
 }
@@ -33,7 +35,7 @@ Pret* Pret::dodajPunkt(double odleglosc) // tworzymy punkt w konkretnej odległo
     A[0] = ((pKonc->getX() - pPocz->getX())/L);
     A[1] = ((pKonc->getY() - pPocz->getY())/L); // wektor jednostkowy
     Punkt* nowy = new Punkt((pPocz->getX() + odleglosc*A[0]),(pPocz->getY() + odleglosc*A[1]),"P");
-    Pret* nowyPret = new Pret(nowy,punkty[1]);
+    Pret* nowyPret = new Pret(nowy,punkty[1],"l");
     ustawDlugosc(punkty[0],nowy); // jeszcze nie testowane
     return nowyPret; // po dodaniu punktu trzeba będzie zpushbackować pręt do schematu
     //i pamiętać też o punkcie w środku, bo na tym etapie nie jest dodawany ani punkt ani pręt
@@ -193,7 +195,7 @@ void Pret::utworzMacierze()
 }
 
 
-PretProstokotny::PretProstokotny(Punkt* _pPocz, Punkt* _pKonc, double _E, double _b, double _h ) : Pret(_pPocz,_pKonc)
+PretProstokotny::PretProstokotny(Punkt* _pPocz, Punkt* _pKonc, double _E, double _b, double _h,std::string nazwa ) : Pret(_pPocz,_pKonc,nazwa)
 {
     wczytajParametry(_E,_b,_h);
 }
@@ -209,8 +211,9 @@ void PretProstokotny::wczytajParametry(double _E, double _b, double _h) // ew za
 
 
 
-PretKolowy:: PretKolowy(Punkt* _pPocz, Punkt*,double _E, double _d) : Pret(_pPocz,pKonc)
+PretKolowy:: PretKolowy(Punkt* _pPocz, Punkt*,double _E, double _d, std::string nazwa) : Pret(_pPocz,pKonc,nazwa)
 {
+
     wczytajParametry(_E,_d);
 }
 
