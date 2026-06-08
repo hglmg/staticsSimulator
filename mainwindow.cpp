@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->punktyTable->setRowCount(255);
+    ui->pretyTable->setRowCount(255);
+    ui->podporyTable->setRowCount(255);
+    ui->obcPunktTable->setRowCount(255);
+    ui->obcKonstrTable->setRowCount(255);
     aplikacja.uruchom();
     aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
     aplikacja.getSilnik()->rozwiaz();
@@ -14,6 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
     odswiezTabele(ui->punktyTable, 'p');
     odswiezTabele(ui->pretyTable, 'l');
     odswiezTabele(ui->podporyTable, 's');
+    odswiezCBox(ui->pretStartPointComboBox, 'p');
+    odswiezCBox(ui->pretEndPointComboBox, 'p');
+    odswiezCBox(ui->obcPunktGroupBox, 'p');
+    odswiezCBox(ui->pretObcComboBox, 'l');
+    odswiezCBox(ui->punktPodporyComboBox, 'p');
+
 
 
 
@@ -66,6 +76,33 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
         break;
     default:
         return;
+        break;
+    }
+}
+
+void MainWindow::odswiezCBox(QComboBox *odswiezanyQBox, char dataType)
+{
+
+
+    odswiezanyQBox->clear();
+    std::string temp;
+    switch (dataType)
+    {
+    case 'p':
+        for (Punkt *wybrany : aplikacja.getSchemat()->zwrocPunkty())
+        {
+            temp = wybrany->getNazwa() + ":\t(" + std::to_string(wybrany->getX()) + ", " + std::to_string(wybrany->getY())+ ')';
+            odswiezanyQBox->addItem(QString::fromStdString(temp));
+        }
+        break;
+    case 'l':
+        for (Pret *wybrany : aplikacja.getSchemat()->zwrocPrety())
+        {
+            temp = wybrany->getNazwa() + ":\t[(" + std::to_string(wybrany->getPPocz()->getX()) + ", " + std::to_string(wybrany->getPPocz()->getY()) + "); (" + std::to_string(wybrany->getPKonc()->getX()) + ", " + std::to_string(wybrany->getPKonc()->getY()) + ')';
+            odswiezanyQBox->addItem(QString::fromStdString(temp));
+        }
+        break;
+    default:
         break;
     }
 }

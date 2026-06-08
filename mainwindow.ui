@@ -95,7 +95,60 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QGraphicsView" name="graphicsView"/>
+       <widget class="RenderWindow" name="frame">
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>26</red>
+              <green>26</green>
+              <blue>26</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>26</red>
+              <green>26</green>
+              <blue>26</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>26</red>
+              <green>26</green>
+              <blue>26</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>26</red>
+              <green>26</green>
+              <blue>26</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="consoleGrBox">
@@ -157,8 +210,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -281,8 +334,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -432,8 +485,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -443,7 +496,7 @@
            <item>
             <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="obcPunktTab">
               <attribute name="title">
@@ -710,8 +763,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -846,8 +899,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -958,7 +1011,29 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="podporaTypeComboBox"/>
+            <widget class="QComboBox" name="podporaTypeComboBox">
+             <property name="editable">
+              <bool>false</bool>
+             </property>
+             <property name="maxVisibleItems">
+              <number>5</number>
+             </property>
+             <item>
+              <property name="text">
+               <string>Podpora Ruchoma</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Podpora Stała</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Utwierdzenie Stałe</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_12">
@@ -1010,7 +1085,7 @@
      <x>0</x>
      <y>0</y>
      <width>1247</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuStatics_Simulator">
@@ -1022,6 +1097,14 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RenderWindow</class>
+   <extends>QFrame</extends>
+   <header>renderwindow.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

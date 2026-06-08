@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QComboBox>
 #include "aplikacjasymulatora.h"
 
 
@@ -20,6 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     void odswiezTabele(QTableWidget* odswiezanaTabela, char dataType);
+    void odswiezCBox(QComboBox *odswiezanyQBox, char dataType);
     ~MainWindow() override;
 
 private slots:

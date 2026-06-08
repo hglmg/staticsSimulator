@@ -17,13 +17,17 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        renderwindow.cpp
+        renderwindow.h
 )
+
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(staticsSimulator
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         aplikacjasymulatora.cpp aplikacjasymulatora.h Konstruktor.cpp Konstruktor.h kontenersiatki.cpp kontenersiatki.h main.cpp mainwindow.cpp mainwindow.h mainwindow.ui obciazenie.cpp obciazenie.h   podpora.cpp podpora.h pret.cpp pret.h punkt.cpp punkt.h README.md   silnikobliczeniowy.cpp silnikobliczeniowy.h
+        renderwindow.h renderwindow.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET staticsSimulator APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -60,6 +64,12 @@ set_target_properties(staticsSimulator PROPERTIES
 )
 target_include_directories(staticsSimulator PRIVATE
     ${CMAKE_SOURCE_DIR}/Eigen
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_sources(staticsSimulator PRIVATE
+    renderwindow.cpp
+    renderwindow.h
 )
 
 include(GNUInstallDirs)
