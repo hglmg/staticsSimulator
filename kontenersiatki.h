@@ -21,6 +21,9 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void dodajObciazenie(Obciazenie* noweObc);
     void dodajPodpore(Podpora* pod);
     void kasujPunkty();
+    void kasujWybranyPkt(int index) { punkty.erase(punkty.begin() + index); };
+    void kasujWybranyPret(int index) { prety.erase(prety.begin() + index); };
+    void kasujWybranaPodpore(int index) { podpory.erase(podpory.begin() + index); };
     void kasujPodporePocz() { podpory.erase(podpory.begin()); };
     void kasujPodporeKonc() { podpory.pop_back(); }; // nie lepiej kaować indeksem? po prosu erase od index
     void kasujObcKonc() { obciazenia.pop_back(); };
@@ -33,7 +36,6 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     std::vector <Podpora*> zwrocPodpory() {return podpory;};
     std::vector <Obciazenie*> zwrocObciazenia() { return obciazenia; };
     int policzStopnieSwobody();
-
 
 
 

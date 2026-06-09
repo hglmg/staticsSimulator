@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QComboBox>
+#include <QSpinBox>
 #include "aplikacjasymulatora.h"
 
 
@@ -22,6 +23,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     void odswiezTabele(QTableWidget* odswiezanaTabela, char dataType);
     void odswiezCBox(QComboBox *odswiezanyQBox, char dataType);
+    void odswiezSBox(QSpinBox *odswiezanySBox, char dataType);
+    void odswiezUI();// wiecej info o tej metodzie w *.cpp
     ~MainWindow() override;
 
 private slots:
@@ -30,6 +33,8 @@ private slots:
     void on_punktRemoveBtn_clicked();
 
     void on_pretAddBtn_clicked();
+
+    void on_pretRemoveBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

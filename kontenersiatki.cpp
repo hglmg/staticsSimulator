@@ -28,8 +28,6 @@ void KontenerSiatki::kasujPunkty()
     punkty.resize(0);
 }
 
-
-
 int KontenerSiatki::policzStopnieSwobody()
 {
     return punkty.size() * 3; //w naszym układzie 2D każdy punkt ma 3 stopnie swobody

@@ -10,7 +10,7 @@ void Konstruktor::konfiguruj()
 
     schemat.dodajPunkt(podpora->zwrocPunkt());
 
-    Punkt* pom = new Punkt(0,1,"P");
+    Punkt* pom = new Punkt(100,0,"P");
 
     Pret* pret = new PretProstokotny(schemat.zwrocPunkty()[0],pom,210e9, 0.01,0.05,"l");
 
@@ -185,6 +185,16 @@ void Konstruktor::dodajPret(Punkt* pocz, Punkt* konc, double E, double b, double
     schemat.dodajPret(pret);
 }
 
+void Konstruktor::dodajPunkt(double _x, double _y, std::string _nazwa)
+{
+    Punkt *nowy = new Punkt(_x, _y, _nazwa);
+    schemat.dodajPunkt(nowy);
+}
+
+void Konstruktor::dodajPunkt(Punkt* nowy)
+{
+    schemat.dodajPunkt(nowy);
+}
 
 
 

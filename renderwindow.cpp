@@ -30,12 +30,12 @@ void RenderWindow::rysujPret(QPainter &painter, Pret* pret)
 
 void RenderWindow::rysujPodpore(QPainter &painter, Podpora* podpora)
 {
-    double radius = 10, bok = 30;
+    double radius = 5, bok = 30;
     QPointF linPocz, linKonc, punkty[3];
     painter.setPen(QPen(Qt::darkGray, 3));
-    double x = podpora->zwrocPunkt()->getX() + x0 - radius;
-    double y = -podpora->zwrocPunkt()->getY() + y0 - radius;
-    painter.drawEllipse(x, y, 2*radius, 2*radius);
+    double x = podpora->zwrocPunkt()->getX() + x0;
+    double y = -podpora->zwrocPunkt()->getY() + y0;
+    painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
     if (podpora->zwrocBlok_x() && !podpora->zwrocBlok_y())
     {
         // QPointF punkty[3] = {  nie wiedziec czemu to nie dziala??? jebac Qt
@@ -108,16 +108,30 @@ void RenderWindow::paintEvent(QPaintEvent* event)
     // painter.drawEllipse(60, 60, 40, 40);
 
 
-    painter.setPen(QPen(Qt::black, 5));//tutaj poważniejsze testy rysowania
-    painter.drawLine(100, 400, 400, 400);
-    painter.setPen(QPen(Qt::red, 3));
-    double bok = 30;
-    QPointF punkty[3] = {
-        QPointF(100, 400),
-        QPointF(100-(bok/2), 400+(bok*sqrt(3)/2)),
-        QPointF(100+(bok/2), 400+(bok*sqrt(3)/2))
-    };
-    painter.drawPolygon(punkty, 3);
-    painter.setPen(QPen(Qt::blue, 3));
-    painter.drawEllipse(100-5, 400-5, 10, 10);
+    // painter.setPen(QPen(Qt::black, 5));//tutaj poważniejsze testy rysowania
+    // painter.drawLine(100, 400, 400, 400);
+    // painter.setPen(QPen(Qt::red, 3));
+    // double bok = 30;
+    // QPointF punkty[3] = {
+    //     QPointF(100, 400),
+    //     QPointF(100-(bok/2), 400+(bok*sqrt(3)/2)),
+    //     QPointF(100+(bok/2), 400+(bok*sqrt(3)/2))
+    // };
+    // painter.drawPolygon(punkty, 3);
+    // painter.setPen(QPen(Qt::blue, 3));
+    // painter.drawEllipse(100-5, 400-5, 10, 10);
+
+
+    for (Pret *wybrany : kontener->zwrocPrety())
+    {
+        rysujPret(painter, wybrany);
+    }
+    for (Podpora *wybrana : kontener->zwrocPodpory())
+    {
+        rysujPodpore(painter, wybrana);
+    }
+    // for (Obciazenie *wybrane : kontener->zwrocObciazenia())
+    // {
+    //     rysujWektor(painter, wybrane);
+    // }
 }

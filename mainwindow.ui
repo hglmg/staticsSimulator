@@ -287,6 +287,9 @@
                </property>
               </spacer>
              </item>
+             <item>
+              <widget class="QSpinBox" name="pktRemoveSBox"/>
+             </item>
             </layout>
            </item>
            <item>
@@ -426,6 +429,9 @@
                </property>
               </spacer>
              </item>
+             <item>
+              <widget class="QSpinBox" name="pretRemoveSBox"/>
+             </item>
             </layout>
            </item>
            <item>
@@ -496,7 +502,7 @@
            <item>
             <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="obcPunktTab">
               <attribute name="title">
@@ -581,6 +587,9 @@
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="obcPktRemoveSBox"/>
                  </item>
                 </layout>
                </item>
@@ -709,6 +718,9 @@
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="obcKRemoveSBox"/>
                  </item>
                 </layout>
                </item>
@@ -850,6 +862,9 @@
                </property>
               </spacer>
              </item>
+             <item>
+              <widget class="QSpinBox" name="momentRemoveSBox"/>
+             </item>
             </layout>
            </item>
            <item>
@@ -990,6 +1005,9 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="podpRemoveSBox"/>
              </item>
             </layout>
            </item>

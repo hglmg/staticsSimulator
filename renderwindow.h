@@ -7,7 +7,7 @@
 
 /*
 WAŻNE!!!!!!!
-Do odświeżania rysunku w MainWindow trzeba Używać ui->RenderArea->update();
+Do odświeżania rysunku w MainWindow trzeba Używać ui->frame->update();
 
 na razie dałem definiowanie punktów przyłożenia kształtów w double, może dam w Punktach, Podporach i Prętach zeby było ładniej
 */

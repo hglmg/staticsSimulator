@@ -15,18 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
     aplikacja.getSilnik()->rozwiaz();
     aplikacja.getSilnik()->wypisz();
-    odswiezTabele(ui->punktyTable, 'p');
-    odswiezTabele(ui->pretyTable, 'l');
-    odswiezTabele(ui->podporyTable, 's');
-    odswiezCBox(ui->pretStartPointComboBox, 'p');
-    odswiezCBox(ui->pretEndPointComboBox, 'p');
-    odswiezCBox(ui->obcPunktGroupBox, 'p');
-    odswiezCBox(ui->pretObcComboBox, 'l');
-    odswiezCBox(ui->punktPodporyComboBox, 'p');
-
-
-
-
+    ui->frame->dodajKsztalty(aplikacja.getSchemat());
+    odswiezUI();
 }
 
 MainWindow::~MainWindow()
@@ -107,19 +97,68 @@ void MainWindow::odswiezCBox(QComboBox *odswiezanyQBox, char dataType)
     }
 }
 
+void MainWindow::odswiezSBox(QSpinBox *odswiezanySBox, char dataType)
+{
+    odswiezanySBox->clear();
+    switch (dataType)
+    {
+    case 'p':
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPunkty().size());
+        break;
+    case 'l':
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPrety().size());
+        break;
+    case 's':
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPodpory().size());
+        break;
+    case 'k':
+        break;
+    case 'o':
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocObciazenia().size());
+        break;
+    default:
+        return;
+        break;
+    }
+}
+
+void MainWindow::odswiezUI()
+{
+    //do tej metody wbijamy WSZYSTKO co musi byc odsiwezone, zeby zamiast robic monolity w kazdym
+    //slocie guzika to masz jedna ladna metode
+
+    ui->frame->update();
+    odswiezTabele(ui->punktyTable, 'p');
+    odswiezTabele(ui->pretyTable, 'l');
+    odswiezTabele(ui->podporyTable, 's');
+    odswiezCBox(ui->pretStartPointComboBox, 'p');
+    odswiezCBox(ui->pretEndPointComboBox, 'p');
+    odswiezCBox(ui->obcPunktGroupBox, 'p');
+    odswiezCBox(ui->pretObcComboBox, 'l');
+    odswiezCBox(ui->punktPodporyComboBox, 'p');
+    odswiezSBox(ui->pktRemoveSBox, 'p');
+    odswiezSBox(ui->pretRemoveSBox, 'l');
+    odswiezSBox(ui->obcPktRemoveSBox, 'o');
+    odswiezSBox(ui->obcKRemoveSBox, 'k');
+
+}
+
+
+
+
+
 void MainWindow::on_punktAddBtn_clicked()
 {
-    Punkt* nowy = new Punkt(ui->punktXCoordSpinBox->value(), ui->punktYCoordSpinBox->value(), ui->punktNameEdit->text().toStdString());
-    aplikacja.getSchemat()->dodajPunkt(nowy); // jest źle, bo mainwondow nie powinno szponcić w logice
-    odswiezTabele(ui->punktyTable, 'p');\
+    aplikacja.getKonstruktor()->dodajPunkt(ui->punktXCoordSpinBox->value(), ui->punktYCoordSpinBox->value(), ui->punktNameEdit->text().toStdString());
+    odswiezUI();
         // std::cout<<nowy->getX()<<"\t"<<nowy->getY()<<"\t";
 }
 //i postaraj się nie robić takich piętrusów jak w 73 - zrób kilka zmiennych pomicbuiczych, kod jest przejżystrzy
 
 void MainWindow::on_punktRemoveBtn_clicked()
 {
-    aplikacja.getSchemat()->kasujPunktKonc();
-    odswiezTabele(ui->punktyTable, 'p');
+    aplikacja.getSchemat()->kasujWybranyPkt(ui->pktRemoveSBox->value()-1);
+    odswiezUI();
 }
 
 void MainWindow::on_pretAddBtn_clicked()
@@ -132,18 +171,12 @@ void MainWindow::on_pretAddBtn_clicked()
     double E = (ui->ELineEdit->text().toDouble());
     double d = (ui->dLineEdit->text().toDouble());
     aplikacja.getKonstruktor()->dodajPret(pocz, konc, E, d, nazwa);
+    odswiezUI();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+void MainWindow::on_pretRemoveBtn_clicked()
+{
+    aplikacja.getSchemat()->kasujWybranyPret(ui->pretRemoveSBox->value()-1);
+    odswiezUI();
+}
 
