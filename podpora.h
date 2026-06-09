@@ -15,6 +15,7 @@ protected:
 
 public:
     Podpora(double _x, double _y);
+    Podpora(Punkt *_pozycja);
     //virtual bool blokujeX() = 0;
     //virtual bool blokujeY() = 0; // podpora to klasa abstarkcyjna: dostępne będą tylko jej typy pochodne
     void wstawPodpore();
@@ -32,24 +33,28 @@ class UtwierdzenieStale : public Podpora
 {
 public:
     UtwierdzenieStale(double _x, double _y);//zostawmy moze zmienne w metodach z podloga przed, mi latwiej zapamietac ktore sa ktore wtedy
+    UtwierdzenieStale(Punkt *_pozycja);
 };
 
 class PrzegubWalcowy : public Podpora
 {
 public:
     PrzegubWalcowy(double _x, double _y);
+    PrzegubWalcowy(Punkt *_pozycja);
 };
 
 class UtwierdzeniePrzesuwne : public Podpora
 {
 public:
     UtwierdzeniePrzesuwne(double _x, double _y, char freeAxis);//moze uzyc czegos innego do definiowania swobodnej osi, ale chyba char bedzie najlepszy (potem mozna zrobic jakis drop-down w GUI)
+    UtwierdzeniePrzesuwne(Punkt *_pozycja, char freeAxis);
     //może jakaś mapa? ładnie by wyglądała
 };
 class PodporaRuchoma : public Podpora//moze tez pelnic funkcje lozyska czolowego
 {
 public:
     PodporaRuchoma(double _x, double _y, char freeAxis);
+    PodporaRuchoma(Punkt *_pozycja, char freeAxis);
 };
 
 #endif // PODPORA_H

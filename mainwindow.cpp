@@ -6,6 +6,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    axisBlokRadioGroup = new QButtonGroup(this);
+    axisBlokRadioGroup->addButton(ui->xAxisSelect, 0);
+    axisBlokRadioGroup->addButton(ui->yAxisSelect, 1);
+
     ui->punktyTable->setRowCount(255);
     ui->pretyTable->setRowCount(255);
     ui->podporyTable->setRowCount(255);
@@ -163,6 +168,7 @@ void MainWindow::on_punktRemoveBtn_clicked()
 
 void MainWindow::on_pretAddBtn_clicked()
 {
+    //qDebug() << "indeksy: " << ui->pretStartPointComboBox->currentIndex() << "\t" << ui->pretEndPointComboBox->currentIndex();
     std::string nazwa = (ui->pretNameLineEdit->text().toStdString());
     int indexPocz = (ui->pretStartPointComboBox->currentIndex());
     int indexKonc= (ui->pretEndPointComboBox->currentIndex());
@@ -178,5 +184,16 @@ void MainWindow::on_pretRemoveBtn_clicked()
 {
     aplikacja.getSchemat()->kasujWybranyPret(ui->pretRemoveSBox->value()-1);
     odswiezUI();
+}
+
+
+void MainWindow::on_podporaAddBtn_clicked()
+{
+    std::string nazwa = ui->podporaNameEdit->text().toStdString();
+    int indexPkt = ui->punktPodporyComboBox->currentIndex();
+    Punkt* pktPodpory = aplikacja.getSchemat()->zwrocPunkty()[indexPkt];
+    aplikacja.getKonstruktor()->dodajPodpore(pktPodpory, ui->podporaTypeComboBox->currentIndex(), axisBlokRadioGroup->checkedId());
+    odswiezUI();
+
 }
 

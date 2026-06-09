@@ -175,7 +175,7 @@ void Konstruktor::konfiguruj()
 
 void Konstruktor::dodajPret(Punkt* pocz, Punkt* konc, double E, double d, std::string nazwa)
 {
-    Pret* pret = new PretKolowy(pocz, konc, E, d,"l");
+    Pret* pret = new PretKolowy(pocz, konc, E, d,nazwa);
     schemat.dodajPret(pret);
 }
 
@@ -196,7 +196,24 @@ void Konstruktor::dodajPunkt(Punkt* nowy)
     schemat.dodajPunkt(nowy);
 }
 
-
+void Konstruktor::dodajPodpore(Punkt* _pozycja, int typeIndex, bool lockedX)
+{
+    Podpora *nowa;
+    char freeAxis;
+    if (lockedX) freeAxis = 'Y';
+    else freeAxis = 'X';
+    switch (typeIndex)
+    {
+    case 0:
+        nowa = new UtwierdzenieStale(_pozycja);
+        break;
+    case 1:
+        nowa = new PodporaRuchoma(_pozycja, freeAxis);
+    default:
+        break;
+    }
+    schemat.dodajPodpore(nowa);
+}
 
 
 

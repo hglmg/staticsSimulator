@@ -211,7 +211,7 @@ void PretProstokotny::wczytajParametry(double _E, double _b, double _h) // ew za
 
 
 
-PretKolowy:: PretKolowy(Punkt* _pPocz, Punkt*,double _E, double _d, std::string nazwa) : Pret(_pPocz,pKonc,nazwa)
+PretKolowy:: PretKolowy(Punkt* _pPocz, Punkt* _pKonc,double _E, double _d, std::string nazwa) : Pret(_pPocz,_pKonc,nazwa)
 {
 
     wczytajParametry(_E,_d);

@@ -452,7 +452,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="pretStartPointComboBox"/>
+            <widget class="QComboBox" name="pretStartPointComboBox">
+             <property name="currentIndex">
+              <number>-1</number>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_6">

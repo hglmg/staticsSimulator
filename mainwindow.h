@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QComboBox>
+#include <QButtonGroup>
 #include <QSpinBox>
 #include "aplikacjasymulatora.h"
 
@@ -18,6 +19,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     AplikacjaSymulatora aplikacja;
+    QButtonGroup *axisBlokRadioGroup = nullptr;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -35,6 +37,8 @@ private slots:
     void on_pretAddBtn_clicked();
 
     void on_pretRemoveBtn_clicked();
+
+    void on_podporaAddBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
