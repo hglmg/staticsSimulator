@@ -19,6 +19,7 @@ class RenderWindow : public QFrame
     void rysujWektor(QPainter &painter, Punkt* punktObciazenia);
     void rysujPoleWektorowe(QPainter &painter, Pret* pretObciazenia);
     void rysujPret(QPainter &painter, Pret* pret);
+    void rysujPunkt(QPainter &painter, Punkt* punkt);
     double x0 {100}, y0 {300};
     KontenerSiatki* kontener;
 public:

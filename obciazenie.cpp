@@ -12,6 +12,7 @@ Obciazenie::Obciazenie(double _wartoscX, double _wartoscY)
 
  ObcPunktowe::ObcPunktowe(double _wartoscX, double _wartoscY, Punkt* pkt) : Obciazenie(_wartoscX,_wartoscY )
 {
+    typ = sila;
     pktPrzylozenia = pkt;
     pkt->dodajSile_x(_wartoscX);
     pkt->dodajSile_y(_wartoscY);
@@ -22,11 +23,13 @@ Obciazenie::Obciazenie(double _wartoscX, double _wartoscY)
 
 ObcKonstrukcyjne::ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Pret* pret) : Obciazenie(_wartoscX,_wartoscY )
 {
+    typ = sila;
     pretPrzylozenia = pret;
 }
 
 MomentSkupiony::MomentSkupiony( double _wartosc, Punkt* pkt)
 {
+    typ = moment;
     pktPrzylozenia = pkt;
     wartoscOBR = _wartosc;
     pkt->dodajMoment_obr(_wartosc); //przekazanie przez wartość do punktu

@@ -7,16 +7,19 @@
 
 /*  KLASA PRZESTARZAŁA  */
 
-
+enum typObciazenia {sila, moment};
 class Obciazenie
 
 {
 protected:
+    Pret* pretPrzylozenia{ nullptr };
+    Punkt* pktPrzylozenia{ nullptr };
     std::string nazwa {"F"};
     double wartoscX{0};
     double wartoscY{0};
     double wartoscOBR{0};
     double wartosc{0}; // dałem to bezpośrednio w klasie, bez użycia klasy siła (tak jest przejżyściej)
+
     
 public:
 
@@ -26,6 +29,8 @@ public:
     double wartoscSily_x() { return wartoscX; };
     double wartoscSily_y() { return wartoscY; };
     double wartoscSuly_OBR() { return wartoscOBR; };
+    virtual Punkt* getPunkt() = 0;
+    typObciazenia typ;
 
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
@@ -37,18 +42,18 @@ public:
 class ObcPunktowe : public Obciazenie
 {
 
-    Punkt* pktPrzylozenia{ nullptr };
+
 public:
 
     ObcPunktowe(double _wartoscX, double _wartoscY,Punkt* pkt);
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
-    Punkt* getPunkt() { return pktPrzylozenia; };
+    Punkt* getPunkt() override { return pktPrzylozenia; };
 };
 
 class ObcKonstrukcyjne : public Obciazenie
 {
 
-    Pret* pretPrzylozenia{ nullptr };
+
 
 public:
 
@@ -59,13 +64,13 @@ public:
 
 class MomentSkupiony : public Obciazenie
 {
-    Punkt* pktPrzylozenia{ nullptr };
+
 
 public:
 
     MomentSkupiony(double _wartosc, Punkt* _pkt);
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
-    Punkt* getPunkt() { return pktPrzylozenia; };
+    Punkt* getPunkt() override { return pktPrzylozenia; };
 };
 
 

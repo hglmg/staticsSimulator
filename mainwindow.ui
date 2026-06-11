@@ -163,7 +163,14 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QPlainTextEdit" name="consoleTxtBox"/>
+          <widget class="QPlainTextEdit" name="consoleTxtBox">
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -312,7 +319,13 @@
            <item>
             <widget class="QDoubleSpinBox" name="punktXCoordSpinBox">
              <property name="decimals">
-              <number>5</number>
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>-1000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000.000000000000000</double>
              </property>
             </widget>
            </item>
@@ -326,7 +339,13 @@
            <item>
             <widget class="QDoubleSpinBox" name="punktYCoordSpinBox">
              <property name="decimals">
-              <number>5</number>
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>-1000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000.000000000000000</double>
              </property>
             </widget>
            </item>
