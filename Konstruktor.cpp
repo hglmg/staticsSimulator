@@ -10,7 +10,7 @@ void Konstruktor::konfiguruj()
 
     schemat.dodajPunkt(podpora->zwrocPunkt());
 
-    Punkt* pom = new Punkt(100,0,"P");
+    Punkt* pom = new Punkt(2,0,"P");
 
     Pret* pret = new PretProstokotny(schemat.zwrocPunkty()[0],pom,210e9, 0.01,0.05,"l");
 
@@ -18,9 +18,9 @@ void Konstruktor::konfiguruj()
 
     schemat.dodajPunkt(pom);
 
-    ObcPunktowe* obc = new ObcPunktowe(0,1000,pom,"F");
+    ObcPunktowe* obc = new ObcPunktowe(1,7,pom,"F");
 
-    MomentSkupiony* mom = new MomentSkupiony(1000,pom,"F");
+    MomentSkupiony* mom = new MomentSkupiony(5,pom,"F");
 
 
 

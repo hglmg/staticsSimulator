@@ -47,6 +47,8 @@ private slots:
     void on_momentAddBtn_2_clicked();
     void on_momentRemoveBtn_2_clicked();
 
+    void on_obcKonstrAddBtn_clicked();
+    void on_obcKonstrRemoveBtn_clicked();
 };
 
 

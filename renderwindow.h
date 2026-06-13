@@ -16,11 +16,13 @@ class RenderWindow : public QFrame
 {
     Q_OBJECT
     void rysujPodpore(QPainter &painter, Podpora* podpora);
-    void rysujWektor(QPainter &painter, Punkt* punktObciazenia);
-    void rysujPoleWektorowe(QPainter &painter, Pret* pretObciazenia);
+    void rysujWektor(QPainter &painter, Obciazenie* obc);
+    void rysujPoleWektorowe(QPainter &painter, Obciazenie* obc);
+    void rysujMoment(QPainter &painter, Obciazenie* obc);
     void rysujPret(QPainter &painter, Pret* pret);
     void rysujPunkt(QPainter &painter, Punkt* punkt);
     double x0 {100}, y0 {300};
+    float wspolczynnikSkali {50};
     KontenerSiatki* kontener;
 public:
     explicit RenderWindow(QWidget *parent = nullptr);

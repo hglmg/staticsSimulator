@@ -19,10 +19,10 @@ void RenderWindow::rysujPret(QPainter &painter, Pret* pret)
     painter.setPen(QPen(Qt::black, 3));
     //zamiast pisac to wewnatrz drawLine() napisalem jako osobne lokalne zmienne dla przejrzystosci
     //tak zrobie tez wszedzie indziej zeby dalo sie czytac
-    double xp = pret->getPPocz()->getX() + x0;
-    double yp = -pret->getPPocz()->getY() + y0;
-    double xk = pret->getPKonc()->getX() + x0;
-    double yk = -pret->getPKonc()->getY() + y0;
+    double xp = pret->getPPocz()->getX()*wspolczynnikSkali + x0;
+    double yp = -pret->getPPocz()->getY()*wspolczynnikSkali + y0;
+    double xk = pret->getPKonc()->getX()*wspolczynnikSkali + x0;
+    double yk = -pret->getPKonc()->getY()*wspolczynnikSkali + y0;
     painter.drawLine(xp, yp, xk, yk);
 }
 
@@ -30,8 +30,8 @@ void RenderWindow::rysujPunkt(QPainter &painter, Punkt* punkt)
 {
     painter.setPen(QPen(Qt::gray, 3));
     double radius = 2;
-    double x = punkt->getX() + x0;
-    double y = -punkt->getY() + y0;
+    double x = punkt->getX()*wspolczynnikSkali + x0;
+    double y = -punkt->getY()*wspolczynnikSkali + y0;
     painter.drawEllipse(x-(radius/2), y-(radius/2), radius, radius);
 }
 
@@ -40,8 +40,8 @@ void RenderWindow::rysujPodpore(QPainter &painter, Podpora* podpora)
     double radius = 5, bok = 30;
     QPointF linPocz, linKonc, punkty[3];
     painter.setPen(QPen(Qt::darkGray, 2));
-    double x = podpora->zwrocPunkt()->getX() + x0;
-    double y = -podpora->zwrocPunkt()->getY() + y0;
+    double x = podpora->zwrocPunkt()->getX()*wspolczynnikSkali + x0;
+    double y = -podpora->zwrocPunkt()->getY()*wspolczynnikSkali + y0;
     painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
     if (podpora->zwrocBlok_x() && !podpora->zwrocBlok_y())
     {
@@ -77,27 +77,63 @@ void RenderWindow::rysujPodpore(QPainter &painter, Podpora* podpora)
 
 }
 
-void RenderWindow::rysujWektor(QPainter &painter, Punkt* punktObciazenia)
-{//mam problem z ta metoda bo tak pojebany jest ten kod ze nie mam jak odroznic ktory punkt ma obciazeni a ktory nie
+void RenderWindow::rysujWektor(QPainter &painter, Obciazenie* obc)
+{
     painter.setPen(QPen(Qt::red, 2));
+    if (obc->getPunkt() == nullptr)//moment warty swietowania - pierwszy w kodzie handler null pointera
+    {
+        qDebug() << "Blad odczytu obciazenia " << obc->getNazwa() << "\n";
+        return;
+    }
     double radius = 5;
-    double x = punktObciazenia->getX() + x0;
-    double y = -punktObciazenia->getY() + y0;
-    double xI = x - punktObciazenia->zwrocSila_x();
-    double yI = y + punktObciazenia->zwrocSila_y();
+    double x = obc->getPunkt()->getX()*wspolczynnikSkali + x0;
+    double y = -obc->getPunkt()->getY()*wspolczynnikSkali + y0;
+    double xI = x - obc->wartoscSily_x()*wspolczynnikSkali;
+    double yI = y + obc->wartoscSily_y()*wspolczynnikSkali;
     painter.drawLine(x, y, xI, yI);
     painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
 }
 
-void RenderWindow::rysujPoleWektorowe(QPainter &painter, Pret *pretObciazenia)
+void RenderWindow::rysujMoment(QPainter &painter, Obciazenie* obc)
+{
+    painter.setPen(QPen(Qt::green, 2));
+    if (obc->getPunkt() == nullptr)
+    {
+        qDebug() << "Blad odczytu obciazenia" << obc->getNazwa() << "\n";
+        return;
+    }
+    double radius = 5;
+    double x = obc->getPunkt()->getX()*wspolczynnikSkali + x0;
+    double y = -obc->getPunkt()->getY()*wspolczynnikSkali + y0;
+    painter.drawPoint(x, y);
+    painter.drawEllipse(x, y, 2*radius, 2*radius);
+    if (obc->wartoscSuly_OBR() < 0) painter.drawLine(x, y, x+(2*radius), y+(2*radius));
+    if (obc->wartoscSuly_OBR() > 0) painter.drawEllipse(x, y, 2*radius*0.75, 2*radius*0.75);
+    else return;
+}
+
+void RenderWindow::rysujPoleWektorowe(QPainter &painter, Obciazenie* obc)
 {
     painter.setPen(QPen(Qt::blue, 2));
-    // double radius = 5;
-    // double x1 = pretObciazenia->getPPocz()->getX() + x0;
-    // double y1 = pretObciazenia->getPPocz()->getY() + y0;
-    // double x2 = pretObciazenia->getPKonc()->getX() + x0;
-    // double y2 = pretObciazenia->getPKonc()->getY() + y0;
-    //na razie tego nie robie bo nie mam jak dostac sie do wartosci obciazen
+    if (obc->getPret() == nullptr)
+    {
+        qDebug() << "Blad odczytu obciazenia" << obc->getNazwa() << "\n";
+        return;
+    }
+    double radius = 5;
+    double x1 = obc->getPret()->getPPocz()->getX()*wspolczynnikSkali + x0;
+    double y1 = -obc->getPret()->getPPocz()->getY()*wspolczynnikSkali + y0;
+    double x2 = obc->getPret()->getPKonc()->getX()*wspolczynnikSkali + x0;
+    double y2 = -obc->getPret()->getPKonc()->getY()*wspolczynnikSkali + y0;
+    double x1I = x1 - obc->wartoscSily_x()*wspolczynnikSkali;
+    double y1I = y1 + obc->wartoscSily_y()*wspolczynnikSkali;
+    double x2I = x2 - obc->wartoscSily_x()*wspolczynnikSkali;
+    double y2I = y2 + obc->wartoscSily_y()*wspolczynnikSkali;
+    painter.drawLine(x1, y1, x1I, y1I);
+    painter.drawLine(x2, y2, x2I, y2I);
+    painter.drawLine(x1I, y1I, x2I, y2I);
+    painter.drawEllipse(x1-radius, y1-radius, 2*radius, 2*radius);
+    painter.drawEllipse(x2-radius, y2-radius, 2*radius, 2*radius);
 }
 
 
@@ -140,8 +176,11 @@ void RenderWindow::paintEvent(QPaintEvent* event)
     {
         rysujPodpore(painter, wybrana);
     }
-    // for (Obciazenie *wybrane : kontener->zwrocObciazenia())
-    // {
-    //     rysujWektor(painter, wybrane);
-    // }
+    for (Obciazenie *wybrane : kontener->zwrocObciazenia())
+    {
+        if (wybrane->typ == typObciazenia::konstrukcyjne) rysujPoleWektorowe(painter, wybrane);
+        if (wybrane->typ == typObciazenia::momentSkupiony) rysujMoment(painter, wybrane);
+        if (wybrane->typ == typObciazenia::silaSkupiona) rysujWektor(painter, wybrane);
+
+    }
 }

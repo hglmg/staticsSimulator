@@ -246,7 +246,6 @@ void MainWindow::on_pretRemoveBtn_clicked()
 
 void MainWindow::on_podporaAddBtn_clicked()
 {
-    std::string nazwa = ui->podporaNameEdit->text().toStdString();
     int indexPkt = ui->punktPodporyComboBox->currentIndex();
     Punkt* pktPodpory = aplikacja.getSchemat()->zwrocPunkty()[indexPkt];
     aplikacja.getKonstruktor()->dodajPodpore(pktPodpory, ui->podporaTypeComboBox->currentIndex(), axisBlokRadioGroup->checkedId());
@@ -277,7 +276,7 @@ void MainWindow::on_obcPunktAddBtn_clicked()
 
 void MainWindow::on_obcPunktRemoveBt_clicked()
 {
-    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->obcPktRemoveSBox->value()-1);
+    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->obcPktRemoveSBox->value()-1, typObciazenia::silaSkupiona);
     odswiezUI();
 }
 
@@ -294,23 +293,26 @@ void MainWindow::on_momentAddBtn_2_clicked()
 
 void MainWindow::on_momentRemoveBtn_2_clicked()
 {
-    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->momentRemoveSBox->value()-1);
+    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->momentRemoveSBox->value()-1, typObciazenia::momentSkupiony);
     odswiezUI();
 }
 
 
+void MainWindow::on_obcKonstrAddBtn_clicked()
+{
+    std::string nazwa = ui->obcKonstrNameEdit->text().toStdString();
+    double xVal = ui->obcKonstrXSpinBox->value();
+    double yVal = ui->obcKonstrYSpinBox->value();
+    int index = ui->pretObcComboBox->currentIndex();
+    Pret* wybrany = aplikacja.getSchemat()->zwrocPrety()[index];
+    aplikacja.getKonstruktor()->dodajObcKonstrukcyjne(xVal, yVal, wybrany, nazwa);
+    odswiezUI();
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+void MainWindow::on_obcKonstrRemoveBtn_clicked()
+{
+    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->obcKRemoveSBox->value()-1, typObciazenia::konstrukcyjne);
+    odswiezUI();
+}
 

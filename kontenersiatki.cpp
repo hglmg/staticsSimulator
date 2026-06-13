@@ -59,6 +59,18 @@ int KontenerSiatki::policzStopnieSwobody()
     //jeśli bedziemy chceli rozbudować
 }
 
+void KontenerSiatki::kasujWybranaObciazenie(int index, typObciazenia _typ)
+{
+    int ind = -1, realInd = 0;
+    for (Obciazenie* wybrane : obciazenia)
+    {
+        if (wybrane->typ == _typ) ++ind;
+        if (ind == index) break;
+        realInd++;
+    }
+    obciazenia.erase(obciazenia.begin() + realInd);
+}
+
 
 
 

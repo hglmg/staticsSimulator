@@ -217,8 +217,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -356,8 +356,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -514,8 +514,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -798,8 +798,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -927,8 +927,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1025,16 +1025,6 @@
             </layout>
            </item>
            <item>
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>Nazwa</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="podporaNameEdit"/>
-           </item>
-           <item>
             <widget class="QLabel" name="label_13">
              <property name="text">
               <string>Typ Podpory</string>
@@ -1116,7 +1106,7 @@
      <x>0</x>
      <y>0</y>
      <width>1247</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuStatics_Simulator">

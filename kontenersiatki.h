@@ -36,6 +36,7 @@ public://wiem ze te metody nie sa po polimorficznemu, moze da sie to jakos upros
     void kasujWybranyPret(int index) { prety.erase(prety.begin() + index); };
     void kasujWybranaPodpore(int index) { podpory.erase(podpory.begin() + index); };
     void kasujWybranaObciazenie(int index) {obciazenia.erase(obciazenia.begin()+index);};
+    void kasujWybranaObciazenie(int index, typObciazenia _typ);
 
     std::vector <Punkt*> zwrocPunkty() {return punkty;};
     std::vector <Pret*> zwrocPrety() {return prety;};
