@@ -18,9 +18,9 @@ void Konstruktor::konfiguruj()
 
     schemat.dodajPunkt(pom);
 
-    ObcPunktowe* obc = new ObcPunktowe(0,1000,pom);
+    ObcPunktowe* obc = new ObcPunktowe(0,1000,pom,"F");
 
-    MomentSkupiony* mom = new MomentSkupiony(1000,pom);
+    MomentSkupiony* mom = new MomentSkupiony(1000,pom,"F");
 
 
 
@@ -210,11 +210,32 @@ void Konstruktor::dodajPodpore(Punkt* _pozycja, int typeIndex, bool lockedX)
     case 1:
         nowa = new PodporaRuchoma(_pozycja, freeAxis);
     default:
-        break;
+        return; // załatałem potencjalne tworzenie zbugowanej podpory przez return zamiast break
     }
     schemat.dodajPodpore(nowa);
 }
 
+
+void Konstruktor::dodajObcPunktowe(double _x, double _y, Punkt* punkt,std::string _nazwa)
+{
+    Obciazenie* obc = new ObcPunktowe(_x,_y,punkt, _nazwa);
+    schemat.dodajObciazenie(obc);
+
+}
+
+void Konstruktor::dodajObcKonstrukcyjne(double _x, double _y, Pret* pret, std::string _nazwa)
+{
+    Obciazenie* obc = new ObcKonstrukcyjne(_x,_y,pret,_nazwa);
+    schemat.dodajObciazenie(obc);
+
+}
+
+void Konstruktor::dodajMomentSkupiony(double war, Punkt* punkt, std::string _nazwa)
+{
+    Obciazenie* obc = new MomentSkupiony(war,punkt,_nazwa);
+    schemat.dodajObciazenie(obc);
+
+}
 
 
 

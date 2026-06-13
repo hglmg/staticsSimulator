@@ -217,8 +217,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
-            <height>494</height>
+            <width>226</width>
+            <height>537</height>
            </rect>
           </property>
           <attribute name="label">
@@ -356,8 +356,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
-            <height>494</height>
+            <width>226</width>
+            <height>537</height>
            </rect>
           </property>
           <attribute name="label">
@@ -514,8 +514,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
-            <height>494</height>
+            <width>226</width>
+            <height>537</height>
            </rect>
           </property>
           <attribute name="label">
@@ -525,7 +525,7 @@
            <item>
             <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="obcPunktTab">
               <attribute name="title">
@@ -798,8 +798,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
-            <height>494</height>
+            <width>226</width>
+            <height>537</height>
            </rect>
           </property>
           <attribute name="label">
@@ -903,22 +903,12 @@
            <item>
             <widget class="QLabel" name="label_22">
              <property name="text">
-              <string>Wartość X</string>
+              <string>Wartość</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="momentXSpinBox_2"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_19">
-             <property name="text">
-              <string>Wartość Y</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDoubleSpinBox" name="momentYSpinBox_2"/>
+            <widget class="QDoubleSpinBox" name="momentSpinBox_2"/>
            </item>
            <item>
             <widget class="QLabel" name="label_20">
@@ -937,8 +927,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
-            <height>494</height>
+            <width>226</width>
+            <height>537</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1126,7 +1116,7 @@
      <x>0</x>
      <y>0</y>
      <width>1247</width>
-     <height>30</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuStatics_Simulator">

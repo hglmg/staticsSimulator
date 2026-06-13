@@ -50,7 +50,6 @@ public:
     double getL() {return L;};
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
-    Pret* dodajPunkt(double odleglosc);
 
     void dodajObciarzenie(ObcKonstrukcyjne* _obc);
 

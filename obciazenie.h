@@ -7,7 +7,7 @@
 
 /*  KLASA PRZESTARZAŁA  */
 
-enum typObciazenia {sila, moment};
+enum typObciazenia {momentSkupiony, silaSkupiona, konstrukcyjne};
 class Obciazenie
 
 {
@@ -24,12 +24,13 @@ protected:
 public:
 
     Obciazenie() = default; // dodałem bo moment nie ma wartości x i y
-    Obciazenie(double _wartoscX, double _wartoscY);
+    Obciazenie(double _wartoscX, double _wartoscY,std::string _nazwa);
     double wartoscSily() { return wartosc; };
     double wartoscSily_x() { return wartoscX; };
     double wartoscSily_y() { return wartoscY; };
     double wartoscSuly_OBR() { return wartoscOBR; };
     virtual Punkt* getPunkt() = 0;
+    virtual Pret* getPret() = 0;
     typObciazenia typ;
 
     std::string getNazwa() {return nazwa;};
@@ -45,21 +46,20 @@ class ObcPunktowe : public Obciazenie
 
 public:
 
-    ObcPunktowe(double _wartoscX, double _wartoscY,Punkt* pkt);
+    ObcPunktowe(double _wartoscX, double _wartoscY,Punkt* pkt,std::string _nazwa);
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
+    Pret* getPret() override { return nullptr; };
     Punkt* getPunkt() override { return pktPrzylozenia; };
 };
 
 class ObcKonstrukcyjne : public Obciazenie
 {
-
-
-
 public:
 
-    ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Pret* _pret);
+    ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Pret* _pret,std::string _nazwa);
     void dodajPunktPrz(Pret* _pretPrzylozenia) { pretPrzylozenia = _pretPrzylozenia; };
-    Pret* getPret() { return pretPrzylozenia; };
+    Pret* getPret() override { return pretPrzylozenia; };
+    Punkt* getPunkt() override {return nullptr;};
 };
 
 class MomentSkupiony : public Obciazenie
@@ -68,9 +68,10 @@ class MomentSkupiony : public Obciazenie
 
 public:
 
-    MomentSkupiony(double _wartosc, Punkt* _pkt);
+    MomentSkupiony(double _wartosc, Punkt* _pkt,std::string _nazwa);
     void dodajPunktPrz(Punkt* _pktPrzylozenia) { pktPrzylozenia = _pktPrzylozenia; };
     Punkt* getPunkt() override { return pktPrzylozenia; };
+    Pret* getPret() override { return nullptr; }; // zrobiłem tak, żeby działało
 };
 
 

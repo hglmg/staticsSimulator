@@ -20,10 +20,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     AplikacjaSymulatora aplikacja;
     QButtonGroup *axisBlokRadioGroup = nullptr;
+    enum {prety, podpory, punkty, sily,obcKonstrukcyjne,momenty};
+    Ui::MainWindow *ui;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    void odswiezTabele(QTableWidget* odswiezanaTabela, char dataType);
+    void odswiezTabele(QTableWidget* odswiezanaTabela, int);
     void odswiezCBox(QComboBox *odswiezanyQBox, char dataType);
     void odswiezSBox(QSpinBox *odswiezanySBox, char dataType);
     void odswiezUI();// wiecej info o tej metodzie w *.cpp
@@ -31,17 +33,20 @@ public:
 
 private slots:
     void on_punktAddBtn_clicked();
-
     void on_punktRemoveBtn_clicked();
 
     void on_pretAddBtn_clicked();
-
     void on_pretRemoveBtn_clicked();
 
     void on_podporaAddBtn_clicked();
+    void on_podporaRemoveBtn_clicked();
 
-private:
-    Ui::MainWindow *ui;
+    void on_obcPunktAddBtn_clicked();
+    void on_obcPunktRemoveBt_clicked();
+
+    void on_momentAddBtn_2_clicked();
+    void on_momentRemoveBtn_2_clicked();
+
 };
 
 

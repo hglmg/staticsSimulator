@@ -24,24 +24,13 @@ void Pret::ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc)
 
     cosinus = (pKonc->getX() - pPocz->getX())/L;
     sinus = (pKonc->getY() - pPocz->getY())/L;
+
     utworzMacierze();
 }
 
 
 
-Pret* Pret::dodajPunkt(double odleglosc) // tworzymy punkt w konkretnej odległości od początku pręta, i wiąrze go z prętem
-{
-    double A [2];
-    A[0] = ((pKonc->getX() - pPocz->getX())/L);
-    A[1] = ((pKonc->getY() - pPocz->getY())/L); // wektor jednostkowy
-    Punkt* nowy = new Punkt((pPocz->getX() + odleglosc*A[0]),(pPocz->getY() + odleglosc*A[1]),"P");
-    Pret* nowyPret = new Pret(nowy,punkty[1],"l");
-    ustawDlugosc(punkty[0],nowy); // jeszcze nie testowane
-    return nowyPret; // po dodaniu punktu trzeba będzie zpushbackować pręt do schematu
-    //i pamiętać też o punkcie w środku, bo na tym etapie nie jest dodawany ani punkt ani pręt
 
-
-}
 
 
 

@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->podporyTable->setRowCount(255);
     ui->obcPunktTable->setRowCount(255);
     ui->obcKonstrTable->setRowCount(255);
+    ui->momentTable_2->setRowCount(255);
     aplikacja.uruchom();
     aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
     aplikacja.getSilnik()->rozwiaz();
@@ -29,12 +30,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
+void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, int dataType)
 {
     odswiezanaTabela->clearContents();
     int i = 0;
     switch (dataType) {
-    case 'p':
+    case punkty: // dodałem enuma bo lepiej wygląda i jest czytelniejszy
         for (Punkt* wybrany : aplikacja.getSchemat()->zwrocPunkty())
         {
             //odswiezanaTabela->insertRow(i);
@@ -45,7 +46,7 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
             ++i;
         }
         break;
-    case 'l':
+    case prety:
         for (Pret* wybrany : aplikacja.getSchemat()->zwrocPrety())
         {
             //odswiezanaTabela->insertRow(i);
@@ -55,7 +56,7 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
             ++i;
         }
         break;
-    case 's':
+    case podpory:
         for (Podpora* wybrana : aplikacja.getSchemat()->zwrocPodpory())
         {
             std::string blokOsi = "";
@@ -68,6 +69,50 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, char dataType)
             else blokObr = '-';
             odswiezanaTabela->setItem(i, 2, new QTableWidgetItem( QString::fromStdString( blokObr ) ));
         }
+        break;
+    case sily:
+    {
+        for (Obciazenie* obc : aplikacja.getSchemat()->zwrocObciazenia())
+        {
+
+            if (obc->typ == silaSkupiona)
+            {
+                odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( obc->getNazwa() ) ));
+                std::string nazwa = obc->getPunkt()->getNazwa() +" (" + std::to_string(obc->getPunkt()->getX()) + "," + std::to_string(obc->getPunkt()->getY()) + ")";
+                odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString( nazwa)));
+                i++;
+            }
+        }
+        break;
+    case momenty:
+        for (Obciazenie* obc : aplikacja.getSchemat()->zwrocObciazenia())
+        {
+
+            if (obc->typ == momentSkupiony)
+            {
+                odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( obc->getNazwa() ) ));
+                std::string nazwa = obc->getPunkt()->getNazwa() +" (" + std::to_string(obc->getPunkt()->getX()) + "," + std::to_string(obc->getPunkt()->getY()) + ")";
+                odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString( nazwa)));
+                i++;
+            }
+        }
+        break;
+    case obcKonstrukcyjne:
+        for (Obciazenie* obc : aplikacja.getSchemat()->zwrocObciazenia())
+        {
+
+            if (obc->typ == konstrukcyjne)
+            {
+                odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( obc->getNazwa() ) ));
+                std::string nazwa = obc->getPret()->getNazwa();
+                odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString(nazwa)));
+                i++;
+            }
+
+
+        }
+    }
+
         break;
     default:
         return;
@@ -83,14 +128,14 @@ void MainWindow::odswiezCBox(QComboBox *odswiezanyQBox, char dataType)
     std::string temp;
     switch (dataType)
     {
-    case 'p':
+    case punkty:
         for (Punkt *wybrany : aplikacja.getSchemat()->zwrocPunkty())
         {
             temp = wybrany->getNazwa() + ":\t(" + std::to_string(wybrany->getX()) + ", " + std::to_string(wybrany->getY())+ ')';
             odswiezanyQBox->addItem(QString::fromStdString(temp));
         }
         break;
-    case 'l':
+    case prety:
         for (Pret *wybrany : aplikacja.getSchemat()->zwrocPrety())
         {
             temp = wybrany->getNazwa() + ":\t[(" + std::to_string(wybrany->getPPocz()->getX()) + ", " + std::to_string(wybrany->getPPocz()->getY()) + "); (" + std::to_string(wybrany->getPKonc()->getX()) + ", " + std::to_string(wybrany->getPKonc()->getY()) + ')';
@@ -107,19 +152,23 @@ void MainWindow::odswiezSBox(QSpinBox *odswiezanySBox, char dataType)
     odswiezanySBox->clear();
     switch (dataType)
     {
-    case 'p':
+    case punkty:
         odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPunkty().size());
         break;
-    case 'l':
+    case prety:
         odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPrety().size());
         break;
-    case 's':
+    case podpory:
         odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPodpory().size());
         break;
-    case 'k':
+    case obcKonstrukcyjne:
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->indekxyObciazen().size());
         break;
-    case 'o':
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocObciazenia().size());
+    case sily:
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->indekxySil().size());
+        break;
+    case momenty:
+        odswiezanySBox->setRange(0, aplikacja.getSchemat()->indekxyMomentow().size());
         break;
     default:
         return;
@@ -133,18 +182,26 @@ void MainWindow::odswiezUI()
     //slocie guzika to masz jedna ladna metode
 
     ui->frame->update();
-    odswiezTabele(ui->punktyTable, 'p');
-    odswiezTabele(ui->pretyTable, 'l');
-    odswiezTabele(ui->podporyTable, 's');
-    odswiezCBox(ui->pretStartPointComboBox, 'p');
-    odswiezCBox(ui->pretEndPointComboBox, 'p');
-    odswiezCBox(ui->obcPunktGroupBox, 'p');
-    odswiezCBox(ui->pretObcComboBox, 'l');
-    odswiezCBox(ui->punktPodporyComboBox, 'p');
-    odswiezSBox(ui->pktRemoveSBox, 'p');
-    odswiezSBox(ui->pretRemoveSBox, 'l');
-    odswiezSBox(ui->obcPktRemoveSBox, 'o');
-    odswiezSBox(ui->obcKRemoveSBox, 'k');
+    odswiezTabele(ui->punktyTable, punkty);
+    odswiezTabele(ui->pretyTable, prety);
+    odswiezTabele(ui->podporyTable, podpory);
+    odswiezTabele(ui->obcPunktTable, sily);
+    odswiezTabele(ui->momentTable_2, momenty);
+    odswiezTabele(ui->obcKonstrTable, obcKonstrukcyjne);
+
+    odswiezCBox(ui->pretStartPointComboBox, punkty);
+    odswiezCBox(ui->pretEndPointComboBox, punkty);
+    odswiezCBox(ui->obcPunktGroupBox, punkty);
+    odswiezCBox(ui->pretObcComboBox, prety);
+    odswiezCBox(ui->punktPodporyComboBox, punkty);
+    odswiezCBox(ui->momentGroupBox_2, punkty);
+
+    odswiezSBox(ui->pktRemoveSBox, punkty);
+    odswiezSBox(ui->pretRemoveSBox, prety);
+    odswiezSBox(ui->obcPktRemoveSBox, sily);
+    odswiezSBox(ui->obcKRemoveSBox, obcKonstrukcyjne);
+    odswiezSBox(ui->momentRemoveSBox, momenty);
+
 
 }
 
@@ -196,4 +253,64 @@ void MainWindow::on_podporaAddBtn_clicked()
     odswiezUI();
 
 }
+
+
+void MainWindow::on_podporaRemoveBtn_clicked()
+{
+    aplikacja.getSchemat()->kasujWybranaPodpore(ui->podpRemoveSBox->value()-1);
+    odswiezUI();
+}
+
+
+void MainWindow::on_obcPunktAddBtn_clicked()
+{
+    std::string nazwa = ui->obcPunktNameEdit->text().toStdString();
+    double x = ui->obcPunktXSpinBox->text().toDouble();
+    double y = ui->obcPunktYSpinBox->text().toDouble();
+    int index = ui->obcPunktGroupBox->currentIndex();
+    Punkt* punkt = aplikacja.getSchemat()->zwrocPunkty()[index];
+    Obciazenie* nowe = new ObcPunktowe(x, y, punkt, nazwa);
+    aplikacja.getSchemat()->dodajObciazenie(nowe);
+    odswiezUI();
+
+}
+
+void MainWindow::on_obcPunktRemoveBt_clicked()
+{
+    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->obcPktRemoveSBox->value()-1);
+    odswiezUI();
+}
+
+void MainWindow::on_momentAddBtn_2_clicked()
+{
+    std::string nazwa = ui->momentNameEdit_2->text().toStdString();
+    double wartosc = ui->momentSpinBox_2->text().toDouble();
+    int index = ui->punktPodporyComboBox->currentIndex();
+    Punkt* punkt = aplikacja.getSchemat()->zwrocPunkty()[index];
+    Obciazenie* nowy = new MomentSkupiony(wartosc, punkt, nazwa);
+    aplikacja.getSchemat()->dodajObciazenie(nowy);
+    odswiezUI();
+}
+
+void MainWindow::on_momentRemoveBtn_2_clicked()
+{
+    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->momentRemoveSBox->value()-1);
+    odswiezUI();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
