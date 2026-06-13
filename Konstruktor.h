@@ -4,6 +4,7 @@
 #include "punkt.h"
 #include "podpora.h"
 #include "pret.h"
+#include <fstream>
 class KontenerSiatki;
 
 class Konstruktor
@@ -12,7 +13,10 @@ class Konstruktor
 public:
     Konstruktor() = default;
     KontenerSiatki* Kontener() { return &schemat; };
-    void konfiguruj();
+
+    void wczytaj(std::string nazwaPliku);
+    void zapiszSchemat(std::string nazwaPliku);
+
     void dodajPunkt();
     void dodajPret(Punkt* pocz, Punkt* konc, double E, double d, std::string nazwa);
     void dodajPret(Punkt* pocz, Punkt* konc, double E, double b, double h, std::string nazwa);

@@ -6,6 +6,7 @@
 #include <QComboBox>
 #include <QButtonGroup>
 #include <QSpinBox>
+#include <QFileDialog>
 #include "aplikacjasymulatora.h"
 
 
@@ -49,6 +50,12 @@ private slots:
 
     void on_obcKonstrAddBtn_clicked();
     void on_obcKonstrRemoveBtn_clicked();
+
+    void on_wczytajSchematBtn_clicked();
+    void on_zapiszSchematBtn_clicked();
+
+    void on_calcRunBtn_clicked();
+
 };
 
 

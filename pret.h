@@ -20,6 +20,10 @@ protected:
 
     double L {0};
 
+    double d{0};
+    double b{0};
+    double h{0};
+
     double E{210e9};
     double A{0.001};
     double I{1e-6}; // przykładowe wartości na stałe do testów, potem doda się ich wyliczanie na podstawie przekroju belki
@@ -62,6 +66,11 @@ public:
 
 
     void wczytajParametry(double _E, double _d); // do prętów kołowych
+
+    double zwroc_d() {return d;};
+    double zwroc_b() {return b;};
+    double zwroc_h() {return h;};
+    double zwroc_E() {return E;};
 
     //dla obiążeń konstrukcyjnych: będzie działac analogicznie jak
     //w przypadku macierzy sztywności globalnej

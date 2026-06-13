@@ -30,6 +30,7 @@ ObcKonstrukcyjne::ObcKonstrukcyjne(double _wartoscX, double _wartoscY, Pret* pre
 
 MomentSkupiony::MomentSkupiony( double _wartosc, Punkt* pkt, std::string _nazwa)
 {
+    nazwa = _nazwa;
     typ = momentSkupiony;
     pktPrzylozenia = pkt;
     wartoscOBR = _wartosc;

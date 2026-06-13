@@ -1,176 +1,225 @@
 #include "Konstruktor.h"
 
 
-void Konstruktor::konfiguruj()
+
+
+void Konstruktor::wczytaj(std::string nazwaPliku)
 {
 
-    Podpora* podpora = new UtwierdzenieStale(0, 0);
-
-    schemat.dodajPodpore(podpora);
-
-    schemat.dodajPunkt(podpora->zwrocPunkt());
-
-    Punkt* pom = new Punkt(2,0,"P");
-
-    Pret* pret = new PretProstokotny(schemat.zwrocPunkty()[0],pom,210e9, 0.01,0.05,"l");
-
-    schemat.dodajPret(pret);
-
-    schemat.dodajPunkt(pom);
-
-    ObcPunktowe* obc = new ObcPunktowe(1,7,pom,"F");
-
-    MomentSkupiony* mom = new MomentSkupiony(5,pom,"F");
+    std::ifstream plik;
+    plik.open(nazwaPliku);
+    std::string linia;
 
 
+    while (std::getline(plik,linia))
+    {
+        std::string wiersz [8] = {"","","","","","","",""};
+        int i = 0;
+        for (unsigned int j = 0; j < linia.size();j++)
+        {
 
-    schemat.dodajObciazenie(obc);
-    schemat.dodajObciazenie(mom);
+            if(linia[j] != ' ')
+            {
+                wiersz[i] += linia[j];
+            }
+            else
+                i++;
+        }
 
-    pret->utworzMacierze(); // odnośnie zaokrągleń: stworzymy metodę w mainwindow która zaokrągla wyniki przed wypisaniem
-    //wrzuceniem ich na ekran do 0.0 dla małych wartości, ale przechowujemy całość,
-    //dokładność zaokrąglania będzie zależeć od najwiękrzej przyłożone siły na schemacie oraz rodzaju tego co sie wypisze czy coś
+        if ((wiersz[0][0] == '/' && wiersz[0][1] =='/'))
+            continue;
+
+        if (wiersz[0] == "punkt")
+        {
+            std::string nazwa = wiersz[1];
+            double x = stod(wiersz[2]);
+            double y = stod(wiersz[3]);
+            dodajPunkt(x,y,nazwa);
+        }
+        else if (wiersz[0] == "pret")
+        {
+            if(wiersz[1] == "kwadratowy")
+            {
+                std::string nazwa = wiersz[2];
+                double b = stod(wiersz[3]);
+                double h = stod(wiersz[4]);
+                Punkt* pPocz = schemat.zwrocPunkty()[stoi(wiersz[5])];
+                Punkt* pKonc = schemat.zwrocPunkty()[stoi(wiersz[6])];
+                double E = stod(wiersz[7]);
+                dodajPret(pPocz, pKonc,E,b,h, nazwa);
+
+            }
+            else if(wiersz[1] == "kolowy")
+            {
+                std::string nazwa = wiersz[2];
+                double d = stod(wiersz[3]);
+                Punkt* pPocz = schemat.zwrocPunkty()[stoi(wiersz[4])];
+                Punkt* pKonc = schemat.zwrocPunkty()[stoi(wiersz[5])];
+                double E = stod(wiersz[6]);
+                dodajPret(pPocz, pKonc,E,d, nazwa);
+            }
+
+        }
+        else if(wiersz[0] == "sila")
+        {
+            std::string nazwa = wiersz[1];
+            double x = stod(wiersz[2]);
+            double y = stod(wiersz[3]);
+            Punkt* punkt = schemat.zwrocPunkty()[stoi(wiersz[4])];
+            dodajObcPunktowe(x,y, punkt,nazwa);
+
+        }
+        else if(wiersz[0]== "moment")
+        {
+            std::string nazwa = wiersz[1];
+            double wartosc = stod(wiersz[2]);
+            Punkt* punkt = schemat.zwrocPunkty()[stoi(wiersz[3])];
+            dodajMomentSkupiony(wartosc,punkt,nazwa);
+        }
+        else if(wiersz[0] == "obcKonstrukcyjne")
+        {
+            std::string nazwa = wiersz[1];
+            double x = stod(wiersz[2]);
+            double y = stod(wiersz[3]);
+            Pret* pret = schemat.zwrocPrety()[stoi(wiersz[4])];
+            dodajObcKonstrukcyjne(x,y,pret,nazwa);
+        }
+        else if(wiersz[0]== "podpora")
+        {
+            Punkt* punkt = schemat.zwrocPunkty()[stoi(wiersz[1])];
+            int typ = stoi(wiersz[2]);
+            bool blokX;
+            if(wiersz[3] == "1")
+                blokX = true;
+            else
+                blokX = false;
+            dodajPodpore(punkt, typ,blokX);
+        }
+
+    }
 
 
 
 
+}
 
-    //ogólny pomysł jest taki: podpory dodajemy gdzie się chce, a pręty i siły tylko w punktach, które już są dodane
+void Konstruktor::zapiszSchemat(std::string nazwaPliku)
+{
 
-    //testy/denug budowania schematu - na razie while(true) (xD), docelowo event loop
+    std::ofstream plik;
+    plik.open(nazwaPliku);
 
-    // while(true)
-    // {
-    //     std::cout <<" Wybierz co chcesz dodac: " << std::endl;
-    //     std::cout << "1.Podpora" << std::endl;
-    //     std::cout << "2.Sila" << std::endl;
-    //     std::cout << "3.Pret" << std::endl;
-    //     std::cout << "4.Punkt na precie" << std::endl;
-    //     std::cout << "5.Break" << std::endl;
-    //     int wybor;
-    //     std::cin >> wybor;
-    //     if(wybor == 1)//ja bym zamienil te ify na switch case ale twoj wybor >>>>> to i tak tylko tymczasowe, przecierz nie będziemy budować schematu w while(true) xD
-    //     //trzeba bedzie zrobić ładną grafikę w ui z wyskskującymi okienkami czy coś
+    for (auto &pkt : schemat.zwrocPunkty())
+    {
+        plik << "punkt " << pkt->getNazwa() << " " << pkt->getX() << " " << pkt->getY() << std::endl;
 
-    //     {
-    //         std::cout << "Podaj polozenie podpory: ";
-    //         double x, y;
-    //         int select;
-    //         std::cin >> x >> y;
-    //         std::cout << "Wybierz tryb podpory:\n";
-    //         std::cout << "1.\tUtwierdzenie stale\n";
-    //         std::cout << "2.\tPrzegub walcowy\n";
-    //         std::cout << "3.\tUtwierdzenie przesuwne (blokada obrotu)\n";
-    //         std::cout << "4.\tPodpora ruchoma (swobodny obrot)\n";
-    //         std::cout << ">";
-    //         std::cin >> select;
-    //         Podpora* podpora;
-    //         char freeAxis;
-    //         switch (select)
-    //         {
-    //         default:
-    //             podpora = new UtwierdzenieStale(x, y);
-    //             break;
-    //         case 1:
-    //             podpora = new UtwierdzenieStale(x, y);
-    //             break;
-    //         case 2:
-    //             podpora = new PrzegubWalcowy(x, y);
-    //             break;
-    //         case 3:
-    //             std::cout << "Wybierz os swobodna elementu [X, Y]>";
-    //             std::cin >> freeAxis;
-    //             podpora = new UtwierdzeniePrzesuwne(x, y, freeAxis);
-    //             break;
-    //         case 4:
-    //             std::cout << "Wybierz os swobodna elementu [X, Y]>";
-    //             std::cin >> freeAxis;
-    //             podpora = new PodporaRuchoma(x, y, freeAxis);
-    //             break;
-    //         }
-            
-    //         schemat.dodajPodpore(podpora);
-    //     }
-    //     if(wybor == 2)
-    //     {
-    //         std::cout << "Podaj punkt przylozenia sily: ";
-    //         int i = 1;
-    //         for (const auto &punkt : schemat.zwrocPunkty())
-    //         {
-    //             std::cout << i << ": " << punkt->getNazwa() << " [" << punkt->getX() << ";" << punkt->getY() << "]" << std::endl;
-    //             //wszystkie możliwe punkty - tylko w podporze wspujemy z palca, resztę trzeba gdzieś "przykleić"
-    //             //dobre, proste podejśćie, debiloodporne, nie będzie błędów w aplikacji jeśli ktoś pomyli współrzędne
-    //             //nie wymaga stosowania połączeń, ponieważ współrzeDne wszystko zdefiniują
-    //             i++;
-    //         }
-    //         int pkt;
-    //         std::cin >> pkt;
-    //         std::cout << "Podaj sile zdefionowana wektorem: "<< std::endl; // pierwszy punkt to punkt przylozenia, drugi to punkt który trzeba podać
-    //         double x, y;
-    //         std::cin >> x >> y;
-    //         Obciazenie* obc = new ObcPunktowe(x,y,schemat.zwrocPunkty()[pkt-1]);
-    //         schemat.dodajObciazenie(obc);
+    }
+    for (auto &pret : schemat.zwrocPrety())
+    {
+        plik << "pret ";
 
-    //     }
-    //     if(wybor == 3)
-    //     {
-    //         std::cout << "Wybierz początek preta: " << std::endl;
-    //         int i = 1;
-    //         for (const auto &punkt : schemat.zwrocPunkty())
-    //         {
+        if (pret->zwroc_d() != 0)
+        {
+            plik << "kolowy " << pret->getNazwa() << " ";
+            plik << pret->zwroc_d() << " ";
+        }
 
-    //             std::cout << i << ": " << punkt->getNazwa() << " [" << punkt->getX() << ";" << punkt->getY() << "]" << std::endl;
-    //             i++;
-    //         }
-    //         int pkt;
-    //         std::cin >> pkt;
-    //         std::cout << "Podaj wsp punktu koncowego: ";
-    //         double x, y;
-    //         std::cin >> x >> y;
-    //         Punkt* pom = new Punkt(x,y,"P");
-    //         Pret* obc = new Pret(schemat.zwrocPunkty()[pkt-1],pom);
-    //         schemat.dodajPret(obc);
-    //     }
-    //     if(wybor == 4)
-    //     {
-    //     std::cout << "Wybierz pret: " << std::endl;
-    //     int i = 1;
-    //     for (const auto &pret : schemat.zwrocPrety())
-    //     {
-    //        std::cout << i << ": " << pret->getNazwa() << " " << pret->getL() << std::endl;
-    //         i++;
-    //     }
-    //     int pret;//kolego, pisze sie pręt nie prent XD >> whatever
-    //     // ja piszę "gówno" przez UW
-    //     std::cin >> pret;
-    //     std::cout << "Podaj odleglosc od punktu poczatkowgo na precie: ";
-    //     double l;
-    //     std::cin >> l;
-    //     schemat.zwrocPrety()[pret-1]->dodajPunkt(l);
 
-    //     //UWAGA przy aktualnej konfiguracji silnika program może się wywalać dla dodania dodatkowych punktów w pręcie
-    //     // trzeba przerobić dodanie punktu w środku na podział na 2 pręty - to rozwiąże sprawę
+        else if (pret->zwroc_h() != 0 && pret->zwroc_b() != 0)
+        {
+            plik << "kwadratowy " << pret->getNazwa() << " ";
+            plik << pret->zwroc_h() << " ";
+            plik << pret->zwroc_b() << " " << pret->zwroc_h() << " ";
+        }
 
-    //     }
-    //     if (wybor == 5)
-    //         break;
-    //     else std::cerr << "Nieprawidlowa instrukcja\n";//dziwnie dziala bo sie wpisuje po kazdym while, ale w sumie to i tak zaraz to wywalamy wiec bajo jajo
-    //     //tak jest bo nie daliśmy else if i wypiuje się zawsze jak nie dasz "5"
-    //     schemat.kasujPunkty();
-    //     for(const auto &podpory : schemat.zwrocPodpory())
-    //     {
-    //         schemat.dodajPunkt(podpory->zwrocPunkt());
-    //     }
-    //     for(const auto &pret : schemat.zwrocPrety())
-    //     {
 
-    //         for(unsigned int i = 1; i < pret->zwrocPunkty().size();i++)
-    //         {
-    //             schemat.dodajPunkt(pret->zwrocPunkty()[i]);
-    //         }
+        unsigned int index = 0;
+        for (auto &pkt : schemat.zwrocPunkty())
+        {
+            if (pret->getPPocz() == pkt)
+            {
+                plik << index << " ";
+                break;
+            }
+            index++;
+        }
+        index = 0;
+        for (auto &pkt : schemat.zwrocPunkty())
+        {
+            if (pret->getPKonc() == pkt)
+            {
+                plik << index << " ";
+                break;
+            }
 
-    //     }
-    // }
+            index++;
+        }
+        plik << pret->zwroc_E() << std::endl;
+    }
+
+    for(auto &podp : schemat.zwrocPodpory())
+    {
+        for(auto &podp : schemat.zwrocPodpory())
+        {
+            plik << "podpora ";
+
+            int index = 0;
+            for (auto &pkt : schemat.zwrocPunkty())
+            {
+                if (podp->zwrocPunkt() == pkt)
+                {
+                    plik << index << " ";
+                    break;
+                }
+                index++;
+            }
+
+            if(podp->getTyp() == 0)
+            {
+                plik << "0 1";
+            }
+            else
+            {
+                plik << "1 ";
+
+                if(podp->zwrocBlok_x())
+                    plik << "1";
+                else
+                    plik << "0"; // narazie 2, bo tyle mamy metod tworzenia w kontruktorze
+            }
+
+            plik << std::endl;
+        }
+
+    }
+
+
+
+    for(unsigned int i = 0; i < schemat.indekxySil().size();i++)
+    {
+        unsigned int index = 0;
+        Obciazenie* sila = schemat.zwrocObciazenia()[schemat.indekxySil()[i]];
+        plik << "sila " << sila->getNazwa() << " " << sila->wartoscSily_x() << " " << sila->wartoscSily_y() << " " << schemat.indekxySil()[i] << std::endl;
+
+
+    }
+
+    for(unsigned int i = 0; i < schemat.indekxyMomentow().size();i++)
+    {
+
+        Obciazenie* moment = schemat.zwrocObciazenia()[schemat.indekxyMomentow()[i]];
+        plik << "moment " << moment->getNazwa() << " " << moment->wartoscSuly_OBR() << " "<< schemat.indekxyMomentow()[i] << std::endl;;
+
+    }
+     for(unsigned int i = 0; i < schemat.indekxyObciazen().size();i++)
+    {
+
+        Obciazenie* obc = schemat.zwrocObciazenia()[schemat.indekxyObciazen()[i]];
+        plik << "sila " << obc->getNazwa() << " " << obc->wartoscSily_x() << " " << obc->wartoscSily_y() << " " << schemat.indekxyObciazen()[i] <<std::endl;
+
+
+     }
+
 }
 
 void Konstruktor::dodajPret(Punkt* pocz, Punkt* konc, double E, double d, std::string nazwa)
@@ -209,6 +258,7 @@ void Konstruktor::dodajPodpore(Punkt* _pozycja, int typeIndex, bool lockedX)
         break;
     case 1:
         nowa = new PodporaRuchoma(_pozycja, freeAxis);
+        break;
     default:
         return; // załatałem potencjalne tworzenie zbugowanej podpory przez return zamiast break
     }

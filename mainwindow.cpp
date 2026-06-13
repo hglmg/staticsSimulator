@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -17,10 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->obcPunktTable->setRowCount(255);
     ui->obcKonstrTable->setRowCount(255);
     ui->momentTable_2->setRowCount(255);
-    aplikacja.uruchom();
-    aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
-    aplikacja.getSilnik()->rozwiaz();
-    aplikacja.getSilnik()->wypisz();
+
+
+
+
+
     ui->frame->dodajKsztalty(aplikacja.getSchemat());
     odswiezUI();
 }
@@ -153,22 +155,22 @@ void MainWindow::odswiezSBox(QSpinBox *odswiezanySBox, char dataType)
     switch (dataType)
     {
     case punkty:
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPunkty().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPunkty().size());
         break;
     case prety:
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPrety().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPrety().size());
         break;
     case podpory:
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->zwrocPodpory().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPodpory().size());
         break;
     case obcKonstrukcyjne:
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->indekxyObciazen().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->indekxyObciazen().size());
         break;
     case sily:
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->indekxySil().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->indekxySil().size());
         break;
     case momenty:
-        odswiezanySBox->setRange(0, aplikacja.getSchemat()->indekxyMomentow().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->indekxyMomentow().size());
         break;
     default:
         return;
@@ -276,7 +278,8 @@ void MainWindow::on_obcPunktAddBtn_clicked()
 
 void MainWindow::on_obcPunktRemoveBt_clicked()
 {
-    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->obcPktRemoveSBox->value()-1, typObciazenia::silaSkupiona);
+    int index = aplikacja.getSchemat()->indekxySil()[ui->obcPktRemoveSBox->value()-1];
+    aplikacja.getSchemat()->kasujWybranaObciazenie(index, typObciazenia::silaSkupiona);
     odswiezUI();
 }
 
@@ -286,14 +289,13 @@ void MainWindow::on_momentAddBtn_2_clicked()
     double wartosc = ui->momentSpinBox_2->text().toDouble();
     int index = ui->punktPodporyComboBox->currentIndex();
     Punkt* punkt = aplikacja.getSchemat()->zwrocPunkty()[index];
-    Obciazenie* nowy = new MomentSkupiony(wartosc, punkt, nazwa);
-    aplikacja.getSchemat()->dodajObciazenie(nowy);
+    aplikacja.getKonstruktor()->dodajMomentSkupiony(wartosc,punkt, nazwa);
     odswiezUI();
 }
-
 void MainWindow::on_momentRemoveBtn_2_clicked()
 {
-    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->momentRemoveSBox->value()-1, typObciazenia::momentSkupiony);
+    int index = aplikacja.getSchemat()->indekxyMomentow()[ui->momentRemoveSBox->value()-1];
+    aplikacja.getSchemat()->kasujWybranaObciazenie(index, typObciazenia::momentSkupiony);
     odswiezUI();
 }
 
@@ -312,7 +314,68 @@ void MainWindow::on_obcKonstrAddBtn_clicked()
 
 void MainWindow::on_obcKonstrRemoveBtn_clicked()
 {
-    aplikacja.getSchemat()->kasujWybranaObciazenie(ui->obcKRemoveSBox->value()-1, typObciazenia::konstrukcyjne);
+    int index = aplikacja.getSchemat()->indekxyObciazen()[ui->obcKRemoveSBox->value()-1];
+    aplikacja.getSchemat()->kasujWybranaObciazenie(index, typObciazenia::momentSkupiony);
     odswiezUI();
 }
+
+void MainWindow::on_wczytajSchematBtn_clicked()
+{
+
+    QString sciezka = QFileDialog::getOpenFileName(
+        this,
+        "Wybierz plik",
+        QDir::currentPath(),
+        " "
+        );
+
+    std::string s = sciezka.toStdString();
+    aplikacja.getKonstruktor()->wczytaj(s);
+    odswiezUI();
+}
+
+void MainWindow::on_zapiszSchematBtn_clicked()
+{
+    QString sciezka = QFileDialog::getSaveFileName(
+        this,
+        "Wybierz plik",
+        QDir::currentPath(),
+        "(.txt);"
+        );
+    std::string s = sciezka.toStdString();
+
+    aplikacja.getKonstruktor()->zapiszSchemat(s);
+    odswiezUI();
+
+}
+
+void MainWindow::on_calcRunBtn_clicked()
+{
+    aplikacja.getSilnik()->konfiguruj((aplikacja.getSchemat()));
+    aplikacja.getSilnik()->rozwiaz();
+    aplikacja.getSilnik()->wypisz();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

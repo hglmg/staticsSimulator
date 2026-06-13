@@ -192,10 +192,12 @@ PretProstokotny::PretProstokotny(Punkt* _pPocz, Punkt* _pKonc, double _E, double
 void PretProstokotny::wczytajParametry(double _E, double _b, double _h) // ew zamiast klas pochodnych można dodać paramtr
 //przekroju, który były klasą zaiwerającą dane
 {
+    b = _b;
+    h = _h;
     E = _E;
-    A = _b * _h; // można by też rozszeżyć dla różnych kształtów np dwuetownik albo kątownik ew wycięcia wewnątrz pręta
-    double h3 = _h*_h*_h; // uwaga na to co jest _b a co _h
-    I =  (_b*h3)/12;
+    A = b * h; // można by też rozszeżyć dla różnych kształtów np dwuetownik albo kątownik ew wycięcia wewnątrz pręta
+    double h3 = h*h*h; // uwaga na to co jest _b a co _h
+    I =  (b*h3)/12;
 }
 
 
@@ -209,8 +211,9 @@ PretKolowy:: PretKolowy(Punkt* _pPocz, Punkt* _pKonc,double _E, double _d, std::
 void PretKolowy::wczytajParametry(double _E, double _d)
 {
     E = _E;
-    double r2 = (_d/2.0)*(_d/2.0);
-    double d4 = _d*_d*_d*_d;
+    d = _d;
+    double r2 = (d/2.0)*(d/2.0);
+    double d4 = d*d*d*d;
     A = PI * r2; // można by też rozszeżyć dla różnych kształtów np dwuetownik albo kątownik ew wycięcia wewnątrz pręta
     I =  (PI * d4)/64;
 }

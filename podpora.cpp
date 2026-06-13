@@ -13,6 +13,7 @@ Podpora::Podpora(Punkt *_pozycja)
 
 UtwierdzenieStale::UtwierdzenieStale(double _x, double _y)  : Podpora(_x, _y)
 {
+    typ = 0;
     xBlok = true;
     yBlok = true;
     rotBlok = true;
@@ -21,6 +22,7 @@ UtwierdzenieStale::UtwierdzenieStale(double _x, double _y)  : Podpora(_x, _y)
 
 UtwierdzenieStale::UtwierdzenieStale(Punkt *_pozycja)  : Podpora(_pozycja)
 {
+    typ = 0;
     xBlok = true;
     yBlok = true;
     rotBlok = true;
@@ -44,6 +46,7 @@ PrzegubWalcowy::PrzegubWalcowy(Punkt *_pozycja) : Podpora(_pozycja)
 
 UtwierdzeniePrzesuwne::UtwierdzeniePrzesuwne(double _x, double _y, char freeAxis) : Podpora(_x, _y)
 {
+    typ = 1;
     rotBlok = true;
     switch (freeAxis)
     {
@@ -64,6 +67,7 @@ UtwierdzeniePrzesuwne::UtwierdzeniePrzesuwne(double _x, double _y, char freeAxis
 
 UtwierdzeniePrzesuwne::UtwierdzeniePrzesuwne(Punkt *_pozycja, char freeAxis) : Podpora(_pozycja)
 {
+    typ = 1;
     rotBlok = true;
     switch (freeAxis)
     {

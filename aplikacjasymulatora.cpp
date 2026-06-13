@@ -7,5 +7,5 @@ AplikacjaSymulatora::AplikacjaSymulatora()
 }
 void AplikacjaSymulatora::uruchom()
 {
-    konstruktor.konfiguruj();
+
 }
