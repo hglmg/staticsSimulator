@@ -18,10 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->obcPunktTable->setRowCount(255);
     ui->obcKonstrTable->setRowCount(255);
     ui->momentTable_2->setRowCount(255);
+
     aplikacja.uruchom();
 
-
     ui->frame->dodajKsztalty(aplikacja.getSchemat());
+
 
     odswiezUI();
 }
@@ -80,6 +81,8 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, int dataType)
                 odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( obc->getNazwa() ) ));
                 std::string nazwa = obc->getPunkt()->getNazwa() +" (" + std::to_string(obc->getPunkt()->getX()) + "," + std::to_string(obc->getPunkt()->getY()) + ")";
                 odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString( nazwa)));
+                odswiezanaTabela->setItem(i, 2, new QTableWidgetItem( QString::fromStdString(std::to_string(obc->wartoscSily_x()))));
+                odswiezanaTabela->setItem(i, 3, new QTableWidgetItem( QString::fromStdString(std::to_string(obc->wartoscSily_y()))));
                 i++;
             }
         }
@@ -93,6 +96,7 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, int dataType)
                 odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( obc->getNazwa() ) ));
                 std::string nazwa = obc->getPunkt()->getNazwa() +" (" + std::to_string(obc->getPunkt()->getX()) + "," + std::to_string(obc->getPunkt()->getY()) + ")";
                 odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString( nazwa)));
+                odswiezanaTabela->setItem(i, 2, new QTableWidgetItem( QString::fromStdString(std::to_string(obc->wartoscSuly_OBR()))));
                 i++;
             }
         }
@@ -106,6 +110,8 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, int dataType)
                 odswiezanaTabela->setItem(i, 0, new QTableWidgetItem( QString::fromStdString( obc->getNazwa() ) ));
                 std::string nazwa = obc->getPret()->getNazwa();
                 odswiezanaTabela->setItem(i, 1, new QTableWidgetItem( QString::fromStdString(nazwa)));
+                odswiezanaTabela->setItem(i, 2, new QTableWidgetItem( QString::fromStdString(std::to_string(obc->wartoscSily_x()))));
+                odswiezanaTabela->setItem(i, 3, new QTableWidgetItem( QString::fromStdString(std::to_string(obc->wartoscSily_y()))));
                 i++;
             }
 
@@ -276,7 +282,9 @@ void MainWindow::on_obcPunktAddBtn_clicked()
 
 void MainWindow::on_obcPunktRemoveBtn_clicked()
 {
-    int index = aplikacja.getSchemat()->indekxySil()[ui->obcPktRemoveSBox->value()-1];
+    int i = ui->obcPktRemoveSBox->value()-1;
+    int index = aplikacja.getSchemat()->indekxySil()[i];
+    aplikacja.getSchemat()->indekxySil().erase(aplikacja.getSchemat()->indekxySil().begin()+i);
     aplikacja.getSchemat()->kasujWybranaObciazenie(index);
     odswiezUI();
 }
@@ -292,8 +300,10 @@ void MainWindow::on_momentAddBtn_2_clicked()
 }
 void MainWindow::on_momentRemoveBtn_2_clicked()
 {
-    int index = aplikacja.getSchemat()->indekxyMomentow()[ui->momentRemoveSBox->value()-1];
+    int i = ui->momentRemoveSBox->value()-1;
+    int index = aplikacja.getSchemat()->indekxyMomentow()[i];
     aplikacja.getSchemat()->kasujWybranaObciazenie(index);
+    aplikacja.getSchemat()->indekxyMomentow().erase(aplikacja.getSchemat()->indekxyMomentow().begin()+i);
     odswiezUI();
 }
 
@@ -312,26 +322,34 @@ void MainWindow::on_obcKonstrAddBtn_clicked()
 
 void MainWindow::on_obcKonstrRemoveBtn_clicked()
 {
-    int index = aplikacja.getSchemat()->indekxyObciazen()[ui->obcKRemoveSBox->value()-1];
+    int i = ui->obcKRemoveSBox->value()-1;
+    int index = aplikacja.getSchemat()->indekxyObciazen()[i];
+    aplikacja.getSchemat()->indekxyObciazen().erase(aplikacja.getSchemat()->indekxyObciazen().begin()+i);
     aplikacja.getSchemat()->kasujWybranaObciazenie(index);
+
     odswiezUI();
 }
 
 void MainWindow::on_wczytajSchematBtn_clicked()
 {
 
+#include <Qdebug>
 
-    aplikacja.getSchemat()->wyczyscSchemat();
     QString sciezka = QFileDialog::getOpenFileName(
         this,
         "Wybierz plik",
         QDir::currentPath(),
         " "
         );
+    if (sciezka == "") return;
 
+    aplikacja.getSchemat()->wyczyscSchemat();
     std::string s = sciezka.toStdString();
     aplikacja.getKonstruktor()->wczytaj(s);
     odswiezUI();
+
+
+
 }
 
 void MainWindow::on_zapiszSchematBtn_clicked()
@@ -352,7 +370,6 @@ void MainWindow::on_zapiszSchematBtn_clicked()
 void MainWindow::on_wyliczPrzemieszczeniaBtn_clicked()
 {
     ui->consoleTxtBox->clear();
-    aplikacja.getSilnik()->rozwiaz();
     ui->frame->przelaczTryb(przemieszczenia);
     for (auto &pkt : aplikacja.getSchemat()->zwrocPunkty())
     {
@@ -362,22 +379,19 @@ void MainWindow::on_wyliczPrzemieszczeniaBtn_clicked()
         linijka = "Przesunięcie Y punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocPrzemieszczenie_y())+ "\n";
         ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
     }
+    odswiezUI();
 
 }
 
 void MainWindow::on_trybEdycjiBtn_clicked()
 {
-
-
     ui->frame->przelaczTryb(edycja);
-    aplikacja.getSilnik()->rozwiaz();
-
+    odswiezUI();
 }
 
 void MainWindow::on_wyliczReakcjeBtn_clicked()
 {
     ui->consoleTxtBox->clear();
-    aplikacja.getSilnik()->rozwiaz();
     ui->frame->przelaczTryb(reakcje);
 
     for (auto &podpora : aplikacja.getSchemat()->zwrocPodpory())
@@ -390,7 +404,26 @@ void MainWindow::on_wyliczReakcjeBtn_clicked()
         linijka = "Reakcja obrotu punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceObr()) + "\n";
         ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
     }
+    odswiezUI();
 }
+
+void MainWindow::on_calcExportBtn_2_clicked()
+{
+    aplikacja.getSchemat()->wyczyscSchemat();
+    odswiezUI();
+
+}
+
+
+
+void MainWindow::on_uruchomObliczeniBtn_clicked()
+{
+    aplikacja.getSilnik()->rozwiaz();
+    odswiezUI();
+}
+
+
+
 
 
 

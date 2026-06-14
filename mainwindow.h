@@ -56,9 +56,15 @@ private slots:
 
     void on_windowRefreshBtn_clicked() {odswiezUI();};
 
+    void on_calcExportBtn_2_clicked();
+
     void on_wyliczPrzemieszczeniaBtn_clicked();
     void on_trybEdycjiBtn_clicked();
     void on_wyliczReakcjeBtn_clicked();
+
+
+    void on_uruchomObliczeniBtn_clicked();
+
 };
 
 

@@ -88,6 +88,7 @@ void KontenerSiatki::kasujWybranaObciazenie(int index)
     qDebug() << index;
     if(obciazenia[index] == nullptr) return;
     obciazenia.erase(obciazenia.begin() + index);
+
 }
 
 void KontenerSiatki::wyczyscSchemat()

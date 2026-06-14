@@ -1,4 +1,5 @@
 #include "Konstruktor.h"
+#include "podpora.h"
 
 #include <Qdebug>
 
@@ -276,8 +277,11 @@ void Konstruktor::dodajPodpore(Punkt* _pozycja, int typeIndex, bool lockedX)
     case 1:
         nowa = new PodporaRuchoma(_pozycja, freeAxis);
         break;
+    case 2:
+        nowa = new PodporaStala(_pozycja);
+
     default:
-        return; // załatałem potencjalne tworzenie zbugowanej podpory przez return zamiast break
+        break;
     }
     schemat.dodajPodpore(nowa);
 }
