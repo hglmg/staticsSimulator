@@ -1,5 +1,6 @@
 #include "pret.h"
 #include "obciazenie.h"
+#include <Qdebug>
 
 
 
@@ -21,8 +22,7 @@ void Pret::ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc)
     cosinus = (_pKonc->getX() - _pPocz->getX())/L;
     sinus = (_pKonc->getY() - _pPocz->getY())/L;
 
-    ustawMacierzTransformacji();
-    utworzMacierze();
+
 }
 
 void Pret::dodajObciarzenie(ObcKonstrukcyjne* _obc)
@@ -98,6 +98,12 @@ std::vector <int> Pret::zwrocStopnieSwobody()
 
 void Pret::utworzMacierze()
 {
+
+    qDebug()
+    << "E =" << E
+    << "A =" << A
+    << "I =" << I
+    << "L =" << L;
     sztywnoscLokalna.setZero();
 
     //czarna magia - tworzenie macierzy lokalnej zgodnie z metodą elementów skończonych
@@ -161,7 +167,8 @@ void Pret::utworzMacierze()
 
     wektorObciazenLokalnych.setZero();
 
-    obc.clear();
+
+
 
     for (auto* obciazenie : obc) // obciążenia tworzone w lokalnej osi pręta, w UI trzema wymusić podanie loklanych
     //współrzędnych pręta
@@ -181,6 +188,11 @@ void Pret::utworzMacierze()
 
 
     }
+    for(auto* o : obc)
+        delete o;
+
+    obc.clear();
+
     obciazeniaGlobalne.setZero();
     obciazeniaGlobalne = transformacja.transpose() * wektorObciazenLokalnych;
 

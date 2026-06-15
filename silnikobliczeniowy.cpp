@@ -98,7 +98,11 @@ void SilnikObliczeniowy::narzucWarunkiBrzegowe() // ma modyfikować kopie macier
     //przypisujemy warunki początkowe, np. dla utwierdzenia słaego ruch w każej osi jest równy zero
     //rozważamy typy podpór, i dla każdego modyfikujemy globalną macierz przemieszczeń tak, aby
     //wymusić określone ruchy
+    qDebug() << "K norm przed"
+             << macierzGlobalna.norm();
 
+    qDebug() << "F norm przed"
+             << wektorObciazen.norm();
 
     for(const auto podpora : schemat->zwrocPodpory())
     {
@@ -147,6 +151,11 @@ void SilnikObliczeniowy::narzucWarunkiBrzegowe() // ma modyfikować kopie macier
         }
 
     }
+    qDebug() << "K norm po"
+             << macierzGlobalna_podpory.norm();
+
+    qDebug() << "F norm po"
+             << wektorObciazen_podpory.norm();
 
 }
 
@@ -159,14 +168,19 @@ void SilnikObliczeniowy::wyznaczPrzemieszczenia()
         i = p->zwrocStopienSwobody_x();
         war = wektorPrzemieszczen(i);
         p->ustawPrzemieszczenie_x(war);
+        qDebug() << " x: "<<war;
 
         i = p->zwrocStopienSwobody_y();
         war = wektorPrzemieszczen(i);
         p->ustawPrzemieszczenie_y(war);
+        qDebug() << " y: "<<war;
+
 
         i = p->zwrocStopienSwobody_obr();
         war = wektorPrzemieszczen(i);
         p->ustawPrzemieszczenie_obr(war); // zapisuje wartości przemieszczeń do punktów - pozwli na graficze
+        qDebug() << " obr: "<<war;
+
         //przeunięcie ich na ui
 
     }
@@ -209,22 +223,45 @@ void SilnikObliczeniowy::rozwiaz()
     }
 
 
-    // for(auto &pret : schemat->zwrocPrety())
-    // {
-    //     pret->ustawMacierzTransformacji();
-    //     pret->utworzMacierze();
+
+    for(auto &P : schemat->zwrocPunkty())
+    {
+        P->zeruj_wartosci();
+
+    }
+    qDebug() << schemat->zwrocObciazenia().size();
+
+    for(auto &obc : schemat->zwrocObciazenia())
+    {
+        if (ObcPunktowe* o = dynamic_cast<ObcPunktowe*>(obc))
+        {
+            obc->getPunkt()->dodajSile_x(obc->wartoscSily_x());
+            obc->getPunkt()->dodajSile_y(obc->wartoscSily_y());
+
+        }
+        else if (MomentSkupiony* m = dynamic_cast<MomentSkupiony*>(obc))
+        {
+            obc->getPunkt()->dodajMoment_obr(m->wartoscSuly_OBR());
+        }
+        else
+        {
+            double x = obc->wartoscSily_x();
+            double y = obc->wartoscSily_y();
+            ObcKonstrukcyjne* o = new ObcKonstrukcyjne(x,y,obc->getPret(),"F");
+            obc->getPret()->dodajObciarzenie(o);
+
+        }
 
 
-    // }
-    // for(auto &P : schemat->zwrocPunkty())
-    // {
-    //     P->zeruj_wartosci();
-    //     qDebug() << P->zwrocSila_x() << " : " << P->zwrocSila_y() << "\n";
-    // }
+
+    }
+    for(auto &pret : schemat->zwrocPrety())
+    {
+        pret->ustawMacierzTransformacji();
+        pret->utworzMacierze();
 
 
-
-
+    }
 
     zbudujMacierzGlobalna();
 
@@ -237,18 +274,15 @@ void SilnikObliczeniowy::rozwiaz()
     //macierzGlobalna * /przesunięcia/ = wektorObciazen
     //wektor przemieszczen zawiera przemieszczenia w danym punckie
     //colPivHouseholderQr() to funkcja do rozwiązywania równań macierzowych
-
+    for(int i=0;i<wektorPrzemieszczen.size();i++)
+    {
+        qDebug() << i << wektorPrzemieszczen(i);
+    }
     wyznaczPrzemieszczenia();
-
     wyznaczReakcjePodporowe();
 
-    for(auto &P : schemat->zwrocPunkty())
-    {
-        qDebug() << P->zwrocSila_x() << " : " << P->zwrocSila_y() << "\n";
-    }
-
-
 }
+
 
 
 

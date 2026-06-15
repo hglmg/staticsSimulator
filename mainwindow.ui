@@ -24,31 +24,6 @@
     <item>
      <widget class="QGroupBox" name="groupBox_2">
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QToolButton" name="calcExportBtn">
-         <property name="minimumSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Zapisz wyniki (.txt)</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QToolButton" name="zapiszSchematBtn">
          <property name="minimumSize">
@@ -256,6 +231,31 @@
          </property>
          <property name="icon">
           <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QToolButton" name="calcExportBtn">
+         <property name="minimumSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Zapisz wyniki (.txt)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
          </property>
         </widget>
        </item>
