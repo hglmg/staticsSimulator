@@ -7,6 +7,7 @@
 #include <QButtonGroup>
 #include <QSpinBox>
 #include <QFileDialog>
+#include <QPlainTextEdit>
 #include "aplikacjasymulatora.h"
 
 
@@ -29,6 +30,7 @@ public:
     void odswiezTabele(QTableWidget* odswiezanaTabela, int);
     void odswiezCBox(QComboBox *odswiezanyQBox, char dataType);
     void odswiezSBox(QSpinBox *odswiezanySBox, char dataType);
+    MainWindow& operator<<(const std::string& output);
     void odswiezUI();// wiecej info o tej metodzie w *.cpp
     ~MainWindow() override;
 

@@ -39,7 +39,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>pokaż silły wewnętrzne</string>
+          <string>Pokaż silły wewnętrzne</string>
          </property>
          <property name="text">
           <string>N</string>
@@ -61,7 +61,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>edytuj schemat</string>
+          <string>Edytuj schemat</string>
          </property>
          <property name="text">
           <string>...</string>
@@ -86,7 +86,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>pokaż przemieszczenia</string>
+          <string>Pokaż przemieszczenia</string>
          </property>
          <property name="text">
           <string>...</string>
@@ -124,7 +124,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>pokaż reakcje podporowe</string>
+          <string>Pokaż reakcje podporowe</string>
          </property>
          <property name="text">
           <string>R</string>
@@ -171,7 +171,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>wczytaj schemat</string>
+          <string>Wczytaj schemat...</string>
          </property>
          <property name="text">
           <string>...</string>
@@ -196,13 +196,13 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>zapisz schemat</string>
+          <string>Zapisz schemat...</string>
          </property>
          <property name="text">
           <string>...</string>
          </property>
          <property name="icon">
-          <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
          </property>
         </widget>
        </item>
@@ -221,13 +221,13 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Zapisz wyniki (.csv)</string>
+          <string>Zapisz wyniki (.txt)</string>
          </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="QIcon::ThemeIcon::DocumentPrint"/>
+          <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
          </property>
         </widget>
        </item>
@@ -271,7 +271,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>usuń schemat</string>
+          <string>Wyczyść schemat</string>
          </property>
          <property name="text">
           <string/>
@@ -409,8 +409,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -419,6 +419,9 @@
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QTableWidget" name="punktyTable">
+             <property name="editTriggers">
+              <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             </property>
              <property name="columnCount">
               <number>3</number>
              </property>
@@ -552,8 +555,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -562,6 +565,9 @@
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <widget class="QTableWidget" name="pretyTable">
+             <property name="editTriggers">
+              <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             </property>
              <property name="columnCount">
               <number>3</number>
              </property>
@@ -722,8 +728,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -742,6 +748,9 @@
               <layout class="QVBoxLayout" name="verticalLayout_6">
                <item>
                 <widget class="QTableWidget" name="obcPunktTable">
+                 <property name="editTriggers">
+                  <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 </property>
                  <property name="columnCount">
                   <number>4</number>
                  </property>
@@ -901,6 +910,9 @@
               <layout class="QVBoxLayout" name="verticalLayout_8">
                <item>
                 <widget class="QTableWidget" name="obcKonstrTable">
+                 <property name="editTriggers">
+                  <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 </property>
                  <property name="columnCount">
                   <number>4</number>
                  </property>
@@ -1062,8 +1074,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1072,6 +1084,9 @@
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
             <widget class="QTableWidget" name="momentTable_2">
+             <property name="editTriggers">
+              <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             </property>
              <property name="columnCount">
               <number>3</number>
              </property>
@@ -1207,8 +1222,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>226</width>
-            <height>537</height>
+            <width>220</width>
+            <height>494</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1217,6 +1232,9 @@
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
             <widget class="QTableWidget" name="podporyTable">
+             <property name="editTriggers">
+              <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             </property>
              <property name="columnCount">
               <number>3</number>
              </property>
@@ -1391,7 +1409,7 @@
      <x>0</x>
      <y>0</y>
      <width>1247</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuStatics_Simulator">

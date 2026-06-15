@@ -15,32 +15,7 @@ void KontenerSiatki::dodajPret(Pret* nowyPret)
 void KontenerSiatki::dodajObciazenie(Obciazenie* noweObc)
 {
     // enum {momentSkupiony, silaSkupiona, konstrukcyjne}
-
     obciazenia.push_back(noweObc);
-    int typ = noweObc->typ;
-    switch(typ)
-    {
-    case momentSkupiony:
-    {
-        dodajIndexMomentow(obciazenia.size()-1);
-        break;
-    }
-    case silaSkupiona:
-    {
-        dodajIndexSil(obciazenia.size()-1);
-        break;
-    }
-    case konstrukcyjne:
-    {
-        dodajIndexObciazen(obciazenia.size()-1);
-    }
-        default:
-            break;
-    }
-
-
-
-
 }
 
 void KontenerSiatki::dodajPodpore(Podpora* pod)
@@ -61,21 +36,21 @@ int KontenerSiatki::policzStopnieSwobody()
 
 void KontenerSiatki::kasujWybranyPkt(int index)
 {
-    if (punkty.empty()) return;
+    if (punkty.empty()|| index < 0) return;
     if(punkty[index] == nullptr) return;
     punkty.erase(punkty.begin() + index);
 }
 
 void KontenerSiatki::kasujWybranyPret(int index)
 {
-    if(prety.empty()) return;
+    if(prety.empty() || index < 0) return;
     if(prety[index]==nullptr) return;
     prety.erase(prety.begin() + index);
 }
 
 void KontenerSiatki::kasujWybranaPodpore(int index)
 {
-    if(podpory.empty()) return;
+    if(podpory.empty() || index < 0) return;
     if(podpory[index] == nullptr) return;
     podpory.erase(podpory.begin() + index);
 
@@ -84,7 +59,7 @@ void KontenerSiatki::kasujWybranaPodpore(int index)
 void KontenerSiatki::kasujWybranaObciazenie(int index)
 {
 
-    if(obciazenia.empty()) return;
+    if(obciazenia.empty() || index < 0) return;
     qDebug() << index;
     if(obciazenia[index] == nullptr) return;
     obciazenia.erase(obciazenia.begin() + index);
@@ -104,15 +79,6 @@ void KontenerSiatki::wyczyscSchemat()
 
     obciazenia.clear();
     obciazenia.resize(0);
-
-    indexySil.clear();
-    indexySil.resize(0);
-
-    indexyMomentow.clear();
-    indexyMomentow.resize(0);
-
-    indexyObciazen.clear();
-    indexyObciazen.resize(0);
 
 
 }

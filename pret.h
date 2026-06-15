@@ -4,7 +4,8 @@
 #include <Eigen>
 #include <cmath>
 #include "punkt.h"
-#define PI 3.141592653589793238462643383279502884197169
+
+constexpr double PI = 3.141592653589793238462643383279502884197169;
 
 
 class ObcKonstrukcyjne;
@@ -16,7 +17,6 @@ protected:
     Punkt* pKonc {nullptr};
 
     std::string nazwa {"l"};
-    std::vector <Punkt*> punkty;
 
     double L {0};
 
@@ -42,41 +42,32 @@ protected:
     Eigen::Matrix<double,6,1> obciazeniaGlobalne;
 
     void ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc);
-
     void ustawMacierzTransformacji();
 
 public:
 
     Pret(Punkt* _pPocz, Punkt* _pKonc, std::string nazwa);
     void utworzMacierze();
-    Punkt* getPPocz() {return pPocz;};
-    Punkt* getPKonc() {return pKonc;};
-    double getL() {return L;};
-    std::string getNazwa() {return nazwa;};
+    Punkt* getPPocz() const {return pPocz;};
+    Punkt* getPKonc() const {return pKonc;};
+    double getL() const {return L;};
+    std::string getNazwa() const {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
 
     void dodajObciarzenie(ObcKonstrukcyjne* _obc);
-
-    std::vector <Punkt*> zwrocPunkty(){return punkty;};
     std::vector <int> zwrocStopnieSwobody();
 
 
-    Eigen::MatrixXd zwrocSztywnoscGlobalna(){return sztywnoscGlobalna;};
-    Eigen::MatrixXd zwrocObciorzeniaGlobalne(){return obciazeniaGlobalne;};
-    void zeruj_macierze();
+    Eigen::MatrixXd zwrocSztywnoscGlobalna() const {return sztywnoscGlobalna;};
+    Eigen::MatrixXd zwrocObciorzeniaGlobalne() const {return obciazeniaGlobalne;};
 
 
     void wczytajParametry(double _E, double _d); // do prętów kołowych
 
-    double zwroc_d() {return d;};
-    double zwroc_b() {return b;};
-    double zwroc_h() {return h;};
-    double zwroc_E() {return E;};
-
-    //dla obiążeń konstrukcyjnych: będzie działac analogicznie jak
-    //w przypadku macierzy sztywności globalnej
-    //jak odpowiednio zaimlementujemy, to silnik łyknie bez rónicy
-    //ale to w przyszłym tygodniu - najpierw niech zacznie liczyć
+    double zwroc_d() const {return d;};
+    double zwroc_b() const {return b;};
+    double zwroc_h() const {return h;};
+    double zwroc_E() const {return E;};
 };
 
 class PretProstokotny : public Pret

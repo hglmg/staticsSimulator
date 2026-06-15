@@ -26,6 +26,9 @@ public:
     void dodajObcPunktowe(double _x, double _y, Punkt* punkt,std::string _nazwa);
     void dodajObcKonstrukcyjne(double _x, double _y, Pret* pret, std::string _nazwa);
     void dodajMomentSkupiony(double war, Punkt* punkt, std::string _nazwa);
+    void usunObcKonstrukcyjne(int);
+    void usunObcPunktowe(int);
+    void usunMomentSkupiony(int);
 };
 
 

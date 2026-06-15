@@ -32,13 +32,13 @@ void SilnikObliczeniowy:: zbudujMacierzGlobalna()
         int stSwobody[N] = // wektor indeksów stopni swobody dla danego pręta
         {
             // to co robiliśmy cały 1 semestr, czyli tablica ststyczna (btw drugi raz użyłem na prog.2)
-            p->zwrocPunkty()[0]->zwrocStopienSwobody_x(),
-            p->zwrocPunkty()[0]->zwrocStopienSwobody_y(),
-            p->zwrocPunkty()[0]->zwrocStopienSwobody_obr(), //pierwszy punkt w pręcie to jego początek
+            p->getPPocz()->zwrocStopienSwobody_x(),
+            p->getPPocz()->zwrocStopienSwobody_y(),
+            p->getPPocz()->zwrocStopienSwobody_obr(), //pierwszy punkt w pręcie to jego początek
 
-            p->zwrocPunkty()[1]->zwrocStopienSwobody_x(),
-            p->zwrocPunkty()[1]->zwrocStopienSwobody_y(),
-            p->zwrocPunkty()[1]->zwrocStopienSwobody_obr() // a drugi to koniec
+            p->getPKonc()->zwrocStopienSwobody_x(),
+            p->getPKonc()->zwrocStopienSwobody_y(),
+            p->getPKonc()->zwrocStopienSwobody_obr() // a drugi to koniec
         };
 
         auto macierzGlobalnaPreta = p->zwrocSztywnoscGlobalna(); // outo, najłatwiej, bo nie znamy rozmiaru macierzy
@@ -231,17 +231,6 @@ void SilnikObliczeniowy::rozwiaz()
 
 void SilnikObliczeniowy::wyczyscMacierze()
 {
-    // for(auto &pret : schemat->zwrocPrety())
-    // {
-    //     pret->zeruj_macierze();
-    //     pret->utworzMacierze();
-    // }
-    // for(auto &punkt : schemat->zwrocPunkty())
-    // {
-    //     punkt->zeruj_wartosci();
-
-    // }
-
     macierzGlobalna.setZero();
     wektorObciazen.setZero();
     wektorPrzemieszczen.setZero();

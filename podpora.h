@@ -26,6 +26,7 @@ public:
     bool zwrocBlok_x(){return xBlok;};
     bool zwrocBlok_y(){return yBlok;};
     bool zwrocBlok_obr(){return rotBlok;};
+    ~Podpora() {--pozycja;};
 };
 
 class UtwierdzenieStale : public Podpora

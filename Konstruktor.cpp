@@ -194,49 +194,45 @@ void Konstruktor::zapiszSchemat(std::string nazwaPliku)
 
     }
 
-
-
-    for(unsigned int i = 0; i < schemat.indekxySil().size();i++)
+    for (auto wybrane : schemat.zwrocObciazenia())
     {
-
-        Obciazenie* sila = schemat.zwrocObciazenia()[schemat.indekxySil()[i]];
-        plik << "sila " << sila->getNazwa() << " " << sila->getPunkt()->zwrocSila_x() << " " << sila->getPunkt()->zwrocSila_y() << " ";
-        for(unsigned int j = 0; j < schemat.zwrocPunkty().size();j++)
+        if (ObcPunktowe* o = dynamic_cast<ObcPunktowe*>(wybrane))
         {
-            if(schemat.zwrocPunkty()[j] == sila->getPunkt())
-                plik << j << std::endl;
-            j++;
+            plik << "sila " << o->getNazwa() << ' ' << o->wartoscSily_x() << ' ' << o->wartoscSily_y() << ' ';
+            int i = 0;
+            for (auto wybrany_p : schemat.zwrocPunkty())
+            {
+                if (wybrany_p == o->getPunkt())
+                    break;
+                ++i;
+            }
+            plik << i << '\n';
         }
-
+        if (ObcKonstrukcyjne* o = dynamic_cast<ObcKonstrukcyjne*>(wybrane))
+        {
+            plik << "obcKonstrukcyjne " << o->getNazwa() << ' ' << o->wartoscSily_x() << ' ' << o->wartoscSily_y() << ' ';
+            int i = 0;
+            for (auto wybrany_p : schemat.zwrocPrety())
+            {
+                if (wybrany_p == o->getPret())
+                    break;
+                ++i;
+            }
+            plik << i << '\n';
+        }
+        if (MomentSkupiony* o = dynamic_cast<MomentSkupiony*>(wybrane))
+        {
+            plik << "moment " << o->getNazwa() << ' ' << o->wartoscSuly_OBR() << ' ';
+            int i = 0;
+            for (auto wybrany_p : schemat.zwrocPunkty())
+            {
+                if (wybrany_p == o->getPunkt())
+                    break;
+                ++i;
+            }
+            plik << i << '\n';
+        }
     }
-
-    for(unsigned int i = 0; i < schemat.indekxyMomentow().size();i++)
-    {
-
-        Obciazenie* moment = schemat.zwrocObciazenia()[schemat.indekxyMomentow()[i]];
-        plik << "moment " << moment->getNazwa() << " " << moment->wartoscSuly_OBR() << " ";
-        for(unsigned int j = 0; j < schemat.zwrocPunkty().size();j++)
-        {
-            if(schemat.zwrocPunkty()[j] == moment->getPunkt())
-                plik << j << std::endl;
-            j++;
-
-        }
-    }
-     for(unsigned int i = 0; i < schemat.indekxyObciazen().size();i++)
-    {
-
-        Obciazenie* obc = schemat.zwrocObciazenia()[schemat.indekxyObciazen()[i]];
-         plik << "obcKonstrukcyjne " << obc->getNazwa() << " " << obc->wartoscSily_x() << " " << obc->wartoscSily_y() << " ";
-        for(unsigned int j = 0; j < schemat.zwrocPunkty().size();j++)
-        {
-            if(schemat.zwrocPunkty()[j] == obc->getPunkt())
-                plik << j << std::endl;
-            j++;
-
-
-        }
-     }
 
 }
 
@@ -306,6 +302,60 @@ void Konstruktor::dodajMomentSkupiony(double war, Punkt* punkt, std::string _naz
     Obciazenie* obc = new MomentSkupiony(war,punkt,_nazwa);
     schemat.dodajObciazenie(obc);
 
+}
+
+void Konstruktor::usunObcPunktowe(int index)
+{
+    if (schemat.zwrocObciazenia().empty())
+        return;
+    int p_index = -1;
+    int i = 0;
+    for (auto wybrane : schemat.zwrocObciazenia())
+    {
+        if (ObcPunktowe* o = dynamic_cast<ObcPunktowe*>(wybrane))
+            ++p_index;
+        if (index == p_index)
+            break;
+        ++i;
+    }
+    if (p_index > -1)
+        schemat.kasujWybranaObciazenie(i);
+}
+
+void Konstruktor::usunObcKonstrukcyjne(int index)
+{
+    if (schemat.zwrocObciazenia().empty())
+        return;
+    int k_index = -1;
+    int i = 0;
+    for (auto wybrane : schemat.zwrocObciazenia())
+    {
+        if (ObcKonstrukcyjne* o = dynamic_cast<ObcKonstrukcyjne*>(wybrane))
+            ++k_index;
+        if (index == k_index)
+            break;
+        ++i;
+    }
+    if (k_index > -1)
+        schemat.kasujWybranaObciazenie(i);
+}
+
+void Konstruktor::usunMomentSkupiony(int index)
+{
+    if (schemat.zwrocObciazenia().empty())
+        return;
+    int m_index = -1;
+    int i = 0;
+    for (auto wybrane : schemat.zwrocObciazenia())
+    {
+        if (MomentSkupiony* o = dynamic_cast<MomentSkupiony*>(wybrane))
+            ++m_index;
+        if (index == m_index)
+            break;
+        ++i;
+    }
+    if (m_index > -1)
+        schemat.kasujWybranaObciazenie(i);
 }
 
 

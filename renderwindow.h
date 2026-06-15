@@ -12,16 +12,17 @@ Do odświeżania rysunku w MainWindow trzeba Używać ui->frame->update();
 na razie dałem definiowanie punktów przyłożenia kształtów w double, może dam w Punktach, Podporach i Prętach zeby było ładniej
 */
 enum TrybRysowania{edycja, przemieszczenia, reakcje};
-enum Kolor{niebieski, czerwony};
+
 class RenderWindow : public QFrame
 {
     Q_OBJECT
     void rysujPodpore(QPainter &painter, Podpora* podpora);
-    void rysujWektor(QPainter &painter, Obciazenie* obc, Kolor kolor);
+    void rysujWektor(QPainter &painter, Obciazenie* obc, Qt::GlobalColor kolor);
     void rysujPoleWektorowe(QPainter &painter, Obciazenie* obc);
-    void rysujMoment(QPainter &painter, Obciazenie* obc, Kolor kolor);
+    void rysujMoment(QPainter &painter, Obciazenie* obc, Qt::GlobalColor kolor);
     void rysujPret(QPainter &painter, Pret* pret);
     void rysujPunkt(QPainter &painter, Punkt* punkt);
+    void rysujSiatke(QPainter &painter);
     double x0 {100}, y0 {300};
     float wspolczynnikSkali {50};
     KontenerSiatki* kontener;

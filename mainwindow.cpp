@@ -32,6 +32,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+MainWindow& MainWindow::operator<<(const std::string& output)//zeby zastapic te dlugie wiersze appendow
+{
+    ui->consoleTxtBox->appendPlainText(QString::fromStdString(output));
+    return *this;
+}
+
 void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, int dataType)
 {
     odswiezanaTabela->clearContents();
@@ -69,6 +75,7 @@ void MainWindow::odswiezTabele(QTableWidget* odswiezanaTabela, int dataType)
             if (wybrana->zwrocBlok_obr()) blokObr = '+';
             else blokObr = '-';
             odswiezanaTabela->setItem(i, 2, new QTableWidgetItem( QString::fromStdString( blokObr ) ));
+            ++i;
         }
         break;
     case sily:
@@ -159,22 +166,22 @@ void MainWindow::odswiezSBox(QSpinBox *odswiezanySBox, char dataType)
     switch (dataType)
     {
     case punkty:
-        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPunkty().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPunkty().size()+1);
         break;
     case prety:
-        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPrety().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPrety().size()+1);
         break;
     case podpory:
-        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPodpory().size());
+        odswiezanySBox->setRange(1, aplikacja.getSchemat()->zwrocPodpory().size()+1);
         break;
     case obcKonstrukcyjne:
-        odswiezanySBox->setRange(1, aplikacja.getSchemat()->indekxyObciazen().size());
+
         break;
     case sily:
-        odswiezanySBox->setRange(1, aplikacja.getSchemat()->indekxySil().size());
+
         break;
     case momenty:
-        odswiezanySBox->setRange(1, aplikacja.getSchemat()->indekxyMomentow().size());
+
         break;
     default:
         return;
@@ -282,10 +289,8 @@ void MainWindow::on_obcPunktAddBtn_clicked()
 
 void MainWindow::on_obcPunktRemoveBtn_clicked()
 {
-    int i = ui->obcPktRemoveSBox->value()-1;
-    int index = aplikacja.getSchemat()->indekxySil()[i];
-    aplikacja.getSchemat()->indekxySil().erase(aplikacja.getSchemat()->indekxySil().begin()+i);
-    aplikacja.getSchemat()->kasujWybranaObciazenie(index);
+    int index = ui->obcPktRemoveSBox->value()-1;
+    aplikacja.getKonstruktor()->usunObcPunktowe(index);
     odswiezUI();
 }
 
@@ -300,10 +305,8 @@ void MainWindow::on_momentAddBtn_2_clicked()
 }
 void MainWindow::on_momentRemoveBtn_2_clicked()
 {
-    int i = ui->momentRemoveSBox->value()-1;
-    int index = aplikacja.getSchemat()->indekxyMomentow()[i];
-    aplikacja.getSchemat()->kasujWybranaObciazenie(index);
-    aplikacja.getSchemat()->indekxyMomentow().erase(aplikacja.getSchemat()->indekxyMomentow().begin()+i);
+    int index = ui->momentRemoveSBox->value()-1;
+    aplikacja.getKonstruktor()->usunMomentSkupiony(index);
     odswiezUI();
 }
 
@@ -322,11 +325,8 @@ void MainWindow::on_obcKonstrAddBtn_clicked()
 
 void MainWindow::on_obcKonstrRemoveBtn_clicked()
 {
-    int i = ui->obcKRemoveSBox->value()-1;
-    int index = aplikacja.getSchemat()->indekxyObciazen()[i];
-    aplikacja.getSchemat()->indekxyObciazen().erase(aplikacja.getSchemat()->indekxyObciazen().begin()+i);
-    aplikacja.getSchemat()->kasujWybranaObciazenie(index);
-
+    int index = ui->obcKRemoveSBox->value()-1;
+    aplikacja.getKonstruktor()->usunObcKonstrukcyjne(index);
     odswiezUI();
 }
 
@@ -338,11 +338,10 @@ void MainWindow::on_wczytajSchematBtn_clicked()
     QString sciezka = QFileDialog::getOpenFileName(
         this,
         "Wybierz plik",
-        QDir::currentPath(),
-        " "
+        QDir::homePath(),
+        tr("Text files (*.txt)")
         );
     if (sciezka == "") return;
-
     aplikacja.getSchemat()->wyczyscSchemat();
     std::string s = sciezka.toStdString();
     aplikacja.getKonstruktor()->wczytaj(s);
@@ -357,8 +356,8 @@ void MainWindow::on_zapiszSchematBtn_clicked()
     QString sciezka = QFileDialog::getSaveFileName(
         this,
         "Wybierz plik",
-        QDir::currentPath(),
-        "(.txt);"
+        QDir::homePath(),
+        tr("Text files (*.txt)")
         );
     std::string s = sciezka.toStdString();
 
@@ -375,9 +374,8 @@ void MainWindow::on_wyliczPrzemieszczeniaBtn_clicked()
     {
 
         std::string linijka = "Przesunięcie X punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocPrzemieszczenie_x());
-        ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
-        linijka = "Przesunięcie Y punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocPrzemieszczenie_y())+ "\n";
-        ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
+        *this << "Przesunięcie X punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocPrzemieszczenie_x());
+        *this << "Przesunięcie Y punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocPrzemieszczenie_y())+ "\n";
     }
     odswiezUI();
 
@@ -397,12 +395,9 @@ void MainWindow::on_wyliczReakcjeBtn_clicked()
     for (auto &podpora : aplikacja.getSchemat()->zwrocPodpory())
     {
         Punkt *pkt = podpora->zwrocPunkt();
-        std::string linijka = "Reakcja X punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceX());
-        ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
-        linijka = "Reakcja Y punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceY());
-        ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
-        linijka = "Reakcja obrotu punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceObr()) + "\n";
-        ui->consoleTxtBox->appendPlainText(QString::fromStdString(linijka));
+        *this << "Reakcja X punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocReakceX());
+        *this << "Reakcja Y punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocReakceY());
+        *this << "Reakcja obrotu punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocReakceObr()) << "\n";
     }
     odswiezUI();
 }
@@ -418,7 +413,9 @@ void MainWindow::on_calcExportBtn_2_clicked()
 
 void MainWindow::on_uruchomObliczeniBtn_clicked()
 {
+    *this << "Uruchomiono obliczenia...\n";
     aplikacja.getSilnik()->rozwiaz();
+    *this << "Obliczenia zakończone.\n";
     odswiezUI();
 }
 

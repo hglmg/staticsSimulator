@@ -12,18 +12,14 @@ Pret::Pret(Punkt* _pPocz, Punkt* _pKonc,std::string _nazwa)
     ustawDlugosc(_pPocz, _pKonc);
 
     nazwa = _nazwa;
-
-
 }
 
 void Pret::ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc)
 {
     L = sqrt((pow((_pKonc->getY()-_pPocz->getY()), 2) + pow((_pKonc->getX()-_pPocz->getX()), 2)));
-    punkty.push_back(pPocz);
-    punkty.push_back(pKonc);
 
-    cosinus = (pKonc->getX() - pPocz->getX())/L;
-    sinus = (pKonc->getY() - pPocz->getY())/L;
+    cosinus = (_pKonc->getX() - _pPocz->getX())/L;
+    sinus = (_pKonc->getY() - _pPocz->getY())/L;
 
     ustawMacierzTransformacji();
     utworzMacierze();
@@ -40,17 +36,11 @@ void Pret::dodajObciarzenie(ObcKonstrukcyjne* _obc)
     obc.push_back(_obc);
 }
 
-void Pret::zeruj_macierze()
-{
-    sztywnoscGlobalna.setZero();
-    sztywnoscLokalna.setZero();
-    wektorObciazenLokalnych.setZero();
-    obciazeniaGlobalne.setZero();
 
-}
 
 void Pret::ustawMacierzTransformacji()
 {
+    transformacja.setZero();
     transformacja(0,0) = cosinus;
     transformacja(0,1) = sinus;
     transformacja(0,2) = 0;
@@ -113,6 +103,7 @@ std::vector <int> Pret::zwrocStopnieSwobody()
 
 void Pret::utworzMacierze()
 {
+    sztywnoscLokalna.setZero();
 
     //czarna magia - tworzenie macierzy lokalnej zgodnie z metodą elementów skończonych
     //algorytm z profesjonalnych programów do obliczeń zmęczeniowych
@@ -167,7 +158,7 @@ void Pret::utworzMacierze()
 
 
 
-
+    sztywnoscGlobalna.setZero();
     sztywnoscGlobalna = transformacja.transpose() * sztywnoscLokalna * transformacja; // przeliczenie macierzy
     //z lokalnego układu pręta na układ globalny
 

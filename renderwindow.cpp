@@ -1,5 +1,7 @@
 #include "renderwindow.h"
 
+constexpr int grid_size = 50;
+
 RenderWindow::RenderWindow(QWidget* parent) : QFrame(parent) {}
 /*
 Dobra wiec troche wyjasnienia jak to dziala:
@@ -38,59 +40,60 @@ void RenderWindow::rysujPunkt(QPainter &painter, Punkt* punkt)
 
 void RenderWindow::rysujPodpore(QPainter &painter, Podpora* podpora)
 {
-    double radius = 5, bok = 30;
+    double radius = 8, bok = 30;
     QPointF linPocz, linKonc, punkty[3];
     painter.setPen(QPen(Qt::darkGray, 2));
     double x = podpora->zwrocPunkt()->getX()*wspolczynnikSkali + x0;
     double y = -podpora->zwrocPunkt()->getY()*wspolczynnikSkali + y0;
-    painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
-    if (podpora->zwrocBlok_x() && !podpora->zwrocBlok_y())
+
+    if (!podpora->zwrocBlok_x() && podpora->zwrocBlok_y() && !podpora->zwrocBlok_obr())
     {
-        // QPointF punkty[3] = {  nie wiedziec czemu to nie dziala??? jebac Qt
-        //     QPointF(x, y),
-        //     QPointF(x-(bok*sqrt(3)/2), y+(bok/2)),
-        //     QPointF(x-(bok*sqrt(3)/2), y-(bok/2))
-        // };
+        painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
         punkty[0] = QPointF(x, y);
         punkty[1] = QPointF(x-(bok*sqrt(3)/2), y+(bok/2));
         punkty[2] = QPointF(x-(bok*sqrt(3)/2), y-(bok/2));
-        linPocz = QPointF(x-(bok*sqrt(3)/2)-10, y-(bok/2));
-        linKonc = QPointF(x-(bok*sqrt(3)/2)-10, y+(bok/2));
+        linPocz = QPointF(x-(bok*sqrt(3)/2)-5, y-(bok/2));
+        linKonc = QPointF(x-(bok*sqrt(3)/2)-5, y+(bok/2));
         painter.drawLine(linPocz, linKonc);
     }
-    if (podpora->zwrocBlok_y() && !podpora->zwrocBlok_x())
+    if (!podpora->zwrocBlok_y() && podpora->zwrocBlok_x() && !podpora->zwrocBlok_obr())
     {
+        painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
         punkty[0] = QPointF(x, y);
-        punkty[1] = QPointF(x+(bok*sqrt(3)/2), y+(bok/2));
-        punkty[2] = QPointF(x+(bok*sqrt(3)/2), y-(bok/2));
-        linPocz = QPointF(x+(bok*sqrt(3)/2)+10, y-(bok/2));
-        linKonc = QPointF(x+(bok*sqrt(3)/2)+10, y+(bok/2));
+        punkty[1] = QPointF(x-(bok/2), y+(bok*sqrt(3)/2));
+        punkty[2] = QPointF(x+(bok/2), y+(bok*sqrt(3)/2));
+        linPocz = QPointF(x-(bok/2), y+(bok*sqrt(3)/2)+5);
+        linKonc = QPointF(x+(bok/2), y+(bok*sqrt(3)/2)+5);
         painter.drawLine(linPocz, linKonc);
     }
-    if (podpora->zwrocBlok_x() && podpora->zwrocBlok_y())
+    if (podpora->zwrocBlok_x() && podpora->zwrocBlok_y() && !podpora->zwrocBlok_obr())
     {
-
+        painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
+        punkty[0] = QPointF(x, y);
+        punkty[1] = QPointF(x-(bok/2), y+(bok*sqrt(3)/2));
+        punkty[2] = QPointF(x+(bok/2), y+(bok*sqrt(3)/2));
+    }
+    if (podpora->zwrocBlok_x() && podpora->zwrocBlok_y() && podpora->zwrocBlok_obr())
+    {
         punkty[0] = QPointF(x, y);
         punkty[1] = QPointF(x-(bok/2), y+(bok*sqrt(3)/2));
         punkty[2] = QPointF(x+(bok/2), y+(bok*sqrt(3)/2));
     }
     painter.drawPolygon(punkty, 3);
 
+
 }
 
-void RenderWindow::rysujWektor(QPainter &painter, Obciazenie* obc, Kolor kolor)
+void RenderWindow::rysujWektor(QPainter &painter, Obciazenie* obc, Qt::GlobalColor kolor)
 {
-    if (kolor == czerwony)
-        painter.setPen(QPen(Qt::red, 2));
-    else if(kolor == niebieski)
-        painter.setPen(QPen(Qt::blue, 2));
+        painter.setPen(QPen(kolor, 2));
 
-    if (obc->getPunkt() == nullptr)//moment warty swietowania - pierwszy w kodzie handler null pointera
+    if (obc->getPunkt() == nullptr)
     {
         qDebug() << "Blad odczytu obciazenia " << obc->getNazwa() << "\n";
         return;
     }
-    double radius = 5;
+    double radius = 6;
     double x = obc->getPunkt()->getX()*wspolczynnikSkali + x0;
     double y = -obc->getPunkt()->getY()*wspolczynnikSkali + y0;
     double xI = x - obc->wartoscSily_x()*wspolczynnikSkali;
@@ -99,12 +102,10 @@ void RenderWindow::rysujWektor(QPainter &painter, Obciazenie* obc, Kolor kolor)
     painter.drawEllipse(x-radius, y-radius, 2*radius, 2*radius);
 }
 
-void RenderWindow::rysujMoment(QPainter &painter, Obciazenie* obc, Kolor kolor)
+void RenderWindow::rysujMoment(QPainter &painter, Obciazenie* obc, Qt::GlobalColor kolor)
 {
-    if (kolor == czerwony)
-        painter.setPen(QPen(Qt::red, 2));
-    else if(kolor == niebieski)
-        painter.setPen(QPen(Qt::blue, 2));
+        painter.setPen(QPen(kolor, 2));
+
     if (obc->getPunkt() == nullptr)
     {
         qDebug() << "Blad odczytu obciazenia" << obc->getNazwa() << "\n";
@@ -122,13 +123,13 @@ void RenderWindow::rysujMoment(QPainter &painter, Obciazenie* obc, Kolor kolor)
 
 void RenderWindow::rysujPoleWektorowe(QPainter &painter, Obciazenie* obc)
 {
-    painter.setPen(QPen(Qt::red, 2));
+    painter.setPen(QPen(Qt::darkRed, 2));
     if (obc->getPret() == nullptr)
     {
         qDebug() << "Blad odczytu obciazenia" << obc->getNazwa() << "\n";
         return;
     }
-    double radius = 5;
+    double radius = 4;
     double x1 = obc->getPret()->getPPocz()->getX()*wspolczynnikSkali + x0;
     double y1 = -obc->getPret()->getPPocz()->getY()*wspolczynnikSkali + y0;
     double x2 = obc->getPret()->getPKonc()->getX()*wspolczynnikSkali + x0;
@@ -137,11 +138,32 @@ void RenderWindow::rysujPoleWektorowe(QPainter &painter, Obciazenie* obc)
     double y1I = y1 + obc->wartoscSily_y()*wspolczynnikSkali;
     double x2I = x2 - obc->wartoscSily_x()*wspolczynnikSkali;
     double y2I = y2 + obc->wartoscSily_y()*wspolczynnikSkali;
+    double xS = (x1+x2)/2;
+    double yS = (y1+y2)/2;
+    double xSI = (x1I+y1I)/2;
+    double ySI = (y1I+y2I)/2;
     painter.drawLine(x1, y1, x1I, y1I);
     painter.drawLine(x2, y2, x2I, y2I);
     painter.drawLine(x1I, y1I, x2I, y2I);
+    painter.drawLine(xS, yS, xSI, ySI);
     painter.drawEllipse(x1-radius, y1-radius, 2*radius, 2*radius);
     painter.drawEllipse(x2-radius, y2-radius, 2*radius, 2*radius);
+    painter.drawEllipse(xS-radius, yS-radius, 2*radius, 2*radius);
+}
+
+void RenderWindow::rysujSiatke(QPainter &painter)
+{
+    int h = this->size().height();
+    int w = this->size().width();
+    painter.setPen(QPen(Qt::lightGray, 1));
+    for (size_t i = 0; i < h; i+=grid_size)
+    {
+        painter.drawLine(0, i, w, i);
+    }
+    for (size_t i = 0; i < w; i+=grid_size)
+    {
+        painter.drawLine(i, 0, i, h);
+    }
 }
 
 
@@ -150,6 +172,7 @@ void RenderWindow::trybEdycji(QPainter& painter)
 
 
     painter.setRenderHint(QPainter::Antialiasing);
+    rysujSiatke(painter);
 
 
 
@@ -168,8 +191,8 @@ void RenderWindow::trybEdycji(QPainter& painter)
     for (Obciazenie *wybrane : kontener->zwrocObciazenia())
     {
         if (wybrane->typ == typObciazenia::konstrukcyjne) rysujPoleWektorowe(painter, wybrane);
-        if (wybrane->typ == typObciazenia::momentSkupiony) rysujMoment(painter, wybrane,czerwony);
-        if (wybrane->typ == typObciazenia::silaSkupiona) rysujWektor(painter, wybrane, czerwony);
+        if (wybrane->typ == typObciazenia::momentSkupiony) rysujMoment(painter, wybrane,Qt::green);
+        if (wybrane->typ == typObciazenia::silaSkupiona) rysujWektor(painter, wybrane, Qt::red);
 
     }
 
@@ -178,7 +201,7 @@ void RenderWindow::trybEdycji(QPainter& painter)
 void RenderWindow::trybPrzemieszczen(QPainter& painter)
 {
     painter.setRenderHint(QPainter::Antialiasing);
-
+    rysujSiatke(painter);
     painter.save();
 
     painter.setOpacity(0.5);   // stara konstrukcja
@@ -194,11 +217,11 @@ void RenderWindow::trybPrzemieszczen(QPainter& painter)
     // nowa konstrukcja
     for (Pret *wybrany : kontener->zwrocPrety())
     {
-        double x1 = wybrany->zwrocPunkty()[0]->getX() + wybrany->zwrocPunkty()[0]->zwrocPrzemieszczenie_x();
-        double y1 = wybrany->zwrocPunkty()[0]->getY() + wybrany->zwrocPunkty()[0]->zwrocPrzemieszczenie_y();
+        double x1 = wybrany->getPPocz()->getX() + wybrany->getPPocz()->zwrocPrzemieszczenie_x();
+        double y1 = wybrany->getPPocz()->getY() + wybrany->getPPocz()->zwrocPrzemieszczenie_y();
 
-        double x2 = wybrany->zwrocPunkty()[1]->getX() + wybrany->zwrocPunkty()[1]->zwrocPrzemieszczenie_x();
-        double y2 = wybrany->zwrocPunkty()[1]->getY() + wybrany->zwrocPunkty()[1]->zwrocPrzemieszczenie_y();
+        double x2 = wybrany->getPKonc()->getX() + wybrany->getPKonc()->zwrocPrzemieszczenie_x();
+        double y2 = wybrany->getPKonc()->getY() + wybrany->getPKonc()->zwrocPrzemieszczenie_y();
 
         Punkt punkt1(x1,y1,"P");
         Punkt punkt2(x2,y2,"P");
@@ -218,6 +241,7 @@ void RenderWindow::trybPrzemieszczen(QPainter& painter)
 
 void RenderWindow::trybReakcji(QPainter &painter)
 {
+    rysujSiatke(painter);
     for (Pret *wybrany : kontener->zwrocPrety())
     {
         rysujPret(painter, wybrany);
@@ -237,9 +261,9 @@ void RenderWindow::trybReakcji(QPainter &painter)
         ObcPunktowe reakcjaY(0, y ,wybrana->zwrocPunkt(), "R");
         MomentSkupiony mom(obr, wybrana->zwrocPunkt(),"M");
 
-        rysujWektor(painter, &reakcjaX, niebieski);
-        rysujWektor(painter, &reakcjaY, niebieski);
-        rysujMoment(painter, &mom, niebieski);
+        rysujWektor(painter, &reakcjaX, Qt::blue);
+        rysujWektor(painter, &reakcjaY, Qt::blue);
+        rysujMoment(painter, &mom, Qt::cyan);
 
 
     }

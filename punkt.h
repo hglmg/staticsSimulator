@@ -31,8 +31,8 @@ class Punkt
 
 public:
     Punkt(double _x, double _y,std::string _nazwa);
-    double getY() {return y;};
-    double getX() {return x;};
+    double getY() const {return y;};
+    double getX() const {return x;};
     std::string getNazwa() {return nazwa;};
 
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
@@ -63,9 +63,9 @@ public:
     double zwrocPrzemieszczenie_x(){return przemieszczenie_x;};
     double zwrocPrzemieszczenie_y(){return przemieszczenie_y;};
 
-    double zwrocReakceX() { return reakcja_x;};
-    double zwrocReakceY() { return reakcja_y;};
-    double zwrocReakceObr() {return reakcja_obr;};
+    double zwrocReakceX() const { return reakcja_x;};
+    double zwrocReakceY() const { return reakcja_y;};
+    double zwrocReakceObr() const {return reakcja_obr;};
 
     void ustawReakcje_x(double war) {reakcja_x = war;};
     void ustawReakcje_y(double war){reakcja_y = war;};

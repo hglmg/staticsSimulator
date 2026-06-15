@@ -5,7 +5,6 @@
 #include "punkt.h"
 #include "pret.h"
 
-/*  KLASA PRZESTARZAŁA  */
 
 enum typObciazenia {momentSkupiony, silaSkupiona, konstrukcyjne};
 class Obciazenie
@@ -35,7 +34,7 @@ public:
 
     std::string getNazwa() {return nazwa;};
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
-    virtual ~Obciazenie() = default; // klasa wirualna
+    ~Obciazenie() {--pktPrzylozenia;};
 };
 
 
