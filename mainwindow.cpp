@@ -421,28 +421,16 @@ void MainWindow::on_uruchomObliczeniBtn_clicked()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void MainWindow::on_calcExportBtn_clicked()
+{
+    QString sciezka = QFileDialog::getSaveFileName(
+        this,
+        "Wybierz plik",
+        QDir::homePath(),
+        tr("Text files (*.txt)")
+        );
+    std::string s = sciezka.toStdString();
+    aplikacja.getKonstruktor()->zapiszWyniki(sciezka.toStdString());
+    odswiezUI();
+}
 

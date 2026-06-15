@@ -16,6 +16,7 @@ public:
 
     void wczytaj(std::string nazwaPliku);
     void zapiszSchemat(std::string nazwaPliku);
+    void zapiszWyniki(std::string nazwaPliku);
 
     void dodajPunkt();
     void dodajPret(Punkt* pocz, Punkt* konc, double E, double d, std::string nazwa);
