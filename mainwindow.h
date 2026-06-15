@@ -67,6 +67,7 @@ private slots:
 
     void on_uruchomObliczeniBtn_clicked();
 
+    void on_calcExportBtn_clicked();
 };
 
 

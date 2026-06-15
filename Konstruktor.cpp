@@ -110,132 +110,163 @@ void Konstruktor::zapiszSchemat(std::string nazwaPliku)
     std::ofstream plik;
     plik.open(nazwaPliku);
 
-    for (auto &pkt : schemat.zwrocPunkty())
+    if (plik.good())
     {
-        plik << "punkt " << pkt->getNazwa() << " " << pkt->getX() << " " << pkt->getY() << std::endl;
-
-    }
-    for (auto &pret : schemat.zwrocPrety())
-    {
-        plik << "pret ";
-
-        if (pret->zwroc_d() != 0)
-        {
-            plik << "kolowy " << pret->getNazwa() << " ";
-            plik << pret->zwroc_d() << " ";
-        }
-
-
-        else if (pret->zwroc_h() != 0 && pret->zwroc_b() != 0)
-        {
-            plik << "kwadratowy " << pret->getNazwa() << " ";
-            plik << pret->zwroc_h() << " ";
-            plik << pret->zwroc_b() << " " << pret->zwroc_h() << " ";
-        }
-
-
-        unsigned int index = 0;
         for (auto &pkt : schemat.zwrocPunkty())
         {
-            if (pret->getPPocz() == pkt)
-            {
-                plik << index << " ";
-                break;
-            }
-            index++;
+            plik << "punkt " << pkt->getNazwa() << " " << pkt->getX() << " " << pkt->getY() << std::endl;
+
         }
-        index = 0;
-        for (auto &pkt : schemat.zwrocPunkty())
+        for (auto &pret : schemat.zwrocPrety())
         {
-            if (pret->getPKonc() == pkt)
+            plik << "pret ";
+
+            if (pret->zwroc_d() != 0)
             {
-                plik << index << " ";
-                break;
+                plik << "kolowy " << pret->getNazwa() << " ";
+                plik << pret->zwroc_d() << " ";
             }
 
-            index++;
-        }
-        plik << pret->zwroc_E() << std::endl;
-    }
 
-    for(auto &podp : schemat.zwrocPodpory())
-    {
-        for(auto &podp : schemat.zwrocPodpory())
-        {
-            plik << "podpora ";
+            else if (pret->zwroc_h() != 0 && pret->zwroc_b() != 0)
+            {
+                plik << "kwadratowy " << pret->getNazwa() << " ";
+                plik << pret->zwroc_h() << " ";
+                plik << pret->zwroc_b() << " " << pret->zwroc_h() << " ";
+            }
 
-            int index = 0;
+
+            unsigned int index = 0;
             for (auto &pkt : schemat.zwrocPunkty())
             {
-                if (podp->zwrocPunkt() == pkt)
+                if (pret->getPPocz() == pkt)
                 {
                     plik << index << " ";
                     break;
                 }
                 index++;
             }
-
-            if(podp->getTyp() == 0)
+            index = 0;
+            for (auto &pkt : schemat.zwrocPunkty())
             {
-                plik << "0 0";
-            }
-            else if (podp->getTyp() == 1)
-            {
-                plik << "1 ";
+                if (pret->getPKonc() == pkt)
+                {
+                    plik << index << " ";
+                    break;
+                }
 
-                if(podp->zwrocBlok_x())
-                    plik << "1";
-                else
-                    plik << "0";
+                index++;
             }
-            else
-            {
-                plik << "2 0";
-            }
-
-            plik << std::endl;
+            plik << pret->zwroc_E() << std::endl;
         }
 
+        for(auto &podp : schemat.zwrocPodpory())
+        {
+            for(auto &podp : schemat.zwrocPodpory())
+            {
+                plik << "podpora ";
+
+                int index = 0;
+                for (auto &pkt : schemat.zwrocPunkty())
+                {
+                    if (podp->zwrocPunkt() == pkt)
+                    {
+                        plik << index << " ";
+                        break;
+                    }
+                    index++;
+                }
+
+                if(podp->getTyp() == 0)
+                {
+                    plik << "0 0";
+                }
+                else if (podp->getTyp() == 1)
+                {
+                    plik << "1 ";
+
+                    if(podp->zwrocBlok_x())
+                        plik << "1";
+                    else
+                        plik << "0";
+                }
+                else
+                {
+                    plik << "2 0";
+                }
+
+                plik << std::endl;
+            }
+
+        }
+
+        for (auto wybrane : schemat.zwrocObciazenia())
+        {
+            if (ObcPunktowe* o = dynamic_cast<ObcPunktowe*>(wybrane))
+            {
+                plik << "sila " << o->getNazwa() << ' ' << o->wartoscSily_x() << ' ' << o->wartoscSily_y() << ' ';
+                int i = 0;
+                for (auto wybrany_p : schemat.zwrocPunkty())
+                {
+                    if (wybrany_p == o->getPunkt())
+                        break;
+                    ++i;
+                }
+                plik << i << '\n';
+            }
+            if (ObcKonstrukcyjne* o = dynamic_cast<ObcKonstrukcyjne*>(wybrane))
+            {
+                plik << "obcKonstrukcyjne " << o->getNazwa() << ' ' << o->wartoscSily_x() << ' ' << o->wartoscSily_y() << ' ';
+                int i = 0;
+                for (auto wybrany_p : schemat.zwrocPrety())
+                {
+                    if (wybrany_p == o->getPret())
+                        break;
+                    ++i;
+                }
+                plik << i << '\n';
+            }
+            if (MomentSkupiony* o = dynamic_cast<MomentSkupiony*>(wybrane))
+            {
+                plik << "moment " << o->getNazwa() << ' ' << o->wartoscSuly_OBR() << ' ';
+                int i = 0;
+                for (auto wybrany_p : schemat.zwrocPunkty())
+                {
+                    if (wybrany_p == o->getPunkt())
+                        break;
+                    ++i;
+                }
+                plik << i << '\n';
+            }
+        }
+        plik.close();
     }
 
-    for (auto wybrane : schemat.zwrocObciazenia())
+}
+
+void Konstruktor::zapiszWyniki(std::string nazwaPliku)
+{
+    std::ofstream plik;
+    plik.open(nazwaPliku);
+    if (plik.good())
     {
-        if (ObcPunktowe* o = dynamic_cast<ObcPunktowe*>(wybrane))
+        plik << "Przemieszczenia punktow:\n";
+        for (auto wybrany : schemat.zwrocPunkty())
         {
-            plik << "sila " << o->getNazwa() << ' ' << o->wartoscSily_x() << ' ' << o->wartoscSily_y() << ' ';
-            int i = 0;
-            for (auto wybrany_p : schemat.zwrocPunkty())
-            {
-                if (wybrany_p == o->getPunkt())
-                    break;
-                ++i;
-            }
-            plik << i << '\n';
+            plik << wybrany->getNazwa() << ":\n";
+            plik << "X:\t" << wybrany->zwrocPrzemieszczenie_x() << "m\n";
+            plik << "Y:\t" << wybrany->zwrocPrzemieszczenie_y() << "m\n";
+            plik << '\n';
         }
-        if (ObcKonstrukcyjne* o = dynamic_cast<ObcKonstrukcyjne*>(wybrane))
+        plik << "Wartosci sily reakcji:\n";
+        for (auto wybrane : schemat.zwrocPodpory())
         {
-            plik << "obcKonstrukcyjne " << o->getNazwa() << ' ' << o->wartoscSily_x() << ' ' << o->wartoscSily_y() << ' ';
-            int i = 0;
-            for (auto wybrany_p : schemat.zwrocPrety())
-            {
-                if (wybrany_p == o->getPret())
-                    break;
-                ++i;
-            }
-            plik << i << '\n';
+            plik << wybrane->zwrocPunkt()->getNazwa() << ":\n";
+            plik << "Wartosc X:\t" << wybrane->zwrocPunkt()->zwrocReakceX() << "N\n";
+            plik << "Wartosc Y:\t" << wybrane->zwrocPunkt()->zwrocReakceY() << "N\n";
+            plik << "Wartosc Momemntu:\t" << wybrane->zwrocPunkt()->zwrocReakceObr() << "Nm\n";
         }
-        if (MomentSkupiony* o = dynamic_cast<MomentSkupiony*>(wybrane))
-        {
-            plik << "moment " << o->getNazwa() << ' ' << o->wartoscSuly_OBR() << ' ';
-            int i = 0;
-            for (auto wybrany_p : schemat.zwrocPunkty())
-            {
-                if (wybrany_p == o->getPunkt())
-                    break;
-                ++i;
-            }
-            plik << i << '\n';
-        }
+        plik.close();
     }
 
 }
