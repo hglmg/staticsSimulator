@@ -374,8 +374,9 @@ void MainWindow::on_wyliczPrzemieszczeniaBtn_clicked()
     {
 
         std::string linijka = "Przesunięcie X punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocPrzemieszczenie_x());
-        *this << "Przesunięcie X punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocPrzemieszczenie_x());
-        *this << "Przesunięcie Y punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocPrzemieszczenie_y())+ "\n";
+        *this << linijka;
+        linijka = "Przesunięcie Y punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocPrzemieszczenie_y());
+        *this << linijka;
     }
     odswiezUI();
 
@@ -395,9 +396,9 @@ void MainWindow::on_wyliczReakcjeBtn_clicked()
     for (auto &podpora : aplikacja.getSchemat()->zwrocPodpory())
     {
         Punkt *pkt = podpora->zwrocPunkt();
-        *this << "Reakcja X punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocReakceX());
-        *this << "Reakcja Y punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocReakceY());
-        *this << "Reakcja obrotu punktu " << pkt->getNazwa() << " : " << std::to_string(pkt->zwrocReakceObr()) << "\n";
+        *this << "Reakcja X punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceX());
+        *this << "Reakcja Y punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceY());
+        *this << "Reakcja obrotu punktu " + pkt->getNazwa() + " : " + std::to_string(pkt->zwrocReakceObr()) << "\n";
     }
     odswiezUI();
 }

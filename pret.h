@@ -42,7 +42,7 @@ protected:
     Eigen::Matrix<double,6,1> obciazeniaGlobalne;
 
     void ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc);
-    void ustawMacierzTransformacji();
+
 
 public:
 
@@ -55,6 +55,7 @@ public:
     void modyfikujNazwe(std::string _nazwa) {nazwa = _nazwa;};
 
     void dodajObciarzenie(ObcKonstrukcyjne* _obc);
+    void ustawMacierzTransformacji();
     std::vector <int> zwrocStopnieSwobody();
 
 

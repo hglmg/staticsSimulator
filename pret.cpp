@@ -25,12 +25,6 @@ void Pret::ustawDlugosc(Punkt* _pPocz, Punkt* _pKonc)
     utworzMacierze();
 }
 
-
-
-
-
-
-
 void Pret::dodajObciarzenie(ObcKonstrukcyjne* _obc)
 {
     obc.push_back(_obc);
@@ -41,6 +35,7 @@ void Pret::dodajObciarzenie(ObcKonstrukcyjne* _obc)
 void Pret::ustawMacierzTransformacji()
 {
     transformacja.setZero();
+
     transformacja(0,0) = cosinus;
     transformacja(0,1) = sinus;
     transformacja(0,2) = 0;
@@ -166,6 +161,8 @@ void Pret::utworzMacierze()
 
     wektorObciazenLokalnych.setZero();
 
+    obc.clear();
+
     for (auto* obciazenie : obc) // obciążenia tworzone w lokalnej osi pręta, w UI trzema wymusić podanie loklanych
     //współrzędnych pręta
     {
@@ -184,6 +181,7 @@ void Pret::utworzMacierze()
 
 
     }
+    obciazeniaGlobalne.setZero();
     obciazeniaGlobalne = transformacja.transpose() * wektorObciazenLokalnych;
 
 }

@@ -1,4 +1,5 @@
 #include "silnikobliczeniowy.h"
+#include <Qdebug>
 
 void SilnikObliczeniowy::konfiguruj(KontenerSiatki *_schemat)
 {
@@ -208,7 +209,22 @@ void SilnikObliczeniowy::rozwiaz()
     }
 
 
-    wyczyscMacierze();
+    // for(auto &pret : schemat->zwrocPrety())
+    // {
+    //     pret->ustawMacierzTransformacji();
+    //     pret->utworzMacierze();
+
+
+    // }
+    // for(auto &P : schemat->zwrocPunkty())
+    // {
+    //     P->zeruj_wartosci();
+    //     qDebug() << P->zwrocSila_x() << " : " << P->zwrocSila_y() << "\n";
+    // }
+
+
+
+
 
     zbudujMacierzGlobalna();
 
@@ -226,17 +242,15 @@ void SilnikObliczeniowy::rozwiaz()
 
     wyznaczReakcjePodporowe();
 
+    for(auto &P : schemat->zwrocPunkty())
+    {
+        qDebug() << P->zwrocSila_x() << " : " << P->zwrocSila_y() << "\n";
+    }
+
+
 }
 
 
-void SilnikObliczeniowy::wyczyscMacierze()
-{
-    macierzGlobalna.setZero();
-    wektorObciazen.setZero();
-    wektorPrzemieszczen.setZero();
-    wektorReakcji.setZero();
-
-}
 
 
 

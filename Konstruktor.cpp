@@ -177,16 +177,20 @@ void Konstruktor::zapiszSchemat(std::string nazwaPliku)
 
             if(podp->getTyp() == 0)
             {
-                plik << "0 1";
+                plik << "0 0";
             }
-            else
+            else if (podp->getTyp() == 1)
             {
                 plik << "1 ";
 
                 if(podp->zwrocBlok_x())
                     plik << "1";
                 else
-                    plik << "0"; // narazie 2, bo tyle mamy metod tworzenia w kontruktorze
+                    plik << "0";
+            }
+            else
+            {
+                plik << "2 0";
             }
 
             plik << std::endl;

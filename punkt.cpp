@@ -24,16 +24,16 @@ void Punkt::zeruj_wartosci()
 {
 
 
-    double przemieszczenie_x = 0;
-    double przemieszczenie_y = 0;
-    double przemieszczenie_obr0 = 0;
+    przemieszczenie_x = 0;
+    przemieszczenie_y = 0;
+    przemieszczenie_obr = 0;
 
-    double reakcja_x = 0;
-    double reakcja_y = 0;
-    double reakcja_obr = 0;
+    reakcja_x = 0;
+    reakcja_y = 0;
+    reakcja_obr = 0;
 
-    double sila_x = 0;
-    double sila_y = 0;
-    double moment_obr = 0;
+    sila_x = 0;
+    sila_y = 0;
+    moment_obr = 0;
 
 }

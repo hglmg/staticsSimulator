@@ -24,7 +24,7 @@ class SilnikObliczeniowy // wywaliłem to co zrobiłeś bo się nie przyda
     void narzucWarunkiBrzegowe();    // tu uwzględniamy stopnie swobody podpór
     void wyznaczPrzemieszczenia();
     void wyznaczReakcjePodporowe();
-    void wyczyscMacierze();
+
 
 
 
