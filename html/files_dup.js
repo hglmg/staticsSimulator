@@ -1,0 +1,26 @@
+var files_dup =
+[
+    [ "aplikacjasymulatora.cpp", "aplikacjasymulatora_8cpp.html", null ],
+    [ "aplikacjasymulatora.h", "aplikacjasymulatora_8h.html", "aplikacjasymulatora_8h" ],
+    [ "Konstruktor.cpp", "_konstruktor_8cpp.html", null ],
+    [ "Konstruktor.h", "_konstruktor_8h.html", "_konstruktor_8h" ],
+    [ "kontenersiatki.cpp", "kontenersiatki_8cpp.html", null ],
+    [ "kontenersiatki.h", "kontenersiatki_8h.html", "kontenersiatki_8h" ],
+    [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
+    [ "mainwindow.cpp", "mainwindow_8cpp.html", null ],
+    [ "mainwindow.h", "mainwindow_8h.html", "mainwindow_8h" ],
+    [ "obciazenie.cpp", "obciazenie_8cpp.html", null ],
+    [ "obciazenie.h", "obciazenie_8h.html", "obciazenie_8h" ],
+    [ "podpora.cpp", "podpora_8cpp.html", null ],
+    [ "podpora.h", "podpora_8h.html", "podpora_8h" ],
+    [ "pret.cpp", "pret_8cpp.html", null ],
+    [ "pret.h", "pret_8h.html", "pret_8h" ],
+    [ "punkt.cpp", "punkt_8cpp.html", null ],
+    [ "punkt.h", "punkt_8h.html", "punkt_8h" ],
+    [ "renderwindow.cpp", "renderwindow_8cpp.html", "renderwindow_8cpp" ],
+    [ "renderwindow.h", "renderwindow_8h.html", "renderwindow_8h" ],
+    [ "sila.cpp", "sila_8cpp.html", null ],
+    [ "sila.h", "sila_8h.html", "sila_8h" ],
+    [ "silnikobliczeniowy.cpp", "silnikobliczeniowy_8cpp.html", null ],
+    [ "silnikobliczeniowy.h", "silnikobliczeniowy_8h.html", "silnikobliczeniowy_8h" ]
+];

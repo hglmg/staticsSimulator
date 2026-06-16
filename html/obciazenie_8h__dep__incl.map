@@ -1,0 +1,34 @@
+<map id="obciazenie.h" name="obciazenie.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="396,5,490,31"/>
+<area shape="rect" id="Node000002" href="$kontenersiatki_8h.html" title=" " alt="" coords="252,79,365,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="408,41,332,81,330,76,405,36"/>
+<area shape="rect" id="Node000015" href="$obciazenie_8cpp.html" title=" " alt="" coords="389,79,497,105"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="446,46,446,79,440,79,440,46"/>
+<area shape="rect" id="Node000016" href="$pret_8cpp.html" title=" " alt="" coords="521,79,589,105"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="476,37,537,76,534,81,473,42"/>
+<area shape="rect" id="Node000003" href="$_konstruktor_8h.html" title=" " alt="" coords="44,153,143,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="258,112,131,155,129,150,257,107"/>
+<area shape="rect" id="Node000010" href="$kontenersiatki_8cpp.html" title=" " alt="" coords="167,153,294,178"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="286,117,246,154,242,150,282,114"/>
+<area shape="rect" id="Node000011" href="$renderwindow_8h.html" title=" " alt="" coords="485,153,595,178"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="363,107,501,150,500,155,361,112"/>
+<area shape="rect" id="Node000013" href="$silnikobliczeniowy_8h.html" title=" " alt="" coords="319,153,454,178"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="334,113,375,150,372,154,331,117"/>
+<area shape="rect" id="Node000004" href="$_konstruktor_8cpp.html" title=" " alt="" coords="5,226,118,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="84,193,69,227,64,225,80,191"/>
+<area shape="rect" id="Node000005" href="$aplikacjasymulatora_8h.html" title=" " alt="" coords="141,226,288,252"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="129,184,195,223,193,228,126,189"/>
+<area shape="rect" id="Node000006" href="$aplikacjasymulatora_8cpp.html" title=" " alt="" coords="56,300,217,326"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="192,264,151,302,148,298,189,261"/>
+<area shape="rect" id="Node000007" href="$mainwindow_8h.html" title=" " alt="" coords="241,300,343,326"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="241,261,281,298,277,302,237,265"/>
+<area shape="rect" id="Node000008" href="$main_8cpp.html" title=" " alt="" coords="195,374,269,399"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="275,339,244,375,240,371,271,336"/>
+<area shape="rect" id="Node000009" href="$mainwindow_8cpp.html" title=" " alt="" coords="294,374,410,399"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="314,336,344,371,340,375,310,339"/>
+<area shape="rect" id="Node000012" href="$renderwindow_8cpp.html" title=" " alt="" coords="486,226,610,252"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="546,193,549,226,544,226,541,194"/>
+<area shape="poly" id="edge13_Node000013_Node000005" title=" " alt="" coords="345,187,245,228,243,223,343,182"/>
+<area shape="rect" id="Node000014" href="$silnikobliczeniowy_8cpp.html" title=" " alt="" coords="312,226,462,252"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="390,194,390,226,384,226,384,194"/>
+</map>

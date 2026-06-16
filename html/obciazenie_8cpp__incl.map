@@ -1,0 +1,21 @@
+<map id="obciazenie.cpp" name="obciazenie.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="178,5,286,31"/>
+<area shape="rect" id="Node000002" href="$obciazenie_8h.html" title=" " alt="" coords="118,79,212,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,33,189,69,185,66,219,29"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="354,226,411,252"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="242,30,368,212,364,215,238,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,153,59,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="144,108,69,147,67,143,141,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="138,300,192,326"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="159,107,144,133,129,169,120,210,120,231,124,251,133,270,145,287,141,290,128,273,119,253,114,232,114,210,124,168,139,131,155,104"/>
+<area shape="rect" id="Node000005" href="$punkt_8h.html" title=" " alt="" coords="133,226,198,252"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="168,105,168,211,163,211,163,105"/>
+<area shape="rect" id="Node000006" href="$pret_8h.html" title=" " alt="" coords="208,153,262,178"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="179,103,214,140,211,143,175,107"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="168,252,168,284,163,284,163,252"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="235,180,227,213,212,253,188,289,184,286,207,251,222,212,230,178"/>
+<area shape="poly" id="edge10_Node000006_Node000005" title=" " alt="" coords="225,180,189,217,186,213,221,177"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="273,226,330,252"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="248,177,282,213,278,217,244,180"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="261,176,345,217,342,222,259,181"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Pret" name="Pret">
+<area shape="rect" id="Node000001" title=" " alt="" coords="27,5,219,499"/>
+<area shape="rect" id="Node000002" href="$class_pret_kolowy.html" title=" " alt="" coords="5,547,104,613"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,514,64,547,59,546,66,513"/>
+<area shape="rect" id="Node000003" href="$class_pret_prostokotny.html" title=" " alt="" coords="128,547,254,613"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,513,187,546,182,547,175,514"/>
+</map>

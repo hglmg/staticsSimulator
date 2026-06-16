@@ -1,0 +1,9 @@
+<map id="Obciazenie" name="Obciazenie">
+<area shape="rect" id="Node000001" title=" " alt="" coords="162,5,302,417"/>
+<area shape="rect" id="Node000002" href="$class_moment_skupiony.html" title=" " alt="" coords="5,465,138,593"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,365,106,467,101,464,153,362"/>
+<area shape="rect" id="Node000003" href="$class_obc_konstrukcyjne.html" title=" " alt="" coords="162,465,301,593"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,432,234,466,229,466,229,432"/>
+<area shape="rect" id="Node000004" href="$class_obc_punktowe.html" title=" " alt="" coords="325,465,442,593"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="311,370,356,464,351,467,306,373"/>
+</map>

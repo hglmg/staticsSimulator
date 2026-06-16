@@ -1,0 +1,18 @@
+var searchData=
+[
+  ['getkonstruktor_0',['getKonstruktor',['../class_aplikacja_symulatora.html#a5971ad5383491d7702f06fe5fff09da6',1,'AplikacjaSymulatora']]],
+  ['getl_1',['getL',['../class_pret.html#af43c0ef026a486f0ebe92360282e8da3',1,'Pret']]],
+  ['getnazwa_2',['getNazwa',['../class_obciazenie.html#a66a7c77591564ab4f867ab46570614a5',1,'Obciazenie::getNazwa()'],['../class_pret.html#ad88006b45a93167f5e980b0d12d57d86',1,'Pret::getNazwa()'],['../class_punkt.html#aa3d05fe9dd596b5d548289b43c90cff1',1,'Punkt::getNazwa()']]],
+  ['getpkonc_3',['getPKonc',['../class_pret.html#a4f4e44fcadb29941a422dd2531133d31',1,'Pret']]],
+  ['getppocz_4',['getPPocz',['../class_pret.html#a713a2236b2d01b84481e8a2c5d85af05',1,'Pret']]],
+  ['getpret_5',['getPret',['../class_obciazenie.html#a6c6298125f7f772832ebdd08ddbbcfbf',1,'Obciazenie::getPret()'],['../class_obc_punktowe.html#a2e44ee4ccd9266b7edde425b6b36c7df',1,'ObcPunktowe::getPret()'],['../class_obc_konstrukcyjne.html#a4cd1e77bfb698ad74756920a8945418f',1,'ObcKonstrukcyjne::getPret()'],['../class_moment_skupiony.html#a300eb6b757f75a513ce292ddb4443c71',1,'MomentSkupiony::getPret()']]],
+  ['getpunkt_6',['getPunkt',['../class_obciazenie.html#a1478d6252748320475bf2394b9f0acf9',1,'Obciazenie::getPunkt()'],['../class_obc_punktowe.html#aa76026cfed074ca772dcf5020d0fdf0c',1,'ObcPunktowe::getPunkt()'],['../class_obc_konstrukcyjne.html#af34d492435daf6e053c8f7b41117918a',1,'ObcKonstrukcyjne::getPunkt()'],['../class_moment_skupiony.html#a163f392021a73f6746cd3f21011d100d',1,'MomentSkupiony::getPunkt()']]],
+  ['getschemat_7',['getSchemat',['../class_aplikacja_symulatora.html#aed72db22e39ec22737e1984a0ac4e2fe',1,'AplikacjaSymulatora']]],
+  ['getsilnik_8',['getSilnik',['../class_aplikacja_symulatora.html#a4e187db2f4daffa3153d94c4f7098716',1,'AplikacjaSymulatora']]],
+  ['getstatus_9',['getStatus',['../class_aplikacja_symulatora.html#ace54680f505ff1cbfc9115009902cfcd',1,'AplikacjaSymulatora']]],
+  ['gettyp_10',['getTyp',['../class_podpora.html#a949e64d772e35f3e9c93ac42f1a82fad',1,'Podpora']]],
+  ['getwarx_11',['getWarX',['../class_sila.html#a57eb216fb1ce09a6aeeccc246db6c405',1,'Sila']]],
+  ['getwary_12',['getWarY',['../class_sila.html#abe6e7cf0a22d91f8438195e46464b6af',1,'Sila']]],
+  ['getx_13',['getX',['../class_punkt.html#ae851933b574905fdf67841b539ce3088',1,'Punkt']]],
+  ['gety_14',['getY',['../class_punkt.html#a6d4b2bf6f0ea329389aaf578450bb257',1,'Punkt']]]
+];

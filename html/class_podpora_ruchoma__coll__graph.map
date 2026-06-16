@@ -1,0 +1,7 @@
+<map id="PodporaRuchoma" name="PodporaRuchoma">
+<area shape="rect" id="Node000001" title=" " alt="" coords="28,700,164,767"/>
+<area shape="rect" id="Node000002" href="$class_podpora.html" title=" " alt="" coords="37,361,155,651"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,666,98,700,93,700,93,666"/>
+<area shape="rect" id="Node000003" href="$class_punkt.html" title=" " alt="" coords="5,5,186,290"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,290,98,344,93,344,93,290"/>
+</map>

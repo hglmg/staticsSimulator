@@ -1,0 +1,9 @@
+<map id="Podpora" name="Podpora">
+<area shape="rect" id="Node000001" title=" " alt="" coords="161,5,279,316"/>
+<area shape="rect" id="Node000002" href="$class_podpora_ruchoma.html" title=" " alt="" coords="5,364,141,430"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,270,95,365,91,363,151,267"/>
+<area shape="rect" id="Node000003" href="$class_podpora_stala.html" title=" " alt="" coords="165,364,275,430"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="223,330,223,364,217,364,217,330"/>
+<area shape="rect" id="Node000004" href="$class_utwierdzenie_stale.html" title=" " alt="" coords="299,364,437,430"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="289,266,350,362,346,365,285,269"/>
+</map>
